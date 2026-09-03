@@ -1,3 +1,1 @@
-"use client";import Link from "next/link";import {usePathname} from "next/navigation";
-const items=[["/","Home"],["/studio","Phòng Thu"],["/store","Store"],["/me","Me"]] as const;
-export default function TopNav(){const p=usePathname();return <nav className="topnav">{items.map(([h,l])=><Link key={h} href={h} className={p===h?"active":""}>{l}</Link>)}</nav>}
+"use client";import Link from "next/link";import {usePathname} from "next/navigation";const items=[["/","Home"],["/studio","Phòng Thu"],["/store","Store"],["/me","Me"]] as const;export default function TopNav(){const p=usePathname();return <nav className="topnav">{items.map(([h,l])=><Link key={h} href={h} className={p===h?"active":""}>{l}</Link>)}</nav>}

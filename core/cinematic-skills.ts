@@ -1,0 +1,1 @@
+export const CINEMATIC_SKILLS=["composition","lens-camera","blocking","lighting","continuity","editing-rhythm","color","product-cinematography","sound-design","typography-ui","video-qc"] as const;export type CinematicSkill=typeof CINEMATIC_SKILLS[number];export const advisorRule="AI tư vấn ngắn, ưu tiên thao tác đơn giản, giải thích lựa chọn điện ảnh trước khi render.";
