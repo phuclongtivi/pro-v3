@@ -1,1 +1,129 @@
-"use client";import {useState} from "react";import {useSearchParams} from "next/navigation";import BrandFooter from "@/components/BrandFooter";const tabs=["Preview Video","Hiệu Ứng","Mix Âm Thanh","Thiết Bị Đầu Vào","App Ngoài","Thiết Bị Đầu Ra/TiVi","Quản Lý Khán Phòng"] as const;export default function Page(){const q=useSearchParams();const has=q.get("preview");const[t,setT]=useState<string>(has?"Preview Video":"Hiệu Ứng");return <main className="page"><section className="hero"><h1>Phòng Thu</h1><p>Studio Control • Preview • Render</p></section><div className="layerbar">{tabs.map(x=><button key={x} className={t===x?"active":""} onClick={()=>setT(x)}>{x}</button>)}</div><section className="panel"><div className="kpi">Phòng Thu → {t}</div>{t==="Preview Video"?<><div className="preview"><div><strong>{has||"FLASH VIDEO PREVIEW"}</strong><div style={{marginTop:12,fontWeight:900}}>PHUC LONG CENTER</div><div style={{fontFamily:"var(--mono)",fontSize:12,marginTop:4}}>AI FLASH FLOW™ · LONG APP ©</div><div className="glyphs">▣◉↝✦♫⚡⌁✓</div></div></div><div className="grid" style={{marginTop:12}}><div className="card"><h3>AI Cinematic Review</h3><p>Kiểm tra camera, ánh sáng, continuity, rhythm, color, sound và text.</p><button className="action secondary">AI tư vấn</button></div><div className="card"><h3>Render</h3><p>Flash Flow tối ưu tài nguyên trước khi xuất.</p><button className="action">Render Preview</button></div><div className="card"><h3>Lưu về máy</h3><p>Xuất video của user miễn phí khi renderer/provider đã được kết nối.</p><button className="action">Lưu Video · FREE</button></div></div></>:<div className="grid"><div className="card"><h3>Điều khiển chính</h3><p>Chỉ mở nội dung của tab được chọn.</p></div><div className="card"><h3>Flash Flow</h3><p>Pixel Budget • Thermal Governor • Render Scheduler</p></div></div>}</section><BrandFooter/></main>}
+"use client";
+
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import BrandFooter from "@/components/BrandFooter";
+
+const tabs = [
+  "Preview Video",
+  "Hiệu Ứng",
+  "Mix Âm Thanh",
+  "Thiết Bị Đầu Vào",
+  "App Ngoài",
+  "Thiết Bị Đầu Ra/TiVi",
+  "Quản Lý Khán Phòng",
+] as const;
+
+function StudioContent() {
+  const q = useSearchParams();
+  const has = q.get("preview");
+
+  const [t, setT] = useState<string>(
+    has ? "Preview Video" : "Hiệu Ứng"
+  );
+
+  return (
+    <main className="page">
+      <section className="hero">
+        <h1>Phòng Thu</h1>
+        <p>Studio Control • Preview • Render</p>
+      </section>
+
+      <div className="layerbar">
+        {tabs.map((x) => (
+          <button
+            key={x}
+            className={t === x ? "active" : ""}
+            onClick={() => setT(x)}
+          >
+            {x}
+          </button>
+        ))}
+      </div>
+
+      <section className="panel">
+        <div className="kpi">Phòng Thu → {t}</div>
+
+        {t === "Preview Video" ? (
+          <>
+            <div className="preview">
+              <div>
+                <strong>{has || "FLASH VIDEO PREVIEW"}</strong>
+
+                <div style={{ marginTop: 12, fontWeight: 900 }}>
+                  PHUC LONG CENTER
+                </div>
+
+                <div
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 12,
+                    marginTop: 4,
+                  }}
+                >
+                  AI FLASH FLOW™ · LONG APP ©
+                </div>
+
+                <div className="glyphs">▣◉↝✦♫⚡⌁✓</div>
+              </div>
+            </div>
+
+            <div className="grid" style={{ marginTop: 12 }}>
+              <div className="card">
+                <h3>AI Cinematic Review</h3>
+                <p>
+                  Kiểm tra camera, ánh sáng, continuity, rhythm,
+                  color, sound và text.
+                </p>
+                <button className="action secondary">AI tư vấn</button>
+              </div>
+
+              <div className="card">
+                <h3>Render</h3>
+                <p>
+                  Flash Flow tối ưu tài nguyên trước khi xuất.
+                </p>
+                <button className="action">Render Preview</button>
+              </div>
+
+              <div className="card">
+                <h3>Lưu về máy</h3>
+                <p>
+                  Xuất video của user miễn phí khi renderer/provider
+                  đã được kết nối.
+                </p>
+                <button className="action">
+                  Lưu Video · FREE
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="grid">
+            <div className="card">
+              <h3>Điều khiển chính</h3>
+              <p>Chỉ mở nội dung của tab được chọn.</p>
+              </div>
+
+            <div className="card">
+              <h3>Flash Flow</h3>
+              <p>
+                Pixel Budget • Thermal Governor • Render Scheduler
+              </p>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <BrandFooter />
+    </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<main className="page">Đang tải Phòng Thu...</main>}>
+      <StudioContent />
+    </Suspense>
+  );
+}
