@@ -1,0 +1,3 @@
+import "./globals.css";import TopNav from "@/components/TopNav";
+export const metadata={title:"Long App V3",description:"Long App V3 Clean Build"};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="vi" data-theme="boss"><body><TopNav/>{children}</body></html>}

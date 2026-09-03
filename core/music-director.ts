@@ -1,0 +1,3 @@
+export type MusicProvider="soundcloud"|"youtube"|"zing"|"fallback";export type WeeklyThemeMusic={week:string;provider:MusicProvider;title:string;artist?:string;sourceUrl:string;startSeconds:number;durationSeconds:number;maxGain:number};
+export const FALLBACK_THEME:WeeklyThemeMusic={week:"fallback",provider:"fallback",title:"Long App Theme",artist:"Phuc Long Center",sourceUrl:"/audio/long-app-theme.mp3",startSeconds:0,durationSeconds:12,maxGain:.35};
+export function gainAt(second:number,max=.35){return Math.max(0,Math.min(max,(second/10)*max))}

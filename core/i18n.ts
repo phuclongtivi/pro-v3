@@ -1,0 +1,1 @@
+export type Lang="vi"|"en"|"zh";export const languages={vi:"Việt",en:"EN",zh:"中文"} as const;
