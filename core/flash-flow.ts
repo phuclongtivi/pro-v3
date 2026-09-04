@@ -1,1 +1,0 @@
-export type ThermalMode="normal"|"cool"|"survival";export function pixelBudget(temp:number,battery:number){const mode:ThermalMode=temp>=43?"survival":temp>=40||battery<20?"cool":"normal";return{mode,face:1,text:1,product:1,background:mode==="normal"?.78:mode==="cool"?.5:.3,effects:mode==="normal"?.7:mode==="cool"?.35:.12,fps:mode==="normal"?60:mode==="cool"?30:24}}
