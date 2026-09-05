@@ -1,0 +1,7 @@
+export type Lang="vi"|"en"|"zh";
+export const languages={vi:"Tiếng Việt",en:"English",zh:"中文"} as const;
+export const ui={
+ vi:{chooseLanguage:"Chọn ngôn ngữ",continueWeb:"Tiếp tục sử dụng Long trên Web",changeLater:"Bạn có thể đổi ngôn ngữ sau trong Me → Cài Đặt → Ngôn ngữ.",home:"Home",studio:"Phòng Thu",store:"Store",me:"Me",theme:"Giao diện",language:"Ngôn ngữ",eventSpace:"Không gian sự kiện",join:"Tham gia",scanQR:"Quét QR",searchEvent:"Tìm sự kiện…",live:"ĐANG DIỄN RA",upcoming:"SẮP DIỄN RA",forYou:"DÀNH CHO BẠN",myEvents:"SỰ KIỆN CỦA TÔI",core:"Core",output:"Đầu ra",createEvent:"Tạo Event Space"},
+ en:{chooseLanguage:"Choose language",continueWeb:"Continue using Long on the Web",changeLater:"You can change language later in Me → Settings → Language.",home:"Home",studio:"Studio",store:"Store",me:"Me",theme:"Appearance",language:"Language",eventSpace:"Event Space",join:"Join",scanQR:"Scan QR",searchEvent:"Find events…",live:"LIVE NOW",upcoming:"UPCOMING",forYou:"FOR YOU",myEvents:"MY EVENTS",core:"Core",output:"Output",createEvent:"Create Event Space"},
+ zh:{chooseLanguage:"选择语言",continueWeb:"继续在网页使用 Long",changeLater:"之后可在 我的 → 设置 → 语言 中更改。",home:"首页",studio:"演播室",store:"商店",me:"我的",theme:"外观",language:"语言",eventSpace:"活动空间",join:"参加",scanQR:"扫描二维码",searchEvent:"搜索活动…",live:"正在进行",upcoming:"即将开始",forYou:"为你推荐",myEvents:"我的活动",core:"核心",output:"输出",createEvent:"创建活动空间"}
+} as const;

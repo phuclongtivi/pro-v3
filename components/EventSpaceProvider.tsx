@@ -1,0 +1,8 @@
+"use client";
+import {createContext,useCallback,useContext,useMemo,useState} from "react";
+type EvolutionMetric={ts:number;area:string;action:string;result:string;costClass:"local"|"cloud-low"|"cloud";ok:boolean};
+type EventSpaceState={generation:string;metrics:EvolutionMetric[];record:(m:Omit<EvolutionMetric,"ts">)=>void;score:{results:number;evolution:number;economy:number}};
+const Ctx=createContext<EventSpaceState|null>(null);const KEY="long-eventspace-evolution-v1";
+function load():EvolutionMetric[]{if(typeof window==="undefined")return[];try{return JSON.parse(localStorage.getItem(KEY)||"[]").slice(-180)}catch{return[]}}
+export function EventSpaceProvider({children}:{children:React.ReactNode}){const[metrics,setMetrics]=useState<EvolutionMetric[]>(()=>load());const record=useCallback((m:Omit<EvolutionMetric,"ts">)=>setMetrics(prev=>{const next=[...prev,{...m,ts:Date.now()}].slice(-180);try{localStorage.setItem(KEY,JSON.stringify(next))}catch{}return next}),[]);const score=useMemo(()=>{if(!metrics.length)return{results:100,evolution:100,economy:100};const ok=metrics.filter(x=>x.ok).length/metrics.length;const local=metrics.filter(x=>x.costClass==="local").length/metrics.length;const diversity=new Set(metrics.map(x=>`${x.area}:${x.action}`)).size/Math.max(1,metrics.length);return{results:Math.round(ok*100),evolution:Math.round(Math.min(1,.72+diversity)*100),economy:Math.round((.72+.28*local)*100)}},[metrics]);return <Ctx.Provider value={{generation:"RC4-FIX2",metrics,record,score}}>{children}</Ctx.Provider>}
+export function useEventSpace(){const v=useContext(Ctx);if(!v)throw new Error("EventSpaceProvider missing");return v}
