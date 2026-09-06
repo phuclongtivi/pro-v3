@@ -219,3 +219,7 @@ html[data-theme='flash']{--bg:#eef8ff;--surface:#fff;--surface2:#e5f3ff;--text:#
  .contentNote{font-size:13px;padding:9px 10px}
 }
 @media(max-width:390px){.contentGrid{grid-template-columns:1fr}}
+
+
+/* FIXFLOW2 — route only after user selects Tree 3; END content completion */
+.contentGrid button small{display:block;margin-top:4px;color:var(--muted);font-family:var(--mono);font-size:11px}.contentSurface.mode-chat .contentGrid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.contentSurface.mode-chat .contentGrid button.kind-chat{grid-column:1/-1;text-align:left;min-height:82px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 6%,var(--surface)),var(--surface))}.contentSurface.mode-pay .contentGrid button:last-child{border-color:color-mix(in srgb,var(--accent) 62%,var(--line));box-shadow:inset 0 -2px 0 var(--accent)}.contentSurface.mode-list .contentGrid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}@media(max-width:760px){.contentSurface.mode-chat .contentGrid,.contentSurface.mode-list .contentGrid{grid-template-columns:1fr 1fr}.contentSurface.mode-chat .contentGrid button.kind-chat{grid-column:1/-1}}
