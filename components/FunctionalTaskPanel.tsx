@@ -1,0 +1,10 @@
+"use client";
+import {useState} from "react";
+import type {Lang} from "@/lib/navigation";
+export default function FunctionalTaskPanel({lang,title,onCancel,onComplete}:{lang:Lang;title:string;onCancel:()=>void;onComplete:()=>void}){
+ const[enabled,setEnabled]=useState(true);const[value,setValue]=useState(50);const[note,setNote]=useState("");const[tested,setTested]=useState(false);const vi=lang==="vi",zh=lang==="zh";
+ return <div className="functionalPanel"><div className="functionalHead"><div><span>FUNCTIONAL CONTENT</span><h2>{title}</h2></div><b className={`statePill ${tested?"live":"ready"}`}>{tested?(vi?"ĐÃ TEST":zh?"已测试":"TESTED"):(vi?"SẴN SÀNG":zh?"就绪":"READY")}</b></div>
+ <div className="functionalGrid"><label><span>{vi?"Bật tác vụ":zh?"启用任务":"Enable task"}</span><input type="checkbox" checked={enabled} onChange={e=>setEnabled(e.target.checked)}/></label><label><span>{vi?"Mức / thông số":zh?"级别/参数":"Level / parameter"} · {value}</span><input type="range" min="0" max="100" value={value} onChange={e=>setValue(Number(e.target.value))}/></label><label className="wide"><span>{vi?"Ghi chú / dữ liệu":zh?"备注/数据":"Notes / data"}</span><input value={note} onChange={e=>setNote(e.target.value)} placeholder={vi?"Tùy chọn, mã, tên hoặc cấu hình…":zh?"选项、代码、名称或配置…":"Option, code, name or configuration…"}/></label><button type="button" onClick={()=>setTested(true)}>{vi?"Test / Preview":zh?"测试/预览":"Test / Preview"}</button></div>
+ <div className="functionalResult"><b>{tested?"✓ ":"○ "}{vi?"Kết quả kiểm tra":zh?"测试结果":"Test result"}</b><span>{tested?(vi?"Tác vụ đã có trạng thái thực và sẵn sàng áp dụng.":zh?"任务已有实际状态，可以应用。":"Task has a real state and is ready to apply."):(vi?"Hãy Test/Preview trước END để tránh thao tác mù.":zh?"请在 END 前测试/预览。":"Test/Preview before END to avoid blind actions.")}</span></div>
+ <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={onCancel}>{vi?"Chọn lại":zh?"重新选择":"Choose again"}</button><button type="button" className="endCommit" disabled={!enabled||!tested} onClick={onComplete}>{vi?"Áp dụng · END":zh?"应用 · END":"Apply · END"}</button></div></div>
+}
