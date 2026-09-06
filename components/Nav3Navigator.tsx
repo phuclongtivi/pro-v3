@@ -71,6 +71,9 @@ function actions(section: string, child: string): Act[] {
       A("clip", "Clip ngắn", "Short Clip", "短片"),
       A("replay", "Replay", "Replay", "回放"),
       A("render", "Render", "Render", "渲染"),
+      A("highlight-auto", "AI Highlight tự động", "Auto AI Highlight", "AI自动精彩片段", true),
+      A("quick-video-event", "Video nhanh từ ảnh sự kiện", "Quick Event Video", "活动图片快速视频", true),
+      A("qr-refer", "QRcode Refer", "QRcode Refer", "二维码推荐", true),
     ],
     "studio.broadcast:export-video": [
       A("device", "Xuất về máy", "Download to Device", "下载到设备"),
@@ -635,141 +638,208 @@ function getEndContent(section: string, active: NavChild, action?: Act | null): 
 }
 
 export default function Nav3Navigator({ section, items, activeId, onSelect, lang }: { section: string; items: NavChild[]; activeId: string; onSelect: (id: string) => void; lang: Lang }) {
+  type Phase = "B" | "C5" | "COMMIT" | "DONE";
   const active = items.find((x) => x.id === activeId) || items[0];
   const [action, setAction] = useState<Act | null>(null);
   const [selected, setSelected] = useState<Act | null>(null);
-  const [openedDirectId, setOpenedDirectId] = useState<string | null>(null);
+  const [phase, setPhase] = useState<Phase>("B");
+  const [inputValue, setInputValue] = useState("");
+  const [inputTouched, setInputTouched] = useState(false);
+  const [effect, setEffect] = useState("natural");
+  const [lastEnd, setLastEnd] = useState<{ id: string; label: string } | null>(null);
   const { record } = useEventSpace();
 
   useEffect(() => {
     setAction(null);
     setSelected(null);
-    setOpenedDirectId(null);
+    setPhase("B");
+    setInputValue("");
+    setInputTouched(false);
   }, [section]);
+
+  useEffect(() => {
+    if (phase !== "DONE") return;
+    const t = window.setTimeout(() => {
+      setPhase("B");
+      setAction(null);
+      setSelected(null);
+      setInputValue("");
+      setInputTouched(false);
+    }, 1500);
+    return () => window.clearTimeout(t);
+  }, [phase]);
 
   const childActs = useMemo(() => actions(section, active.id), [section, active.id]);
   const direct = !!active.directToEnd;
-  const contentOpen = !!action || (direct && openedDirectId === active.id);
   const content = useMemo(() => getEndContent(section, active, action), [section, active, action]);
+
+  const terminalIds = new Set([
+    "save","apply","confirm","create","publish","send","join","upload","export","download","done","approve","run","start","take-live","checkout","notify","connect","pair","sync","resolve","leave","play","stop","open"
+  ]);
+  const isTerminal = (a: Act) => terminalIds.has(a.id) || a.id.startsWith("confirm-") || a.id.startsWith("save-");
+  const mediaIds = new Set(["photo","image","video","clip","replay","render","banner","record","short","final","social","media"]);
+  const isMediaStep = (a: Act | null) => !!a && (mediaIds.has(a.id) || /photo|image|video|clip|replay|render|banner|highlight/i.test(a.id));
+  const isConnectionStep = section.startsWith("home.connect") || (section.startsWith("studio.mixer") && (active.id === "inputs" || action?.id === "external" || selected?.id === "ext"));
+
+  function inputError(a: Act | null, value: string) {
+    if (!a || a.kind !== "input") return "";
+    const v = value.trim();
+    if (!v) return lang === "en" ? "This field is required." : lang === "zh" ? "此项为必填项。" : "Mục này bắt buộc nhập.";
+    if (/url|link|endpoint|http/i.test(a.id) && !/^https?:\/\/[^\s]+$/i.test(v)) return lang === "en" ? "Invalid address. Example: https://..." : lang === "zh" ? "地址无效，例如：https://..." : "Địa chỉ chưa hợp lệ. Ví dụ: https://...";
+    if (/email/i.test(a.id) && !/^\S+@\S+\.\S+$/.test(v)) return lang === "en" ? "Invalid email." : lang === "zh" ? "邮箱格式不正确。" : "Email chưa đúng định dạng.";
+    if (/phone/i.test(a.id) && !/^[+0-9][0-9\s.-]{7,}$/.test(v)) return lang === "en" ? "Invalid phone number." : lang === "zh" ? "电话号码格式不正确。" : "Số điện thoại chưa đúng định dạng.";
+    if (/width|height|qty|quantity|count/i.test(a.id) && !(Number(v) > 0)) return lang === "en" ? "Enter a number greater than 0." : lang === "zh" ? "请输入大于 0 的数字。" : "Nhập số lớn hơn 0.";
+    return "";
+  }
 
   function choose3(id: string) {
     const target = items.find((x) => x.id === id);
     onSelect(id);
     setAction(null);
     setSelected(null);
-    setOpenedDirectId(target?.directToEnd ? id : null);
+    setInputValue("");
+    setInputTouched(false);
+    setPhase(target?.directToEnd ? "C5" : "B");
   }
 
   function choose4(a: Act) {
     setAction(a);
     setSelected(null);
-    setOpenedDirectId(null);
-    record({ area: section, action: `${active.id}:${a.id}`, result: "end", costClass: "local", ok: true });
+    setInputValue("");
+    setInputTouched(false);
+    setPhase("C5");
+    record({ area: section, action: `${active.id}:${a.id}`, result: "tree4-selected", costClass: "local", ok: true });
   }
 
-  function chooseEnd(a: Act) {
+  function completeEnd(a: Act) {
+    const productId = `ESP-${Date.now().toString(36).toUpperCase()}`;
+    const productLabel = tx(a.label, lang);
+    setLastEnd({ id: productId, label: productLabel });
     setSelected(a);
-    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${a.id}`, result: "end-choice", costClass: a.id.includes("ai") ? "cloud-low" : "local", ok: true });
+    setPhase("DONE");
+    record({
+      area: section,
+      action: `${active.id}:${action?.id || "direct"}:${a.id}`,
+      result: `eventspace-product:${productId}`,
+      costClass: a.id.includes("ai") ? "cloud-low" : "local",
+      ok: true,
+    });
   }
 
-  if (contentOpen) {
+  function choose5(a: Act) {
+    setSelected(a);
+    setInputValue("");
+    setInputTouched(false);
+    if (isTerminal(a) && a.kind !== "input") completeEnd(a);
+    else setPhase("COMMIT");
+  }
+
+  function commitCurrent() {
+    if (!selected) return;
+    const err = inputError(selected, inputValue);
+    if (err) {
+      setInputTouched(true);
+      return;
+    }
+    completeEnd(selected);
+  }
+
+  function backToB() {
+    setPhase("B");
+    setAction(null);
+    setSelected(null);
+    setInputValue("");
+    setInputTouched(false);
+  }
+
+  const separator = (
+    <div className="eventSpaceSeparator" aria-hidden="true">
+      <span>PHUC LONG EVENT SPACE@</span><i>•</i><span>PHUC LONG EVENT SPACE@</span><i>•</i><span>PHUC LONG EVENT SPACE@</span>
+    </div>
+  );
+
+  if (phase !== "B") {
+    const err = inputError(selected, inputValue);
     return (
       <>
-        <section className="navLevelContext" aria-label="Current navigation level">
-          <div className="navLevelRow tree3Row">
-            {items.map((x) => (
-              <button
-                key={x.id}
-                className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")}
-                onClick={() => choose3(x.id)}
-              >
-                <b>{label(x.label, lang)}</b>
-              </button>
-            ))}
-          </div>
+        {separator}
+        <nav className="collapsedTrail" aria-label="Current EventSpace branch">
+          <button type="button" className="trailBack" onClick={phase === "COMMIT" ? () => { setPhase("C5"); setSelected(null); } : backToB}>← Back</button>
+          <button type="button" className="trailNode depth3" onClick={backToB}>{label(active.label, lang)}</button>
+          {action && <><span className="trailSep">|</span><button type="button" className="trailNode depth4" onClick={() => { setSelected(null); setPhase("C5"); }}>{tx(action.label, lang)}</button></>}
+          {selected && <><span className="trailSep">|</span><button type="button" className="trailNode depth5" onClick={() => { setInputValue(""); setInputTouched(false); setPhase("COMMIT"); }}>{tx(selected.label, lang)} <small>↺</small></button></>}
+        </nav>
 
-          {!direct && (
-            <div className="navLevelRow tree4Row">
-              {childActs.map((x) => (
-                <button
-                  key={x.id}
-                  className={(action?.id === x.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")}
-                  onClick={() => choose4(x)}
-                >
+        <section className={`navGroupC contentSurface mode-${content.mode || "grid"}`}>
+          {phase === "C5" && <>
+            {content.note && <p className="contentNote">{tx(content.note, lang)}</p>}
+            <div className="contentGrid">
+              {content.items.map((x) => (
+                <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
                   <b>{tx(x.label, lang)}</b>
+                  {x.kind === "input" && <small>Input</small>}
+                  {x.kind === "chat" && <small>Chat</small>}
                 </button>
               ))}
             </div>
-          )}
-        </section>
+          </>}
 
-        <section className={`navGroupC contentSurface mode-${content.mode || "grid"}`}>
-          <div className="contentHead">
-            <button
-              type="button"
-              onClick={() => {
-                if (action) setAction(null);
-                else setOpenedDirectId(null);
-                setSelected(null);
-              }}
-            >
-              ← Quay lại
-            </button>
-          </div>
+          {phase === "COMMIT" && selected && <div className="endWorkbench">
+            <div className="endWorkbenchHead"><b>{tx(selected.label, lang)}</b><span>EVENTSPACE PRODUCT</span></div>
+            {selected.kind === "input" && <label className={`smartField ${inputTouched && err ? "invalid" : ""}`}>
+              <span>{tx(selected.label, lang)}</span>
+              <input value={inputValue} onChange={(e) => { setInputValue(e.target.value); if (inputTouched) setInputTouched(true); }} onBlur={() => setInputTouched(true)} placeholder={/url|link|endpoint/i.test(selected.id) ? "https://..." : ""}/>
+              {inputTouched && err && <small className="fieldError">● {err}</small>}
+            </label>}
 
-          {content.note && <p className="contentNote">{tx(content.note, lang)}</p>}
+            {isMediaStep(selected) && <div className="effectsStage">
+              <div><b>Effects</b><small>{lang === "en" ? "Required stage before save/publish (except livestream)." : lang === "zh" ? "保存/发布前必须经过效果阶段（直播除外）。" : "Bước bắt buộc trước khi lưu/xuất bản (trừ livestream)."}</small></div>
+              <div className="effectChoices">{["natural","cinematic","event","clean"].map(x => <button type="button" key={x} className={effect === x ? "active" : ""} onClick={() => setEffect(x)}>{x}</button>)}</div>
+              <code>PHUC LONG • EVENT SPACE@</code>
+            </div>}
 
-          <div className="contentGrid">
-            {content.items.map((x) => (
-              <button
-                key={x.id}
-                className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + (selected?.id === x.id ? "selected " : "") + `kind-${x.kind || "action"}`}
-                onClick={() => chooseEnd(x)}
-              >
-                <b>{tx(x.label, lang)}</b>
-                {x.kind === "input" && <small>Input</small>}
-                {x.kind === "chat" && <small>Chat</small>}
-              </button>
-            ))}
-          </div>
+            {isConnectionStep && <div className="connectionHealthMini">
+              <b>Connection Health & Backup</b>
+              <span>{lang === "en" ? "Primary is checked periodically; an approved backup may replace a failed source." : lang === "zh" ? "定期检查主源；主源失败时可切换到已批准的备用源。" : "Nguồn chính được kiểm tra định kỳ; khi lỗi có thể chuyển sang Backup đã duyệt."}</span>
+              <small>Primary → Health Check → Backup → EventSpace log</small>
+            </div>}
 
-          {selected && (
-            <div className="contentResult">
-              <b>{tx(selected.label, lang)}</b>
-              <span>
-                {lang === "zh"
-                  ? "已选择。继续当前操作。"
-                  : lang === "en"
-                    ? "Selected. Continue this action."
-                    : "Đã chọn. Tiếp tục thao tác hiện tại."}
-              </span>
-            </div>
-          )}
+            <div className="endActions"><button type="button" className="secondary" onClick={() => { setPhase("C5"); setSelected(null); }}>Chọn lại</button><button type="button" className="primary" onClick={commitCurrent}>{lang === "en" ? "Complete & Create END" : lang === "zh" ? "完成并创建 END" : "Hoàn tất & tạo END"}</button></div>
+          </div>}
+
+          {phase === "DONE" && lastEnd && <div className="endProductCard">
+            <span className="endCheck">✓</span>
+            <div><b>{lang === "en" ? "EventSpace Product created" : lang === "zh" ? "EventSpace 产品已创建" : "Đã tạo Sản phẩm EventSpace"}</b><strong>{lastEnd.label}</strong><code>{lastEnd.id}</code><small>{lang === "en" ? "Returning to Group B for the next evolution loop…" : lang === "zh" ? "正在返回 B 组，开始下一轮进化…" : "Đang trở lại Nhóm B để bắt đầu vòng tiến hóa tiếp theo…"}</small></div>
+          </div>}
         </section>
       </>
     );
   }
 
   return (
-    <section className="navGroupB">
-      <div className="navColumn">
-        <div className="keyboardList">
-          {items.map((x) => (
-            <button key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}>
-              <b>{label(x.label, lang)}</b>
-            </button>
-          ))}
+    <>
+      {separator}
+      {lastEnd && <div className="recentEnd"><span>✓ END</span><b>{lastEnd.label}</b><code>{lastEnd.id}</code></div>}
+      <section className="navGroupB">
+        <div className="navColumn">
+          <div className="keyboardList">
+            {items.map((x) => (
+              <button type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}>
+                <b>{label(x.label, lang)}</b>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="navColumn child">
-        <div className="keyboardList">
-          {childActs.map((x) => (
-            <button key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}>
-              <b>{tx(x.label, lang)}</b>
-            </button>
-          ))}
+        <div className="navColumn child">
+          <div className="keyboardList">
+            {childActs.map((x) => (
+              <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}>
+                <b>{tx(x.label, lang)}</b>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
