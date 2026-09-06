@@ -4,6 +4,8 @@ import type { Lang, NavChild } from "@/lib/navigation";
 import { label } from "@/lib/navigation";
 import { useEventSpace } from "@/components/EventSpaceProvider";
 import {AppearanceCenter,SoundCenter,PrivacyCenter,SecurityCenter,StickerStore,PaymentCenter} from "@/components/ContentCompletePanels";
+import MediaConnectionPanel from "@/components/MediaConnectionPanel";
+import FunctionalTaskPanel from "@/components/FunctionalTaskPanel";
 
 type Txt = { vi: string; en: string; zh: string };
 type Kind = "action" | "product" | "notice" | "input" | "chat" | "pay";
@@ -669,14 +671,26 @@ function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => 
     try { localStorage.setItem(storageKey, JSON.stringify(next.slice(-80))); } catch {}
   }
 
-  function send(body = text) {
+  const [thinking, setThinking] = useState(false);
+  const [aiError, setAiError] = useState("");
+
+  async function send(body = text) {
     const clean = body.trim();
-    if (!clean) return;
-    const next: Msg[] = [...messages, { role: "user", body: clean }, { role: "ai", body: lang === "en" ? "Request received. AI Flash workspace keeps this conversation open for the next task." : lang === "zh" ? "已收到请求。AI Flash 工作区将保持打开，您可以继续下一项任务。" : "Đã nhận yêu cầu. AI Flash giữ nguyên workspace để bạn tiếp tục tác vụ tiếp theo." }];
-    persist(next);
-    setText("");
-    setSaved(false);
-    record({ area: "home.myai", action: "ai-flash:send", result: "end-repeat", costClass: "local", ok: true });
+    if (!clean || thinking) return;
+    const next: Msg[] = [...messages, { role: "user", body: clean }];
+    persist(next); setText(""); setSaved(false); setThinking(true); setAiError("");
+    try {
+      const r = await fetch("/api/ai/flash", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:next})});
+      const j = await r.json().catch(()=>null);
+      if(!r.ok || !j?.ok) throw new Error(j?.message || `AI Flash ${r.status}`);
+      persist([...next,{role:"ai",body:String(j.text||"")}]);
+      record({ area: "home.myai", action: "ai-flash:send", result: "end-repeat-live", costClass: "cloud-low", ok: true });
+    } catch(e:any) {
+      const message=e?.message || (lang==="vi"?"AI Flash chưa kết nối.":"AI Flash is not connected.");
+      setAiError(message);
+      persist([...next,{role:"ai",body:message}]);
+      record({ area: "home.myai", action: "ai-flash:send", result: "provider-error", costClass: "cloud-low", ok: false });
+    } finally { setThinking(false); }
   }
 
   function save() {
@@ -695,12 +709,12 @@ function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => 
     <div className="aiFlashBody">
       <div className="aiFlashHead"><b>AI Flash</b><span>{lang === "en" ? "Chat • tasks • reusable END" : lang === "zh" ? "聊天 • 任务 • 可重复 END" : "Chat • giao việc • END lặp trong workspace"}</span></div>
       <div className="aiFlashLog" aria-live="polite">
-        {messages.length === 0 ? <div className="aiEmpty">{lang === "en" ? "Start a conversation with AI Flash." : lang === "zh" ? "开始与 AI Flash 对话。" : "Bắt đầu trò chuyện với AI Flash."}</div> : messages.map((m, i) => <div key={i} className={`aiMsg ${m.role}`}><b>{m.role === "user" ? (lang === "vi" ? "Bạn" : lang === "zh" ? "你" : "You") : "AI Flash"}</b><span>{m.body}</span></div>)}
+        {thinking && <div className="aiThinking">AI Flash · {lang === "vi" ? "Đang suy nghĩ…" : lang === "zh" ? "正在思考…" : "Thinking…"}</div>}{aiError && <div className="aiError">{aiError}</div>}{messages.length === 0 ? <div className="aiEmpty">{lang === "en" ? "Start a conversation with AI Flash." : lang === "zh" ? "开始与 AI Flash 对话。" : "Bắt đầu trò chuyện với AI Flash."}</div> : messages.map((m, i) => <div key={i} className={`aiMsg ${m.role}`}><b>{m.role === "user" ? (lang === "vi" ? "Bạn" : lang === "zh" ? "你" : "You") : "AI Flash"}</b><span>{m.body}</span></div>)}
       </div>
       <div className="aiQuickRow">{quick.map(q => <button type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
       <div className="aiComposer">
         <textarea value={text} onChange={e => setText(e.target.value)} placeholder={lang === "en" ? "Message AI Flash…" : lang === "zh" ? "向 AI Flash 输入消息…" : "Nhập yêu cầu cho AI Flash…"} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} />
-        <button type="button" className="endCommit" onClick={() => send()}>{lang === "en" ? "Send · END" : lang === "zh" ? "发送 · END" : "Gửi · END"}</button>
+        <button type="button" className="endCommit" disabled={thinking} onClick={() => send()}>{lang === "en" ? "Send · END" : lang === "zh" ? "发送 · END" : "Gửi · END"}</button>
       </div>
       <div className="aiToolRow">
         <button type="button" onClick={() => setText(quick[0])}>{lang === "vi" ? "Giao việc nhanh" : lang === "zh" ? "快速任务" : "Quick Task"}</button>
@@ -778,6 +792,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   if (contentOpen && active.endType === "stickerStore") return <StickerStore lang={lang} onBack={resetToB} mode="store"/>;
   if (contentOpen && active.endType === "stickerWallet") return <StickerStore lang={lang} onBack={resetToB} mode="wallet"/>;
   if (contentOpen && active.id === "checkout") return <PaymentCenter lang={lang} onBack={resetToB}/>;
+  if (contentOpen && section === "home.connect" && active.id === "devices" && action?.id === "laptop" && selected?.id === "hdmi") return <MediaConnectionPanel lang={lang} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
 
   if (contentOpen) {
     return <section className={`navWorkspace contentSurface mode-${content.mode || "grid"}`}>
@@ -794,20 +809,18 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
         {content.items.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
           <b>{tx(x.label, lang)}</b>{x.kind === "input" && <small>Input → END</small>}{x.kind === "chat" && <small>Chat → END</small>}
         </button>)}
-      </div> : <div className="endWorkPanel">
-        <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Complete this operation to reach END." : lang === "zh" ? "完成此操作以到达 END。" : "Hoàn tất thao tác này để đạt END."}</span></div>
-        {(selected.kind === "input" || active.endType === "createNotice") && <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : (lang === "en" ? "Input" : lang === "zh" ? "输入" : "Nhập nội dung")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>}
-        {selected.kind === "chat" && <label className="endInput"><span>{lang === "en" ? "Message" : lang === "zh" ? "消息" : "Tin nhắn"}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>}
-        <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={(selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") && !draft.trim()} onClick={() => finishEnd()}>{done ? "✓ END" : endLabel(section, active, selected, lang)}</button></div>
-        <div className="endStatus"><b>END</b><span>{done ? (lang === "en" ? "Completed. Returning to the full Tree 3 + Tree 4 workspace…" : lang === "zh" ? "已完成。正在返回完整的树 3 + 树 4 工作区…" : "Đã hoàn tất. Đang trở lại đầy đủ Cây 3 + Cây 4…") : (lang === "en" ? "Every route must end with a result." : lang === "zh" ? "每条路径都必须以结果结束。" : "Mọi tuyến đều bắt buộc có kết quả END.")}</span></div>
-      </div>}
+      </div> : (selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") ? <div className="endWorkPanel">
+        <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Enter the required content, then commit END." : lang === "zh" ? "输入所需内容，然后提交 END。" : "Nhập nội dung cần thiết, sau đó xác nhận END."}</span></div>
+        <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : selected.kind === "chat" ? (lang === "vi"?"Tin nhắn":"Message") : (lang === "vi"?"Nội dung":"Input")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>
+        <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? "✓ END" : endLabel(section, active, selected, lang)}</button></div>
+      </div> : <FunctionalTaskPanel lang={lang} title={tx(selected.label,lang)} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
     </section>;
   }
 
   return <section className="navWorkspace navGroupB">
     <div className="navColumn"><div className="keyboardList">{items.map((x) => <button type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
     <div className="navColumn child"><div className="keyboardList">
-      {direct ? <button type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? "Open task → END" : lang === "zh" ? "打开任务 → END" : "Mở tác vụ → END"}</b></button> : childActs.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
+      {direct ? <button type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? `Open ${label(active.label, lang)}` : lang === "zh" ? `打开 ${label(active.label, lang)}` : `Mở ${label(active.label, lang)}`}</b></button> : childActs.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
     </div></div>
   </section>;
 }

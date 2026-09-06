@@ -13,8 +13,8 @@ export default function WelcomeExperience({lang,onDone}:{lang:Lang;onDone:()=>vo
  return <div className={"welcomeFlash welcomeFilm "+(leaving?"leaving":"")} role="dialog" aria-label="Long Welcome">
    <div className="welcomeAura"/>
    <div className="welcomeJewelFrame" aria-hidden="true"><i/><i/><i/><i/></div>
-   <video ref={videoRef} className="welcomeMovie" src="/welcome/long-welcome-5s.mp4" autoPlay playsInline preload="auto"
-     onEnded={close} onCanPlay={()=>videoRef.current?.play().catch(()=>{})}/>
+   <video ref={videoRef} className="welcomeMovie" src="/welcome/long-welcome-5s.mp4" autoPlay playsInline preload="auto" muted={false}
+     onEnded={close} onLoadedData={()=>videoRef.current?.play().catch(()=>{})} onCanPlay={()=>videoRef.current?.play().catch(()=>{})}/>
    <div className="welcomeGlass"/>
    <div className="welcomeIdentity compact"><h1>{copy[lang].title}</h1><p>{copy[lang].line}</p></div>
    <button className="welcomeSkip" onClick={close}>{copy[lang].skip}</button>
