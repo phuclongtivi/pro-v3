@@ -2,7 +2,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "audit:content": "node scripts/audit-content-registry.mjs",
+    "audit:specialized": "node scripts/audit-specialized.mjs"
   },
   "dependencies": {
     "next": "^15.2.4",

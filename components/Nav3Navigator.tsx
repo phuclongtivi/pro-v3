@@ -5,7 +5,10 @@ import { label } from "@/lib/navigation";
 import { useEventSpace } from "@/components/EventSpaceProvider";
 import {AppearanceCenter,SoundCenter,PrivacyCenter,SecurityCenter,StickerStore,PaymentCenter} from "@/components/ContentCompletePanels";
 import MediaConnectionPanel from "@/components/MediaConnectionPanel";
-import FunctionalTaskPanel from "@/components/FunctionalTaskPanel";
+import RuntimeActionPanel from "@/components/RuntimeActionPanel";
+import TemplateVideoBuilder from "@/components/TemplateVideoBuilder";
+import ProductCreateForm from "@/components/ProductCreateForm";
+import SemanticSpecializedPanel, {semanticIntent} from "@/components/SemanticSpecializedPanel";
 
 type Txt = { vi: string; en: string; zh: string };
 type Kind = "action" | "product" | "notice" | "input" | "chat" | "pay";
@@ -781,6 +784,8 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
     resetToB();
   }
 
+  if (contentOpen && active.endType === "createVideo" && selected?.id === "template") return <TemplateVideoBuilder lang={lang} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
+  if (contentOpen && active.endType === "createProduct" && (selected?.id === "new" || selected?.id === "template")) return <ProductCreateForm lang={lang} mode={selected.id === "template" ? "template" : "new"} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
   if (contentOpen && active.endType === "aiFlashChat") {
     return <AIFlashWorkspace lang={lang} onBack={resetToB} record={record} />;
   }
@@ -812,7 +817,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
         <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Enter the required content, then commit END." : lang === "zh" ? "输入所需内容，然后提交 END。" : "Nhập nội dung cần thiết, sau đó xác nhận END."}</span></div>
         <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : selected.kind === "chat" ? (lang === "vi"?"Tin nhắn":"Message") : (lang === "vi"?"Nội dung":"Input")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>
         <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? "✓ END" : endLabel(section, active, selected, lang)}</button></div>
-      </div> : <FunctionalTaskPanel lang={lang} title={tx(selected.label,lang)} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
+      </div> : <SemanticSpecializedPanel lang={lang} section={section} activeId={active.id} activeLabel={label(active.label,lang)} actionId={action?.id} actionLabel={action?tx(action.label,lang):undefined} selectedId={selected.id} selectedLabel={tx(selected.label,lang)} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
     </section>;
   }
 
