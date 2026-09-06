@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Lang, NavChild } from "@/lib/navigation";
 import { label } from "@/lib/navigation";
 import { useEventSpace } from "@/components/EventSpaceProvider";
+import {AppearanceCenter,SoundCenter,PrivacyCenter,SecurityCenter,StickerStore,PaymentCenter} from "@/components/ContentCompletePanels";
 
 type Txt = { vi: string; en: string; zh: string };
 type Kind = "action" | "product" | "notice" | "input" | "chat" | "pay";
@@ -71,9 +72,6 @@ function actions(section: string, child: string): Act[] {
       A("clip", "Clip ngắn", "Short Clip", "短片"),
       A("replay", "Replay", "Replay", "回放"),
       A("render", "Render", "Render", "渲染"),
-      A("highlight-auto", "AI Highlight tự động", "Auto AI Highlight", "AI自动精彩片段", true),
-      A("quick-video-event", "Video nhanh từ ảnh sự kiện", "Quick Event Video", "活动图片快速视频", true),
-      A("qr-refer", "QRcode Refer", "QRcode Refer", "二维码推荐", true),
     ],
     "studio.broadcast:export-video": [
       A("device", "Xuất về máy", "Download to Device", "下载到设备"),
@@ -170,10 +168,13 @@ function actions(section: string, child: string): Act[] {
       A("promo", "Khuyến mại", "Promotion", "促销", true),
     ],
     "store.shopping:checkout": [
+      A("vietqr", "VietQR / Chuyển khoản", "VietQR / Bank Transfer", "VietQR / 银行转账", true),
+      A("momo", "MoMo", "MoMo", "MoMo", true),
+      A("zalopay", "ZaloPay", "ZaloPay", "ZaloPay"),
+      A("card", "Visa / Mastercard", "Visa / Mastercard", "Visa / Mastercard"),
+      A("apple", "Apple Pay", "Apple Pay", "Apple Pay"),
+      A("google", "Google Pay", "Google Pay", "Google Pay"),
       A("cod", "COD", "COD", "货到付款"),
-      A("bank", "Chuyển khoản", "Bank Transfer", "银行转账"),
-      A("wallet", "Ví điện tử", "Wallet", "钱包", true),
-      A("qr", "QR Pay", "QR Pay", "二维码支付", true),
     ],
     "me.profile:personal": [
       A("view", "Xem", "View", "查看"),
@@ -637,209 +638,176 @@ function getEndContent(section: string, active: NavChild, action?: Act | null): 
   return fallbackEnd(section, active, action);
 }
 
+function isTerminalAction(a: Act) {
+  return /^(save|apply|confirm|create|publish|checkout|upload|download|start|stop|take-live|leave|resolve|send|connect|checkin|arm|run)$/i.test(a.id);
+}
+
+function endLabel(section: string, active: NavChild, selected: Act | null, lang: Lang) {
+  const id = active.endType || "";
+  if (id === "createNotice") return lang === "en" ? "Save & Publish Notice" : lang === "zh" ? "保存并发布通知" : "Lưu & Đăng Thông Báo";
+  if (id === "createLive") return lang === "en" ? "Create Live Room" : lang === "zh" ? "创建直播间" : "Tạo room live";
+  if (id === "createProduct") return lang === "en" ? "Save & Publish Product" : lang === "zh" ? "保存并发布商品" : "Lưu & Đăng Sản Phẩm";
+  if (section.startsWith("studio.mixer")) return lang === "en" ? "Apply & Save" : lang === "zh" ? "应用并保存" : "Áp dụng & Lưu";
+  if (section.startsWith("studio.broadcast")) return lang === "en" ? "Apply / TAKE LIVE" : lang === "zh" ? "应用 / 切入直播" : "Áp dụng / TAKE LIVE";
+  if (selected?.id === "send") return lang === "en" ? "Send" : lang === "zh" ? "发送" : "Gửi";
+  return lang === "en" ? "Complete" : lang === "zh" ? "完成" : "Hoàn tất";
+}
+
+function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => void; record: ReturnType<typeof useEventSpace>["record"] }) {
+  type Msg = { role: "user" | "ai"; body: string };
+  const [messages, setMessages] = useState<Msg[]>([]);
+  const [text, setText] = useState("");
+  const [saved, setSaved] = useState(false);
+  const storageKey = "long-ai-flash-chat-v1";
+
+  useEffect(() => {
+    try { setMessages(JSON.parse(localStorage.getItem(storageKey) || "[]")); } catch { setMessages([]); }
+  }, []);
+
+  function persist(next: Msg[]) {
+    setMessages(next);
+    try { localStorage.setItem(storageKey, JSON.stringify(next.slice(-80))); } catch {}
+  }
+
+  function send(body = text) {
+    const clean = body.trim();
+    if (!clean) return;
+    const next: Msg[] = [...messages, { role: "user", body: clean }, { role: "ai", body: lang === "en" ? "Request received. AI Flash workspace keeps this conversation open for the next task." : lang === "zh" ? "已收到请求。AI Flash 工作区将保持打开，您可以继续下一项任务。" : "Đã nhận yêu cầu. AI Flash giữ nguyên workspace để bạn tiếp tục tác vụ tiếp theo." }];
+    persist(next);
+    setText("");
+    setSaved(false);
+    record({ area: "home.myai", action: "ai-flash:send", result: "end-repeat", costClass: "local", ok: true });
+  }
+
+  function save() {
+    try { localStorage.setItem("long-ai-flash-saved-result", JSON.stringify({ savedAt: new Date().toISOString(), messages })); } catch {}
+    setSaved(true);
+    record({ area: "home.myai", action: "ai-flash:save", result: "end-repeat", costClass: "local", ok: true });
+  }
+
+  const quick = lang === "en" ? ["Create event outline", "Summarize current work", "Prepare announcement"] : lang === "zh" ? ["创建活动框架", "总结当前工作", "准备通知"] : ["Dựng khung sự kiện", "Tóm tắt công việc hiện tại", "Soạn thông báo"];
+
+  return <section className="navWorkspace aiFlashWorkspace">
+    <div className="workspaceCrumbs">
+      <button type="button" className="backKey" onClick={onBack}>← Back</button>
+      <button type="button" className="crumbKey selected">AI Flash</button>
+    </div>
+    <div className="aiFlashBody">
+      <div className="aiFlashHead"><b>AI Flash</b><span>{lang === "en" ? "Chat • tasks • reusable END" : lang === "zh" ? "聊天 • 任务 • 可重复 END" : "Chat • giao việc • END lặp trong workspace"}</span></div>
+      <div className="aiFlashLog" aria-live="polite">
+        {messages.length === 0 ? <div className="aiEmpty">{lang === "en" ? "Start a conversation with AI Flash." : lang === "zh" ? "开始与 AI Flash 对话。" : "Bắt đầu trò chuyện với AI Flash."}</div> : messages.map((m, i) => <div key={i} className={`aiMsg ${m.role}`}><b>{m.role === "user" ? (lang === "vi" ? "Bạn" : lang === "zh" ? "你" : "You") : "AI Flash"}</b><span>{m.body}</span></div>)}
+      </div>
+      <div className="aiQuickRow">{quick.map(q => <button type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
+      <div className="aiComposer">
+        <textarea value={text} onChange={e => setText(e.target.value)} placeholder={lang === "en" ? "Message AI Flash…" : lang === "zh" ? "向 AI Flash 输入消息…" : "Nhập yêu cầu cho AI Flash…"} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} />
+        <button type="button" className="endCommit" onClick={() => send()}>{lang === "en" ? "Send · END" : lang === "zh" ? "发送 · END" : "Gửi · END"}</button>
+      </div>
+      <div className="aiToolRow">
+        <button type="button" onClick={() => setText(quick[0])}>{lang === "vi" ? "Giao việc nhanh" : lang === "zh" ? "快速任务" : "Quick Task"}</button>
+        <button type="button" onClick={() => setText(quick[2])}>{lang === "vi" ? "Mẫu tác vụ" : lang === "zh" ? "任务模板" : "Task Template"}</button>
+        <button type="button" onClick={save}>{saved ? "✓ " : ""}{lang === "vi" ? "Lưu kết quả" : lang === "zh" ? "保存结果" : "Save Result"}</button>
+      </div>
+    </div>
+  </section>;
+}
+
 export default function Nav3Navigator({ section, items, activeId, onSelect, lang }: { section: string; items: NavChild[]; activeId: string; onSelect: (id: string) => void; lang: Lang }) {
-  type Phase = "B" | "C5" | "COMMIT" | "DONE";
   const active = items.find((x) => x.id === activeId) || items[0];
   const [action, setAction] = useState<Act | null>(null);
   const [selected, setSelected] = useState<Act | null>(null);
-  const [phase, setPhase] = useState<Phase>("B");
-  const [inputValue, setInputValue] = useState("");
-  const [inputTouched, setInputTouched] = useState(false);
-  const [effect, setEffect] = useState("natural");
-  const [lastEnd, setLastEnd] = useState<{ id: string; label: string } | null>(null);
+  const [openedDirectId, setOpenedDirectId] = useState<string | null>(null);
+  const [draft, setDraft] = useState("");
+  const [done, setDone] = useState(false);
   const { record } = useEventSpace();
 
   useEffect(() => {
     setAction(null);
     setSelected(null);
-    setPhase("B");
-    setInputValue("");
-    setInputTouched(false);
+    setOpenedDirectId(null);
+    setDraft("");
+    setDone(false);
   }, [section]);
-
-  useEffect(() => {
-    if (phase !== "DONE") return;
-    const t = window.setTimeout(() => {
-      setPhase("B");
-      setAction(null);
-      setSelected(null);
-      setInputValue("");
-      setInputTouched(false);
-    }, 1500);
-    return () => window.clearTimeout(t);
-  }, [phase]);
 
   const childActs = useMemo(() => actions(section, active.id), [section, active.id]);
   const direct = !!active.directToEnd;
+  const contentOpen = !!action || (direct && openedDirectId === active.id);
   const content = useMemo(() => getEndContent(section, active, action), [section, active, action]);
 
-  const terminalIds = new Set([
-    "save","apply","confirm","create","publish","send","join","upload","export","download","done","approve","run","start","take-live","checkout","notify","connect","pair","sync","resolve","leave","play","stop","open"
-  ]);
-  const isTerminal = (a: Act) => terminalIds.has(a.id) || a.id.startsWith("confirm-") || a.id.startsWith("save-");
-  const mediaIds = new Set(["photo","image","video","clip","replay","render","banner","record","short","final","social","media"]);
-  const isMediaStep = (a: Act | null) => !!a && (mediaIds.has(a.id) || /photo|image|video|clip|replay|render|banner|highlight/i.test(a.id));
-  const isConnectionStep = section.startsWith("home.connect") || (section.startsWith("studio.mixer") && (active.id === "inputs" || action?.id === "external" || selected?.id === "ext"));
-
-  function inputError(a: Act | null, value: string) {
-    if (!a || a.kind !== "input") return "";
-    const v = value.trim();
-    if (!v) return lang === "en" ? "This field is required." : lang === "zh" ? "此项为必填项。" : "Mục này bắt buộc nhập.";
-    if (/url|link|endpoint|http/i.test(a.id) && !/^https?:\/\/[^\s]+$/i.test(v)) return lang === "en" ? "Invalid address. Example: https://..." : lang === "zh" ? "地址无效，例如：https://..." : "Địa chỉ chưa hợp lệ. Ví dụ: https://...";
-    if (/email/i.test(a.id) && !/^\S+@\S+\.\S+$/.test(v)) return lang === "en" ? "Invalid email." : lang === "zh" ? "邮箱格式不正确。" : "Email chưa đúng định dạng.";
-    if (/phone/i.test(a.id) && !/^[+0-9][0-9\s.-]{7,}$/.test(v)) return lang === "en" ? "Invalid phone number." : lang === "zh" ? "电话号码格式不正确。" : "Số điện thoại chưa đúng định dạng.";
-    if (/width|height|qty|quantity|count/i.test(a.id) && !(Number(v) > 0)) return lang === "en" ? "Enter a number greater than 0." : lang === "zh" ? "请输入大于 0 的数字。" : "Nhập số lớn hơn 0.";
-    return "";
+  function resetToB() {
+    setAction(null); setSelected(null); setOpenedDirectId(null); setDraft(""); setDone(false);
   }
 
   function choose3(id: string) {
     const target = items.find((x) => x.id === id);
     onSelect(id);
-    setAction(null);
-    setSelected(null);
-    setInputValue("");
-    setInputTouched(false);
-    setPhase(target?.directToEnd ? "C5" : "B");
+    setAction(null); setSelected(null); setDraft(""); setDone(false);
+    setOpenedDirectId(target?.directToEnd ? id : null);
   }
 
   function choose4(a: Act) {
-    setAction(a);
-    setSelected(null);
-    setInputValue("");
-    setInputTouched(false);
-    setPhase("C5");
+    setAction(a); setSelected(null); setDraft(""); setDone(false); setOpenedDirectId(null);
     record({ area: section, action: `${active.id}:${a.id}`, result: "tree4-selected", costClass: "local", ok: true });
   }
 
-  function completeEnd(a: Act) {
-    const productId = `ESP-${Date.now().toString(36).toUpperCase()}`;
-    const productLabel = tx(a.label, lang);
-    setLastEnd({ id: productId, label: productLabel });
-    setSelected(a);
-    setPhase("DONE");
-    record({
-      area: section,
-      action: `${active.id}:${action?.id || "direct"}:${a.id}`,
-      result: `eventspace-product:${productId}`,
-      costClass: a.id.includes("ai") ? "cloud-low" : "local",
-      ok: true,
-    });
-  }
-
   function choose5(a: Act) {
-    setSelected(a);
-    setInputValue("");
-    setInputTouched(false);
-    if (isTerminal(a) && a.kind !== "input") completeEnd(a);
-    else setPhase("COMMIT");
+    setSelected(a); setDraft(""); setDone(false);
+    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${a.id}`, result: "tree5-selected", costClass: a.id.includes("ai") ? "cloud-low" : "local", ok: true });
+    if (isTerminalAction(a) && a.kind !== "input" && a.kind !== "chat") finishEnd(a, true);
   }
 
-  function commitCurrent() {
-    if (!selected) return;
-    const err = inputError(selected, inputValue);
-    if (err) {
-      setInputTouched(true);
-      return;
-    }
-    completeEnd(selected);
+  function finishEnd(a = selected, immediate = false) {
+    if (!a && !selected) return;
+    const target = a || selected!;
+    setDone(true);
+    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${target.id}`, result: "END", costClass: target.id.includes("ai") ? "cloud-low" : "local", ok: true });
+    window.setTimeout(resetToB, immediate ? 700 : 900);
   }
 
-  function backToB() {
-    setPhase("B");
-    setAction(null);
-    setSelected(null);
-    setInputValue("");
-    setInputTouched(false);
+  function backOne() {
+    if (selected) { setSelected(null); setDraft(""); setDone(false); return; }
+    resetToB();
   }
 
-  const separator = (
-    <div className="eventSpaceSeparator" aria-hidden="true">
-      <span>PHUC LONG EVENT SPACE@</span><i>•</i><span>PHUC LONG EVENT SPACE@</span><i>•</i><span>PHUC LONG EVENT SPACE@</span>
-    </div>
-  );
+  if (contentOpen && active.endType === "aiFlashChat") {
+    return <AIFlashWorkspace lang={lang} onBack={resetToB} record={record} />;
+  }
+  if (contentOpen && active.endType === "appearanceCenter") return <AppearanceCenter lang={lang} onBack={resetToB}/>;
+  if (contentOpen && active.endType === "soundCenter") return <SoundCenter lang={lang} onBack={resetToB}/>;
+  if (contentOpen && active.endType === "privacyCenter") return <PrivacyCenter lang={lang} onBack={resetToB}/>;
+  if (contentOpen && active.endType === "securityCenter") return <SecurityCenter lang={lang} onBack={resetToB}/>;
+  if (contentOpen && active.endType === "stickerStore") return <StickerStore lang={lang} onBack={resetToB} mode="store"/>;
+  if (contentOpen && active.endType === "stickerWallet") return <StickerStore lang={lang} onBack={resetToB} mode="wallet"/>;
+  if (contentOpen && active.id === "checkout") return <PaymentCenter lang={lang} onBack={resetToB}/>;
 
-  if (phase !== "B") {
-    const err = inputError(selected, inputValue);
-    return (
-      <>
-        {separator}
-        <nav className="collapsedTrail" aria-label="Current EventSpace branch">
-          <button type="button" className="trailBack" onClick={phase === "COMMIT" ? () => { setPhase("C5"); setSelected(null); } : backToB}>← Back</button>
-          <button type="button" className="trailNode depth3" onClick={backToB}>{label(active.label, lang)}</button>
-          {action && <><span className="trailSep">|</span><button type="button" className="trailNode depth4" onClick={() => { setSelected(null); setPhase("C5"); }}>{tx(action.label, lang)}</button></>}
-          {selected && <><span className="trailSep">|</span><button type="button" className="trailNode depth5" onClick={() => { setInputValue(""); setInputTouched(false); setPhase("COMMIT"); }}>{tx(selected.label, lang)} <small>↺</small></button></>}
-        </nav>
+  if (contentOpen) {
+    return <section className={`navWorkspace contentSurface mode-${content.mode || "grid"}`}>
+      <div className="workspaceCrumbs">
+        <button type="button" className="backKey" onClick={backOne}>← Back</button>
+        <button type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{label(active.label, lang)}</button>
+        {action && <button type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{tx(action.label, lang)}</button>}
+        {selected && <button type="button" className="crumbKey selected tree5Crumb">{tx(selected.label, lang)}</button>}
+      </div>
 
-        <section className={`navGroupC contentSurface mode-${content.mode || "grid"}`}>
-          {phase === "C5" && <>
-            {content.note && <p className="contentNote">{tx(content.note, lang)}</p>}
-            <div className="contentGrid">
-              {content.items.map((x) => (
-                <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
-                  <b>{tx(x.label, lang)}</b>
-                  {x.kind === "input" && <small>Input</small>}
-                  {x.kind === "chat" && <small>Chat</small>}
-                </button>
-              ))}
-            </div>
-          </>}
+      {content.note && !selected && <p className="contentNote">{tx(content.note, lang)}</p>}
 
-          {phase === "COMMIT" && selected && <div className="endWorkbench">
-            <div className="endWorkbenchHead"><b>{tx(selected.label, lang)}</b><span>EVENTSPACE PRODUCT</span></div>
-            {selected.kind === "input" && <label className={`smartField ${inputTouched && err ? "invalid" : ""}`}>
-              <span>{tx(selected.label, lang)}</span>
-              <input value={inputValue} onChange={(e) => { setInputValue(e.target.value); if (inputTouched) setInputTouched(true); }} onBlur={() => setInputTouched(true)} placeholder={/url|link|endpoint/i.test(selected.id) ? "https://..." : ""}/>
-              {inputTouched && err && <small className="fieldError">● {err}</small>}
-            </label>}
-
-            {isMediaStep(selected) && <div className="effectsStage">
-              <div><b>Effects</b><small>{lang === "en" ? "Required stage before save/publish (except livestream)." : lang === "zh" ? "保存/发布前必须经过效果阶段（直播除外）。" : "Bước bắt buộc trước khi lưu/xuất bản (trừ livestream)."}</small></div>
-              <div className="effectChoices">{["natural","cinematic","event","clean"].map(x => <button type="button" key={x} className={effect === x ? "active" : ""} onClick={() => setEffect(x)}>{x}</button>)}</div>
-              <code>PHUC LONG • EVENT SPACE@</code>
-            </div>}
-
-            {isConnectionStep && <div className="connectionHealthMini">
-              <b>Connection Health & Backup</b>
-              <span>{lang === "en" ? "Primary is checked periodically; an approved backup may replace a failed source." : lang === "zh" ? "定期检查主源；主源失败时可切换到已批准的备用源。" : "Nguồn chính được kiểm tra định kỳ; khi lỗi có thể chuyển sang Backup đã duyệt."}</span>
-              <small>Primary → Health Check → Backup → EventSpace log</small>
-            </div>}
-
-            <div className="endActions"><button type="button" className="secondary" onClick={() => { setPhase("C5"); setSelected(null); }}>Chọn lại</button><button type="button" className="primary" onClick={commitCurrent}>{lang === "en" ? "Complete & Create END" : lang === "zh" ? "完成并创建 END" : "Hoàn tất & tạo END"}</button></div>
-          </div>}
-
-          {phase === "DONE" && lastEnd && <div className="endProductCard">
-            <span className="endCheck">✓</span>
-            <div><b>{lang === "en" ? "EventSpace Product created" : lang === "zh" ? "EventSpace 产品已创建" : "Đã tạo Sản phẩm EventSpace"}</b><strong>{lastEnd.label}</strong><code>{lastEnd.id}</code><small>{lang === "en" ? "Returning to Group B for the next evolution loop…" : lang === "zh" ? "正在返回 B 组，开始下一轮进化…" : "Đang trở lại Nhóm B để bắt đầu vòng tiến hóa tiếp theo…"}</small></div>
-          </div>}
-        </section>
-      </>
-    );
+      {!selected ? <div className="contentGrid">
+        {content.items.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
+          <b>{tx(x.label, lang)}</b>{x.kind === "input" && <small>Input → END</small>}{x.kind === "chat" && <small>Chat → END</small>}
+        </button>)}
+      </div> : <div className="endWorkPanel">
+        <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Complete this operation to reach END." : lang === "zh" ? "完成此操作以到达 END。" : "Hoàn tất thao tác này để đạt END."}</span></div>
+        {(selected.kind === "input" || active.endType === "createNotice") && <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : (lang === "en" ? "Input" : lang === "zh" ? "输入" : "Nhập nội dung")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>}
+        {selected.kind === "chat" && <label className="endInput"><span>{lang === "en" ? "Message" : lang === "zh" ? "消息" : "Tin nhắn"}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>}
+        <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={(selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") && !draft.trim()} onClick={() => finishEnd()}>{done ? "✓ END" : endLabel(section, active, selected, lang)}</button></div>
+        <div className="endStatus"><b>END</b><span>{done ? (lang === "en" ? "Completed. Returning to the full Tree 3 + Tree 4 workspace…" : lang === "zh" ? "已完成。正在返回完整的树 3 + 树 4 工作区…" : "Đã hoàn tất. Đang trở lại đầy đủ Cây 3 + Cây 4…") : (lang === "en" ? "Every route must end with a result." : lang === "zh" ? "每条路径都必须以结果结束。" : "Mọi tuyến đều bắt buộc có kết quả END.")}</span></div>
+      </div>}
+    </section>;
   }
 
-  return (
-    <>
-      {separator}
-      {lastEnd && <div className="recentEnd"><span>✓ END</span><b>{lastEnd.label}</b><code>{lastEnd.id}</code></div>}
-      <section className="navGroupB">
-        <div className="navColumn">
-          <div className="keyboardList">
-            {items.map((x) => (
-              <button type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}>
-                <b>{label(x.label, lang)}</b>
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="navColumn child">
-          <div className="keyboardList">
-            {childActs.map((x) => (
-              <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}>
-                <b>{tx(x.label, lang)}</b>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
-  );
+  return <section className="navWorkspace navGroupB">
+    <div className="navColumn"><div className="keyboardList">{items.map((x) => <button type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
+    <div className="navColumn child"><div className="keyboardList">
+      {direct ? <button type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? "Open task → END" : lang === "zh" ? "打开任务 → END" : "Mở tác vụ → END"}</b></button> : childActs.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
+    </div></div>
+  </section>;
 }
