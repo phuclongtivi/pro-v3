@@ -77,7 +77,6 @@
 
 ## Nhánh Home đã chuẩn hóa
 - Sự kiện: Có Quà Tặng / Không Có Quà Tặng / Có Vé / Không Vé / Tạo Quà Tặng / Sự kiện của tôi
-- AI của tôi: AI Flash / AI Bán Hàng / AI Soát Bill / AI Soát Vé / ONE CLICK AI ↔ APP / Quản lý AI và Thu-Chi
 - Kết Nối: Thiết bị / TV-Màn hình / QR-Check-in / App ngoài / Tài khoản / Custom API
 - Tạo nhanh: Tạo sự kiện / Tạo live / Tạo phòng chat / Tạo thông báo / Tạo sản phẩm / Flash Idle Video
 

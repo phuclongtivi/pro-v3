@@ -14,7 +14,6 @@ Các màn dưới đây phải bỏ kiểu “tên node = text title cạnh Quay
 - Home → AI của tôi → AI Soát Bill
 - Home → AI của tôi → AI Soát Vé
 - Home → AI của tôi → ONE CLICK AI ↔ APP
-- Home → AI của tôi → Quản lý AI và Thu-Chi
 - Tất cả tuyến direct END ở Kết Nối / Tạo nhanh
 
 ## Phòng Thu
