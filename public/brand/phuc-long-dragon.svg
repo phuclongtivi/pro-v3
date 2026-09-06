@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 240" role="img" aria-label="Long dragon">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#7656c8"/><stop offset="1" stop-color="#c7a7ff"/></linearGradient></defs>
+<path fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"
+ d="M40 145 C80 65 155 80 175 120 C195 160 235 165 270 120 C300 82 350 92 378 125
+ M58 146 C78 180 115 188 142 168 M274 120 C295 155 334 163 365 146
+ M158 107 C140 82 130 55 151 40 M172 108 C181 77 203 55 226 49
+ M204 135 C218 117 240 109 260 114"/>
+<circle cx="146" cy="105" r="7" fill="#20212a"/>
+<path fill="none" stroke="#7656c8" stroke-width="8" stroke-linecap="round" d="M116 102 C95 88 82 93 71 110 M286 103 C310 82 331 82 349 102"/>
+<path fill="#7656c8" d="M372 123 l30 -16 -14 28 17 19 -35 -8z"/>
+</svg>
