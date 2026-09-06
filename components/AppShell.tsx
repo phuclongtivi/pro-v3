@@ -1,0 +1,3 @@
+"use client";
+import {useEffect} from "react";import {LanguageProvider} from "@/components/LanguageProvider";import TopNav from "@/components/TopNav";import {EventSpaceProvider} from "@/components/EventSpaceProvider";import EvolutionBadge from "@/components/EvolutionBadge";
+export default function AppShell({children}:{children:React.ReactNode}){useEffect(()=>{const saved=localStorage.getItem("long-theme")||"lavender";document.documentElement.dataset.theme=saved;if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{})},[]);return <EventSpaceProvider><LanguageProvider><TopNav/><EvolutionBadge/>{children}</LanguageProvider></EventSpaceProvider>}
