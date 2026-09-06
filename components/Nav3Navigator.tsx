@@ -638,26 +638,32 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   const active = items.find((x) => x.id === activeId) || items[0];
   const [action, setAction] = useState<Act | null>(null);
   const [selected, setSelected] = useState<Act | null>(null);
+  const [openedDirectId, setOpenedDirectId] = useState<string | null>(null);
   const { record } = useEventSpace();
 
   useEffect(() => {
     setAction(null);
     setSelected(null);
-  }, [activeId, section]);
+    setOpenedDirectId(null);
+  }, [section]);
 
   const childActs = useMemo(() => actions(section, active.id), [section, active.id]);
   const direct = !!active.directToEnd;
+  const contentOpen = !!action || (direct && openedDirectId === active.id);
   const content = useMemo(() => getEndContent(section, active, action), [section, active, action]);
 
   function choose3(id: string) {
+    const target = items.find((x) => x.id === id);
     onSelect(id);
     setAction(null);
     setSelected(null);
+    setOpenedDirectId(target?.directToEnd ? id : null);
   }
 
   function choose4(a: Act) {
     setAction(a);
     setSelected(null);
+    setOpenedDirectId(null);
     record({ area: section, action: `${active.id}:${a.id}`, result: "end", costClass: "local", ok: true });
   }
 
@@ -666,34 +672,81 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
     record({ area: section, action: `${active.id}:${action?.id || "direct"}:${a.id}`, result: "end-choice", costClass: a.id.includes("ai") ? "cloud-low" : "local", ok: true });
   }
 
-  if (direct || action) {
+  if (contentOpen) {
     return (
-      <section className={`navGroupC contentSurface mode-${content.mode || "grid"}`}>
-        <div className="contentHead">
-          <button type="button" onClick={() => { setAction(null); setSelected(null); }}>← Quay lại</button>
-          <h2>{tx(content.title, lang)}</h2>
-        </div>
-        {content.note && <p className="contentNote">{tx(content.note, lang)}</p>}
-        <div className="contentGrid">
-          {content.items.map((x) => (
-            <button
-              key={x.id}
-              className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + (selected?.id === x.id ? "selected " : "") + `kind-${x.kind || "action"}`}
-              onClick={() => chooseEnd(x)}
-            >
-              <b>{tx(x.label, lang)}</b>
-              {x.kind === "input" && <small>Input</small>}
-              {x.kind === "chat" && <small>Chat</small>}
-            </button>
-          ))}
-        </div>
-        {selected && (
-          <div className="contentResult">
-            <b>{tx(selected.label, lang)}</b>
-            <span>{lang === "zh" ? "已选择。继续当前操作。" : lang === "en" ? "Selected. Continue this action." : "Đã chọn. Tiếp tục thao tác hiện tại."}</span>
+      <>
+        <section className="navLevelContext" aria-label="Current navigation level">
+          <div className="navLevelRow tree3Row">
+            {items.map((x) => (
+              <button
+                key={x.id}
+                className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")}
+                onClick={() => choose3(x.id)}
+              >
+                <b>{label(x.label, lang)}</b>
+              </button>
+            ))}
           </div>
-        )}
-      </section>
+
+          {!direct && (
+            <div className="navLevelRow tree4Row">
+              {childActs.map((x) => (
+                <button
+                  key={x.id}
+                  className={(action?.id === x.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")}
+                  onClick={() => choose4(x)}
+                >
+                  <b>{tx(x.label, lang)}</b>
+                </button>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section className={`navGroupC contentSurface mode-${content.mode || "grid"}`}>
+          <div className="contentHead">
+            <button
+              type="button"
+              onClick={() => {
+                if (action) setAction(null);
+                else setOpenedDirectId(null);
+                setSelected(null);
+              }}
+            >
+              ← Quay lại
+            </button>
+          </div>
+
+          {content.note && <p className="contentNote">{tx(content.note, lang)}</p>}
+
+          <div className="contentGrid">
+            {content.items.map((x) => (
+              <button
+                key={x.id}
+                className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + (selected?.id === x.id ? "selected " : "") + `kind-${x.kind || "action"}`}
+                onClick={() => chooseEnd(x)}
+              >
+                <b>{tx(x.label, lang)}</b>
+                {x.kind === "input" && <small>Input</small>}
+                {x.kind === "chat" && <small>Chat</small>}
+              </button>
+            ))}
+          </div>
+
+          {selected && (
+            <div className="contentResult">
+              <b>{tx(selected.label, lang)}</b>
+              <span>
+                {lang === "zh"
+                  ? "已选择。继续当前操作。"
+                  : lang === "en"
+                    ? "Selected. Continue this action."
+                    : "Đã chọn. Tiếp tục thao tác hiện tại."}
+              </span>
+            </div>
+          )}
+        </section>
+      </>
     );
   }
 

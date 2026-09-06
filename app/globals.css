@@ -223,3 +223,65 @@ html[data-theme='flash']{--bg:#eef8ff;--surface:#fff;--surface2:#e5f3ff;--text:#
 
 /* FIXFLOW2 — route only after user selects Tree 3; END content completion */
 .contentGrid button small{display:block;margin-top:4px;color:var(--muted);font-family:var(--mono);font-size:11px}.contentSurface.mode-chat .contentGrid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.contentSurface.mode-chat .contentGrid button.kind-chat{grid-column:1/-1;text-align:left;min-height:82px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 6%,var(--surface)),var(--surface))}.contentSurface.mode-pay .contentGrid button:last-child{border-color:color-mix(in srgb,var(--accent) 62%,var(--line));box-shadow:inset 0 -2px 0 var(--accent)}.contentSurface.mode-list .contentGrid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}@media(max-width:760px){.contentSurface.mode-chat .contentGrid,.contentSurface.mode-list .contentGrid{grid-template-columns:1fr 1fr}.contentSurface.mode-chat .contentGrid button.kind-chat{grid-column:1/-1}}
+
+
+/* FIXFLOW2C — node names remain buttons at their correct tree level */
+.navLevelContext{
+  margin:12px 12px 0;
+  padding:10px;
+  border:1px solid color-mix(in srgb,var(--line) 82%,transparent);
+  border-radius:20px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 97%,white),color-mix(in srgb,var(--surface2) 24%,var(--surface)));
+}
+.navLevelRow{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:8px;
+}
+.navLevelRow + .navLevelRow{
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid color-mix(in srgb,var(--line) 72%,transparent);
+}
+.navLevelRow button{
+  position:relative;
+  min-height:48px;
+  border:1px solid color-mix(in srgb,var(--line) 95%,transparent);
+  border-radius:14px;
+  background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface2) 28%,var(--surface)));
+  color:var(--text);
+  padding:10px 12px;
+  text-align:center;
+  font-weight:850;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72);
+}
+.navLevelRow button.selected{
+  border-color:color-mix(in srgb,var(--accent) 68%,var(--line));
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),var(--surface));
+  box-shadow:inset 0 -3px 0 var(--accent),inset 0 1px 0 rgba(255,255,255,.78);
+}
+.navLevelRow button.priority:after{
+  content:"◆";
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:9px;
+  color:var(--accent);
+}
+.navLevelRow button.danger{
+  border-color:color-mix(in srgb,#b05252 48%,var(--line));
+}
+.contentHead{
+  justify-content:flex-start;
+  margin-bottom:10px;
+}
+.contentHead h2{display:none!important}
+@media(max-width:760px){
+  .navLevelContext{margin:10px 7px 0;padding:8px;border-radius:17px}
+  .navLevelRow{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .navLevelRow button{min-height:46px;padding:9px 8px;font-size:12.5px}
+}
+@media(max-width:390px){
+  .navLevelRow{grid-template-columns:1fr 1fr}
+}
