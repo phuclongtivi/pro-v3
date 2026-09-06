@@ -14,7 +14,7 @@ R3 focuses on real functional content and store-preparation hygiene without rede
 ## Important deployment configuration
 Configure AI provider secrets in Vercel server Environment Variables. Do not expose keys in client code.
 
-For online music, only use authorized/licensed playback URLs in `SOUNDCLOUD_TRACKS_JSON` and `ZING_TRACKS_JSON`. R3 intentionally does not scrape or re-host copyrighted audio.
+R3A supersedes the R3 Home-music feature: background music, online playlist sources, and local fallback tracks are removed from the app.
 
 ## Build status
 Source was syntax/type-parsed for the changed TypeScript files. Full `npm install && npm run build` could not be completed in the generation environment because dependency installation timed out. Run the normal local build before Git push.
