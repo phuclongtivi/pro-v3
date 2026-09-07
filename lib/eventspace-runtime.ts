@@ -75,7 +75,7 @@ export type RuntimeMeasurements = {
 
 export type FlashArtifact = {
   id: string;
-  kind: "event-flash";
+  kind: "event-flash" | "flash-flow-preview" | "flash-flow-output-preview";
   state: "draft" | "preview-ready" | "published";
   createdAt: string;
   source: "event-assets" | "device-assets";
@@ -167,9 +167,12 @@ function coreTrace(command: EventSpaceCommand, hasPixelPlan: boolean): CoreExecu
 }
 
 function createFlashArtifact(command: EventSpaceCommand, plan: PixelExecutionPlan): FlashArtifact {
+  const signature = `${command.area}:${command.action}:${command.intent || ""}`;
+  const outputPreview = /flash-flow.*output|output.*flash-flow/i.test(signature);
+  const studioPreview = /flash-flow/i.test(signature);
   return {
     id: `flash-${Date.now().toString(36)}`,
-    kind: "event-flash",
+    kind: outputPreview ? "flash-flow-output-preview" : studioPreview ? "flash-flow-preview" : "event-flash",
     state: "preview-ready",
     createdAt: new Date().toISOString(),
     source: command.source === "device" ? "device-assets" : "event-assets",
@@ -188,21 +191,34 @@ export function executeEventSpaceCommand(command: EventSpaceCommand, capability 
   const needsInput = /(input|name|quantity|code|url|title|width|height)/i.test(command.intent || "") && !Object.keys(command.inputs || {}).length;
   const requiresConfirmation = riskyAction.test(signature) && !command.confirmed;
   const status: RuntimeStatus = needsInput ? "needs-input" : requiresConfirmation ? "needs-confirmation" : "ready";
-  const isFlash = /(event.*flash|flash.*event|flash-idle|watch-flash|create-flash)/i.test(signature) || eventFlashAction.test(signature);
+  const isFlash = /(event.*flash|flash.*event|flash-idle|watch-flash|create-flash|flash-flow)/i.test(signature) || eventFlashAction.test(signature);
   const flashArtifact = isFlash && plan && status === "ready" ? createFlashArtifact(command, plan) : undefined;
+  const outcome = String(command.inputs?.outcome || "");
   const elapsed = Math.max(1, Math.round((typeof performance !== "undefined" ? performance.now() : Date.now()) - started));
   const message = status === "needs-input"
     ? "Cần bổ sung dữ liệu bắt buộc để tiếp tục."
     : status === "needs-confirmation"
       ? "Đã chuẩn bị kết quả. Cần xác nhận trước hành động quan trọng."
       : flashArtifact
-        ? `Flash sự kiện đã sẵn sàng xem trước ở ${plan?.target}.`
-        : "EventSpace Runtime Lab đã lập kế hoạch và trả kết quả mô phỏng cho tác vụ.";
+        ? flashArtifact.kind === "flash-flow-output-preview"
+          ? `Bản xem trước đầu ra Flash Flow đã sẵn sàng ở ${plan?.target}.`
+          : flashArtifact.kind === "flash-flow-preview"
+            ? `Nguồn thật đã được dựng xem trước ở ${plan?.target}.`
+            : `Flash sự kiện đã sẵn sàng xem trước ở ${plan?.target}.`
+        : outcome === "source-ready"
+          ? "Nguồn media thật đã sẵn sàng."
+          : outcome === "output-ready"
+            ? "Đầu ra media đã sẵn sàng hiển thị."
+            : "EventSpace đã tiếp nhận lệnh. Chưa có đầu ra để hiển thị.";
   return {
     commandId: command.id,
     status,
     message,
-    resultCode: flashArtifact ? "FLASH_PREVIEW_READY" : status === "ready" ? "RESULT_READY" : status.toUpperCase().replaceAll("-", "_"),
+    resultCode: flashArtifact
+      ? flashArtifact.kind === "flash-flow-output-preview" ? "OUTPUT_PREVIEW_READY" : "FLASH_PREVIEW_READY"
+      : status === "ready"
+        ? outcome === "source-ready" ? "SOURCE_READY" : outcome === "output-ready" ? "OUTPUT_READY" : "COMMAND_ACCEPTED"
+        : status.toUpperCase().replaceAll("-", "_"),
     coreTrace: coreTrace(command, !!plan),
     pixelPlan: plan,
     flashArtifact,
