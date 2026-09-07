@@ -107,6 +107,9 @@ export function EventSpaceProvider({children}: {children: React.ReactNode}) {
       const action = button.dataset.runtimeAction || button.getAttribute("name") || button.id || button.textContent?.trim() || "button";
       const label = button.textContent?.trim() || action;
       const contentAction = !!button.closest(".contentSurface,.semanticWorkspace,.completionPanel,.studioWorkflowPanel,.endWorkPanel,.aiFlashWorkspace");
+      // A content tool owns its result lifecycle. Generic clicks must not
+      // manufacture RESULT_READY before the tool produces an artifact.
+      if (contentAction) return;
       const result = dispatch({
         id: `${area}:${action}:${Date.now().toString(36)}`,
         area,
