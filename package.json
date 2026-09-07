@@ -4,7 +4,8 @@
     "build": "next build",
     "start": "next start",
     "audit:content": "node scripts/audit-content-registry.mjs",
-    "audit:specialized": "node scripts/audit-specialized.mjs"
+    "audit:specialized": "node scripts/audit-specialized.mjs",
+    "audit:runtime-tree5": "node scripts/audit-runtime-tree5.mjs"
   },
   "dependencies": {
     "next": "^15.2.4",
