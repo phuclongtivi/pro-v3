@@ -246,7 +246,7 @@ function directEnd(key: string): EndBlock | null {
     createVideo: { title: T("Tạo video", "Create Video", "创建视频"), items: [A("template", "Từ mẫu", "From Template", "从模板"), A("record", "Ghi nhanh", "Quick Record", "快速录制", true), A("ai", "AI dựng nhanh", "AI Quick Edit", "AI快速剪辑", true), A("save", "Lưu video", "Save Video", "保存视频")] },
     flashIdle: { title: T("Flash Idle Video", "Flash Idle Video", "Flash待机视频"), items: [A("banner", "Từ banner", "From Banner", "从横幅"), A("mascot", "Thêm mascot", "Add Mascot", "添加吉祥物"), A("preview", "Xem trước", "Preview", "预览"), A("create", "Tạo video", "Create Video", "创建视频", true)] },
 
-    chatRoomLive: { title: T("Phòng chat sự kiện", "Event Chat Room", "活动聊天室"), mode: "chat", note: T("User rời room thì chat kết thúc. Tin nhắn gửi tại đây là END, không cần xác nhận thêm.", "When the user leaves the room, chat ends. Sending a message here is the final action.", "用户离开房间后聊天结束。在此发送即为最终操作。"), items: [A("message", "Ô nhập tin nhắn", "Message Input", "消息输入", true, "chat"), A("send", "Gửi", "Send", "发送", true), A("pin", "Ghim", "Pin", "置顶"), A("invite", "Mời thêm", "Invite", "邀请", true), A("leave", "Rời phòng", "Leave Room", "离开房间", false, true)] },
+    chatRoomLive: { title: T("Phòng chat sự kiện", "Event Chat Room", "活动聊天室"), mode: "chat", note: T("User rời room thì chat kết thúc. Tin nhắn được gửi ngay, không cần thêm bước xác nhận.", "When the user leaves the room, chat ends. Messages are sent immediately without another confirmation step.", "用户离开房间后聊天结束；消息会直接发送，无需再次确认。"), items: [A("message", "Ô nhập tin nhắn", "Message Input", "消息输入", true, "chat"), A("send", "Gửi", "Send", "发送", true), A("pin", "Ghim", "Pin", "置顶"), A("invite", "Mời thêm", "Invite", "邀请", true), A("leave", "Rời phòng", "Leave Room", "离开房间", false, true)] },
     chatMessages: { title: T("Tin nhắn", "Messages", "消息"), mode: "chat", items: [A("message", "Ô nhập tin nhắn", "Message Input", "消息输入", true, "chat"), A("send", "Gửi trong room", "Send in Room", "房间内发送", true), A("pin", "Ghim tin", "Pin", "置顶"), A("hide", "Ẩn tin", "Hide", "隐藏"), A("delete", "Xóa tin", "Delete", "删除", false, true)] },
     chatNotice: { title: T("Thông báo phòng", "Room Notice", "房间通知"), items: [A("quick", "Thông báo nhanh", "Quick Notice", "快速通知", true), A("template", "Mẫu thông báo", "Notice Template", "通知模板"), A("all", "Gửi toàn phòng", "Send to Room", "发送全房间", true), A("qr", "QR room", "QR Room", "房间二维码")] },
     chatLeave: { title: T("Rời phòng", "Leave Room", "离开房间"), items: [A("confirm", "Xác nhận rời", "Confirm Leave", "确认离开", false, true), A("save", "Lưu lịch sử nếu có quyền", "Save Log If Allowed", "有权限则保存记录"), A("cancel", "Ở lại phòng", "Stay", "留在房间", true)] },
@@ -272,7 +272,7 @@ function directEnd(key: string): EndBlock | null {
     inventoryHistory: { title: T("Lịch sử tồn kho", "Inventory History", "库存历史"), items: [A("today", "Hôm nay", "Today", "今天"), A("month", "Tháng này", "This Month", "本月"), A("export", "Xuất báo cáo", "Export Report", "导出报告", true)] },
     avatar: { title: T("Ảnh đại diện", "Avatar", "头像"), items: [A("upload", "Tải ảnh", "Upload", "上传"), A("camera", "Chụp ảnh", "Camera", "拍照"), A("ai", "AI làm đẹp", "AI Enhance", "AI增强", true), A("save", "Lưu", "Save", "保存", true)] },
     contact: { title: T("Liên hệ", "Contact", "联系方式"), items: [A("phone", "Số điện thoại", "Phone", "电话"), A("email", "Email", "Email", "邮箱"), A("address", "Địa chỉ", "Address", "地址"), A("save", "Lưu", "Save", "保存", true)] },
-    personalFinance: { title: T("Thu/Chi của tôi", "My Income & Expense", "我的收支"), items: [A("overview", "Tổng quan", "Overview", "总览", true), A("transactions", "Giao dịch", "Transactions", "交易"), A("category", "Phân loại", "Categories", "分类"), A("export", "Xuất báo cáo", "Export Report", "导出报告", true)] },
+
     personalReport: { title: T("Báo cáo cá nhân", "Personal Report", "个人报告"), items: [A("today", "Hôm nay", "Today", "今天"), A("month", "Tháng này", "This Month", "本月"), A("ai", "AI tóm tắt", "AI Summary", "AI总结", true), A("export", "Xuất báo cáo", "Export Report", "导出报告")] },
     noticeSystem: { title: T("Thông báo hệ thống", "System Notifications", "系统通知"), items: [A("new", "Mới", "New", "新", true), A("read", "Đã đọc", "Read", "已读"), A("priority", "Ưu tiên", "Priority", "优先", true), A("history", "Lịch sử", "History", "历史")] },
     noticeEvents: { title: T("Thông báo sự kiện", "Event Notifications", "活动通知"), items: [A("new", "Mới", "New", "新", true), A("calendar", "Lịch sự kiện", "Event Calendar", "活动日历"), A("qr", "QR check-in", "QR Check-in", "二维码签到"), A("read", "Đã đọc", "Read", "已读")] },
@@ -649,6 +649,10 @@ function isTerminalAction(a: Act) {
   return /^(save|apply|confirm|create|publish|checkout|upload|download|start|stop|take-live|leave|resolve|send|connect|checkin|arm|run)$/i.test(a.id);
 }
 
+function isRiskyAction(a: Act) {
+  return a.danger || /^(publish|checkout|take-live|delete|refund|leave)$/i.test(a.id);
+}
+
 function endLabel(section: string, active: NavChild, selected: Act | null, lang: Lang) {
   const id = active.endType || "";
   if (id === "createNotice") return lang === "en" ? "Save & Publish Notice" : lang === "zh" ? "保存并发布通知" : "Lưu & Đăng Thông Báo";
@@ -706,20 +710,20 @@ function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => 
 
   const quick = lang === "en" ? ["Create event outline", "Summarize current work", "Prepare announcement"] : lang === "zh" ? ["创建活动框架", "总结当前工作", "准备通知"] : ["Dựng khung sự kiện", "Tóm tắt công việc hiện tại", "Soạn thông báo"];
 
-  return <section className="navWorkspace aiFlashWorkspace">
+  return <section className="navWorkspace aiFlashWorkspace" data-runtime-area="home.myai.ai-flash">
     <div className="workspaceCrumbs">
       <button type="button" className="backKey" onClick={onBack}>← Back</button>
       <button type="button" className="crumbKey selected">AI Flash</button>
     </div>
     <div className="aiFlashBody">
-      <div className="aiFlashHead"><b>AI Flash</b><span>{lang === "en" ? "Chat • tasks • reusable END" : lang === "zh" ? "聊天 • 任务 • 可重复 END" : "Chat • giao việc • END lặp trong workspace"}</span></div>
+      <div className="aiFlashHead"><b>AI Flash</b><span>{lang === "en" ? "Chat • tasks • reusable results" : lang === "zh" ? "聊天 • 任务 • 可复用结果" : "Chat • giao việc • kết quả tái sử dụng"}</span></div>
       <div className="aiFlashLog" aria-live="polite">
         {thinking && <div className="aiThinking">AI Flash · {lang === "vi" ? "Đang suy nghĩ…" : lang === "zh" ? "正在思考…" : "Thinking…"}</div>}{aiError && <div className="aiError">{aiError}</div>}{messages.length === 0 ? <div className="aiEmpty">{lang === "en" ? "Start a conversation with AI Flash." : lang === "zh" ? "开始与 AI Flash 对话。" : "Bắt đầu trò chuyện với AI Flash."}</div> : messages.map((m, i) => <div key={i} className={`aiMsg ${m.role}`}><b>{m.role === "user" ? (lang === "vi" ? "Bạn" : lang === "zh" ? "你" : "You") : "AI Flash"}</b><span>{m.body}</span></div>)}
       </div>
       <div className="aiQuickRow">{quick.map(q => <button type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
       <div className="aiComposer">
         <textarea value={text} onChange={e => setText(e.target.value)} placeholder={lang === "en" ? "Message AI Flash…" : lang === "zh" ? "向 AI Flash 输入消息…" : "Nhập yêu cầu cho AI Flash…"} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} />
-        <button type="button" className="endCommit" disabled={thinking} onClick={() => send()}>{lang === "en" ? "Send · END" : lang === "zh" ? "发送 · END" : "Gửi · END"}</button>
+        <button type="button" className="endCommit" disabled={thinking} onClick={() => send()}>{lang === "en" ? "Send" : lang === "zh" ? "发送" : "Gửi"}</button>
       </div>
       <div className="aiToolRow">
         <button type="button" onClick={() => setText(quick[0])}>{lang === "vi" ? "Giao việc nhanh" : lang === "zh" ? "快速任务" : "Quick Task"}</button>
@@ -772,14 +776,14 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   function choose5(a: Act) {
     setSelected(a); setDraft(""); setDone(false);
     record({ area: section, action: `${active.id}:${action?.id || "direct"}:${a.id}`, result: "tree5-selected", costClass: a.id.includes("ai") ? "cloud-low" : "local", ok: true });
-    if (isTerminalAction(a) && a.kind !== "input" && a.kind !== "chat") finishEnd(a, true);
+    if (isTerminalAction(a) && !isRiskyAction(a) && a.kind !== "input" && a.kind !== "chat") finishEnd(a, true);
   }
 
   function finishEnd(a = selected, immediate = false) {
     if (!a && !selected) return;
     const target = a || selected!;
     setDone(true);
-    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${target.id}`, result: "END", costClass: target.id.includes("ai") ? "cloud-low" : "local", ok: true });
+    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${target.id}`, result: "completed", costClass: target.id.includes("ai") ? "cloud-low" : "local", ok: true });
     window.setTimeout(resetToB, immediate ? 700 : 900);
   }
 
@@ -803,7 +807,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   if (contentOpen && section === "home.connect" && active.id === "devices" && action?.id === "laptop" && selected?.id === "hdmi") return <MediaConnectionPanel lang={lang} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
 
   if (contentOpen) {
-    return <section className={`navWorkspace contentSurface mode-${content.mode || "grid"}`}>
+    return <section className={`navWorkspace contentSurface mode-${content.mode || "grid"}`} data-runtime-area={section}>
       <div className="workspaceCrumbs">
         <button type="button" className="backKey" onClick={backOne}>← Back</button>
         <button type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{label(active.label, lang)}</button>
@@ -820,12 +824,12 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
       </div> : ((selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") && semanticIntent({section,activeId:active.id,activeLabel:label(active.label,lang),actionId:action?.id,actionLabel:action?tx(action.label,lang):undefined,selectedId:selected.id,selectedLabel:tx(selected.label,lang)}) === "generic") ? <div className="endWorkPanel">
         <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Enter the required content, then complete this action." : lang === "zh" ? "输入所需内容，然后完成此操作。" : "Nhập nội dung cần thiết, sau đó hoàn tất thao tác."}</span></div>
         <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : selected.kind === "chat" ? (lang === "vi"?"Tin nhắn":"Message") : (lang === "vi"?"Nội dung":"Input")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>
-        <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? "✓ END" : endLabel(section, active, selected, lang)}</button></div>
+        <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? (lang === "en" ? "✓ Completed" : lang === "zh" ? "✓ 已完成" : "✓ Đã hoàn tất") : endLabel(section, active, selected, lang)}</button></div>
       </div> : <SemanticSpecializedPanel lang={lang} section={section} activeId={active.id} activeLabel={label(active.label,lang)} actionId={action?.id} actionLabel={action?tx(action.label,lang):undefined} selectedId={selected.id} selectedLabel={tx(selected.label,lang)} access={access} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
     </section>;
   }
 
-  return <section className="navWorkspace navGroupB">
+  return <section className="navWorkspace navGroupB" data-runtime-area={section}>
     <div className="navColumn"><div className="keyboardList">{items.map((x) => <button type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
     <div className="navColumn child"><div className="keyboardList">
       {direct ? <button type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? `Open ${label(active.label, lang)}` : lang === "zh" ? `打开 ${label(active.label, lang)}` : `Mở ${label(active.label, lang)}`}</b></button> : childActs.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}

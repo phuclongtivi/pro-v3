@@ -401,3 +401,28 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
  .studioWorkflow .semanticHead{align-items:flex-start;gap:8px}.studioWorkflow .runtimeBadge{white-space:normal;text-align:center}
  .studioWorkflow .choiceRow{display:grid;grid-template-columns:1fr}
 }
+
+/* R4B4 EventSpace Runtime + Flash Pixel Governor result feedback */
+.runtimeResultToast{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:11000;width:min(390px,calc(100vw - 28px));box-sizing:border-box;display:grid;gap:5px;padding:14px 46px 14px 15px;border:1px solid color-mix(in srgb,var(--accent) 48%,var(--line));border-radius:17px;background:color-mix(in srgb,var(--surface) 94%,transparent);color:var(--text);box-shadow:0 16px 46px rgba(32,24,64,.18);backdrop-filter:blur(16px);animation:runtime-result-in .18s ease-out}
+.runtimeResultToast small{font:800 10px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.07em;color:var(--accent)}
+.runtimeResultToast>b{font-size:14px;line-height:1.35}.runtimeResultToast>span{font-size:11px;line-height:1.35;color:var(--muted)}
+.runtimeResultToast.state-needs-confirmation{border-color:#c28a35}.runtimeResultToast.state-error,.runtimeResultToast.state-unavailable{border-color:#b6424c}
+.runtimeToastClose{position:absolute;right:9px;top:9px;width:32px;height:32px;border:0;border-radius:10px;background:color-mix(in srgb,var(--surface2) 78%,transparent);color:var(--text);font-size:20px;line-height:1;cursor:pointer}
+.runtimeToastConfirm{justify-self:start;margin-top:4px;min-height:36px;border:1px solid color-mix(in srgb,var(--accent) 52%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--text);padding:7px 12px;font-weight:850}
+@keyframes runtime-result-in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:760px){.runtimeResultToast{left:10px;right:10px;bottom:max(76px,calc(env(safe-area-inset-bottom) + 70px));width:auto}}
+@media(prefers-reduced-motion:reduce){.runtimeResultToast{animation:none}}
+.eventFlashPreview{display:grid;gap:7px;margin-top:10px;padding:12px;border:1px solid color-mix(in srgb,var(--accent) 28%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--surface2) 58%,var(--surface));overflow:hidden}
+.eventFlashPreview>span,.eventFlashPreview>small{color:var(--muted)}
+.eventFlashLayers{position:relative;height:128px;overflow:hidden;border-radius:12px;background:linear-gradient(135deg,#15102b,#4826a8 44%,#e6b9ff);isolation:isolate}
+.eventFlashLayers i{position:absolute;inset:-22%;display:block;border-radius:42%;mix-blend-mode:screen;filter:blur(4px);animation:event-flash-layer 7s ease-in-out infinite alternate}
+.eventFlashLayers i:nth-child(1){background:radial-gradient(circle at 30% 38%,#fff 0 4%,#8bf2ff 19%,transparent 44%)}
+.eventFlashLayers i:nth-child(2){background:conic-gradient(from 20deg,transparent,#ff7ac8,transparent,#a7ffdf);animation-delay:-1.6s;animation-duration:9s}
+.eventFlashLayers i:nth-child(3){inset:22% 26%;background:linear-gradient(135deg,#fff8,#7050ffcc);border-radius:36% 64% 54% 46%;animation-delay:-3s;animation-duration:5.5s}
+.eventFlashLayers i:nth-child(4){inset:auto 8% 12% 8%;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent);filter:none;animation-duration:3s}
+@keyframes event-flash-layer{from{transform:translate3d(-3%,-2%,0) rotate(-5deg) scale(.96);filter:hue-rotate(0deg) blur(4px)}to{transform:translate3d(4%,3%,0) rotate(8deg) scale(1.08);filter:hue-rotate(48deg) blur(6px)}}
+@media(prefers-reduced-motion:reduce){.eventFlashLayers i{animation:none}}
+.runtimeHandled{position:relative}.runtimeHandled:after{content:"";position:absolute;right:7px;top:7px;width:6px;height:6px;border-radius:999px;background:#2f9d68;box-shadow:0 0 0 3px color-mix(in srgb,#2f9d68 13%,transparent)}
+.runtimeHandled[data-runtime-state="needs-confirmation"]:after,.runtimeHandled[data-runtime-state="needs-input"]:after{background:#c28a35;box-shadow:0 0 0 3px color-mix(in srgb,#c28a35 13%,transparent)}
+.runtimeHandled[data-runtime-state="unavailable"]:after,.runtimeHandled[data-runtime-state="error"]:after{background:#b6424c;box-shadow:0 0 0 3px color-mix(in srgb,#b6424c 13%,transparent)}
+.channelStrip button.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent)}
