@@ -19,6 +19,6 @@ export default function ProductCreateForm({lang,onBack,onDone,mode="new"}:Props)
    <label className="wide"><span>{vi?"Mô tả ngắn":"Short description"}</span><textarea value={desc} onChange={e=>setDesc(e.target.value)} /></label>
    <div className="productPreview wide"><b>{vi?"Preview card":"Product preview"}</b><div><strong>{name|| (vi?"Tên sản phẩm":"Product name")}</strong><span>{price?`${Number(price).toLocaleString()} ₫`:(vi?"Chưa nhập giá":"No price")}</span><small>SKU: {sku||"—"} · {vi?"Tồn":"Stock"}: {qty||0}</small></div></div>
   </div>
-  <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={()=>setDraft(true)}>{draft?"✓ ":""}{vi?"Lưu nháp":"Save draft"}</button><button type="button" className="endCommit" disabled={!valid} onClick={onDone}>{vi?"Lưu & Đăng sản phẩm · END":"Save & Publish Product · END"}</button></div>
+  <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={()=>setDraft(true)}>{draft?"✓ ":""}{vi?"Lưu nháp":"Save draft"}</button><button type="button" className="endCommit" disabled={!valid} onClick={onDone}>{vi?"Lưu & Đăng sản phẩm":"Save & Publish Product"}</button></div>
  </section>
 }

@@ -10,7 +10,8 @@ if(!nav.includes('access={access}')) failures.push('access context not passed to
 if(!sem.includes('event-notice-viewer')) failures.push('read-only event notice viewer missing');
 if(!sem.includes('event-notice-editor')) failures.push('event notice editor route missing');
 if(!sem.includes('requiresRuntimeOwnership')) failures.push('runtime ownership guard missing');
-if(!sem.includes('Tham gia · END')) failures.push('event join END missing');
+if(!sem.includes('"Tham gia","Join","参加"')) failures.push('event join action missing');
+if(sem.includes('Tham gia · END')) failures.push('internal END label is visible to users');
 if(!sem.includes('Chia sẻ')) failures.push('event share action missing');
 if(!sem.includes('Xem Flash')) failures.push('event Flash viewer action missing');
 if(sem.includes('<section className="navWorkspace semanticWorkspace">')) failures.push('nested semantic nav workspace still duplicates Tree5 crumbs/borders');
