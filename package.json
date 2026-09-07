@@ -1,0 +1,29 @@
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "audit:content": "node scripts/audit-content-registry.mjs",
+    "audit:specialized": "node scripts/audit-specialized.mjs",
+    "audit:runtime-tree5": "node scripts/audit-runtime-tree5.mjs",
+    "audit:role-aware": "node scripts/audit-role-aware.mjs",
+    "audit:final-polish": "node scripts/audit-final-polish.mjs",
+    "audit:studio-logic": "node scripts/audit-studio-logic.mjs"
+  },
+  "dependencies": {
+    "next": "^15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@neondatabase/serverless": "^1.0.1",
+    "@vercel/blob": "^1.0.2",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@types/qrcode": "^1.5.5"
+  },
+  "name": "pro-v3-webcore"
+}
