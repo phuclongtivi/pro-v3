@@ -327,3 +327,77 @@ html[data-theme='flash']{--bg:#eef8ff;--surface:#fff;--surface2:#e5f3ff;--text:#
 /* Tree5 content is one continuous workspace: no partition stripe between crumbs and content */
 .navWorkspace.contentSurface .endWorkPanel,.navWorkspace.contentSurface .completionPanel{border-top:0!important}
 @media(max-width:760px){.semanticWorkspace>.semanticHead,.semanticWorkspace>.semanticGrid,.semanticWorkspace>.semanticStatus,.semanticWorkspace>.semanticEndRow{margin-left:8px;margin-right:8px}}
+
+/* FIXFLOW3-R4B2 ROLE-AWARE CONTENT ROUTING */
+.semanticEmbedded{margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important}
+.semanticEmbedded>.semanticHead,.semanticEmbedded>.semanticGrid,.semanticEmbedded>.semanticStatus,.semanticEmbedded>.semanticEndRow{margin-left:14px;margin-right:14px}
+.viewerActionRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.viewerActionRow button{min-height:40px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font-weight:800;padding:8px 12px}
+.semanticEmbedded[data-access="viewer"] .runtimeBadge,.semanticEmbedded[data-access="participant"] .runtimeBadge{background:color-mix(in srgb,var(--accent) 7%,var(--surface));}
+@media(max-width:760px){.semanticEmbedded>.semanticHead,.semanticEmbedded>.semanticGrid,.semanticEmbedded>.semanticStatus,.semanticEmbedded>.semanticEndRow{margin-left:8px;margin-right:8px}}
+
+
+/* FIXFLOW3-R4B2 FINAL POLISH — typography, spacing, borders, labels, disabled/END, mobile */
+:root{--ui-radius:14px;--ui-gap:10px}
+.navWorkspace,.semanticPanel,.specializedPanel,.functionalPanel,.completionPanel{font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility}
+.navWorkspace{max-width:1180px;margin-left:auto;margin-right:auto}
+.navWorkspace.contentSurface{overflow:hidden}
+.workspaceCrumbs{border-bottom:0!important;padding-bottom:8px!important}
+.navWorkspace.contentSurface>.workspaceCrumbs+.endWorkPanel,
+.navWorkspace.contentSurface>.workspaceCrumbs+.completionPanel,
+.navWorkspace.contentSurface>.workspaceCrumbs+.semanticPanel,
+.navWorkspace.contentSurface>.workspaceCrumbs+.specializedPanel,
+.navWorkspace.contentSurface>.workspaceCrumbs+.functionalPanel{border-top:0!important}
+.semanticPanel>.workspaceCrumbs,.specializedPanel>.workspaceCrumbs,.functionalPanel>.workspaceCrumbs{display:none!important}
+.semanticPanel,.specializedPanel,.functionalPanel,.completionPanel{padding:14px 14px 16px!important}
+.semanticPanel h2,.specializedPanel h2,.functionalPanel h2,.completionPanel h3{letter-spacing:-.018em;line-height:1.2}
+.semanticPanel p,.semanticResult,.functionalResult span,.endWorkCopy span{line-height:1.48}
+.semanticGrid,.specialGrid,.functionalGrid,.completionGrid{gap:12px}
+.semanticCard,.specialGrid label,.templatePreview,.productPreview,.functionalGrid label,.functionalResult{box-shadow:none!important}
+.semanticCard,.specialGrid label,.templatePreview,.productPreview,.functionalGrid label,.functionalResult,.paymentDetail{border-color:color-mix(in srgb,var(--line) 72%,transparent)!important}
+button{touch-action:manipulation}
+button:disabled{cursor:not-allowed;opacity:.48!important;filter:saturate(.55)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid color-mix(in srgb,var(--accent) 65%,transparent);outline-offset:2px}
+.endCommit,.secondaryEnd{min-height:44px}
+.semanticEndRow,.endCommitRow{gap:8px;align-items:center}
+.endCommit{white-space:normal;text-align:center;line-height:1.2}
+.statePill,.semanticStatus{font-size:12px;line-height:1.35}
+.viewerActionRow{display:flex;gap:8px;flex-wrap:wrap}.viewerActionRow button{min-height:42px}
+/* Remove accidental ruled/divider look inside Tree5; keep only true cards/inputs. */
+.contentSurface hr,.semanticPanel hr,.specializedPanel hr,.functionalPanel hr{display:none!important}
+.contentSurface>*:not(.workspaceCrumbs){border-top-width:0}
+/* Keep card borders but avoid full-width horizontal separators from nested shells. */
+.semanticPanel,.specializedPanel,.functionalPanel,.completionPanel{border-top:0!important;border-bottom:0!important}
+@media(max-width:760px){
+  .topnav a{font-size:clamp(13px,3.6vw,16px);padding:13px 4px}
+  .nav3Corebar{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:8px!important}
+  .navWorkspace{margin:8px 6px 6px;border-radius:18px}
+  .workspaceCrumbs{padding:8px!important;gap:6px}
+  .workspaceCrumbs button{min-height:40px;padding:8px 10px;font-size:13px}
+  .semanticPanel,.specializedPanel,.functionalPanel,.completionPanel{padding:12px 10px 14px!important}
+  .semanticGrid,.specialGrid,.completionGrid,.paymentMethods,.stickerGrid{grid-template-columns:1fr!important;gap:9px}
+  .semanticCard,.specialGrid label,.templatePreview,.productPreview,.functionalGrid label,.functionalResult{border-radius:14px;padding:12px}
+  .semanticEndRow,.endCommitRow{display:grid!important;grid-template-columns:1fr 1fr;position:sticky;bottom:max(8px,env(safe-area-inset-bottom));z-index:8;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);padding:8px 0 0}
+  .semanticEndRow button,.endCommitRow button{width:100%;min-height:46px}
+  input,select,textarea{font-size:16px!important}
+  .brandFooterCompact{margin-top:18px;padding-bottom:max(13px,env(safe-area-inset-bottom))}
+}
+@media(max-width:390px){
+  .workspaceCrumbs{align-items:stretch}.workspaceCrumbs button{flex:1 1 auto}
+  .semanticEndRow,.endCommitRow{grid-template-columns:1fr}
+  .nav3Corebar{grid-template-columns:1fr 1fr}
+}
+
+/* FIXFLOW3-R4B3 STUDIO LOGIC + FINAL POLISH */
+.studioWorkflow .semanticHead{margin-bottom:10px}
+.studioWorkflow .semanticCard>div{display:grid;gap:10px;margin-top:9px}
+.studioWorkflow .choiceRow{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.studioWorkflow input[type="file"]{max-width:100%;padding:9px;background:var(--surface);border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:12px}
+.studioWorkflow input[type="range"]{width:100%}
+.studioWorkflow .semanticResult{min-height:48px}
+/* Tree5 is one continuous surface: no ruled line above result content. */
+.contentSurface .contentGrid,.contentSurface .endWorkPanel,.contentSurface .semanticWorkspace{border-top:0!important}
+.contentSurface .workspaceCrumbs+*{margin-top:0!important}
+@media(max-width:760px){
+ .studioWorkflow .semanticHead{align-items:flex-start;gap:8px}.studioWorkflow .runtimeBadge{white-space:normal;text-align:center}
+ .studioWorkflow .choiceRow{display:grid;grid-template-columns:1fr}
+}

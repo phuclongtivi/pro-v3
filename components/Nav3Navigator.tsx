@@ -9,6 +9,7 @@ import RuntimeActionPanel from "@/components/RuntimeActionPanel";
 import TemplateVideoBuilder from "@/components/TemplateVideoBuilder";
 import ProductCreateForm from "@/components/ProductCreateForm";
 import SemanticSpecializedPanel, {semanticIntent} from "@/components/SemanticSpecializedPanel";
+import {resolveAccessContext} from "@/lib/role-aware-content";
 
 type Txt = { vi: string; en: string; zh: string };
 type Kind = "action" | "product" | "notice" | "input" | "chat" | "pay";
@@ -67,6 +68,7 @@ function actions(section: string, child: string): Act[] {
       A("auto-fit", "AI Auto Fit", "AI Auto Fit", "AI自动适配", true),
     ],
     "studio.broadcast:flash-flow": [
+      A("source", "Chọn nguồn", "Choose Source", "选择来源", true),
       A("intro", "Intro", "Intro", "片头"),
       A("transition", "Chuyển cảnh", "Transition", "转场"),
       A("idle", "Idle video", "Idle Video", "待机视频"),
@@ -223,8 +225,8 @@ function actions(section: string, child: string): Act[] {
 
 function directEnd(key: string): EndBlock | null {
   const m: Record<string, EndBlock> = {
-    eventGift: { title: T("Có Quà Tặng", "Gift Available", "有礼物"), mode: "list", items: [A("n1", "Thông báo 1", "Notice 1", "通知1", true, "notice"), A("n2", "Thông báo 2", "Notice 2", "通知2", false, "notice"), A("n3", "Thông báo 3", "Notice 3", "通知3", false, "notice"), A("check", "Check / Watch / Read", "Check / Watch / Read", "检查/观看/阅读", true), A("confirm", "Confirm / Read / Add", "Confirm / Read / Add", "确认/阅读/添加", true)] },
-    eventNoGift: { title: T("Không Có Quà Tặng", "No Gift", "无礼物"), mode: "list", items: [A("n1", "Thông báo 1", "Notice 1", "通知1", true, "notice"), A("n2", "Thông báo 2", "Notice 2", "通知2", false, "notice"), A("watch", "Check / Watch / Read", "Check / Watch / Read", "检查/观看/阅读", true), A("add", "Confirm / Read / Add", "Confirm / Read / Add", "确认/阅读/添加")] },
+    eventGift: { title: T("Có Quà Tặng", "Gift Available", "有礼物"), mode: "list", note:T("Chọn một thông báo/sự kiện để đọc. Quyền sửa chỉ dành cho chủ sở hữu/editor.","Choose an event notice to read. Editing is reserved for owners/editors.","选择一个活动通知进行阅读；仅所有者/编辑者可修改。"), items: [A("n1", "Thông báo 1", "Notice 1", "通知1", true, "notice"), A("n2", "Thông báo 2", "Notice 2", "通知2", false, "notice"), A("n3", "Thông báo 3", "Notice 3", "通知3", false, "notice")] },
+    eventNoGift: { title: T("Không Có Quà Tặng", "No Gift", "无礼物"), mode: "list", note:T("Nội dung công khai mặc định ở chế độ chỉ đọc.","Public content is read-only by default.","公开内容默认只读。"), items: [A("n1", "Thông báo 1", "Notice 1", "通知1", true, "notice"), A("n2", "Thông báo 2", "Notice 2", "通知2", false, "notice"), A("n3", "Thông báo 3", "Notice 3", "通知3", false, "notice")] },
     eventTicket: { title: T("Có Vé", "Ticket Available", "有票"), items: [A("ticket1", "Vé 1", "Ticket 1", "票1", true), A("ticket2", "Vé 2", "Ticket 2", "票2"), A("qr", "QR Vé", "Ticket QR", "票二维码", true), A("checkin", "Check-in", "Check-in", "签到", true)] },
     eventNoTicket: { title: T("Không Vé", "No Ticket", "无票"), items: [A("notice", "Thông báo không vé", "No-ticket Notice", "无票通知", true, "notice"), A("request", "Yêu cầu vé", "Request Ticket", "申请票"), A("watch", "Theo dõi", "Follow", "关注"), A("read", "Đọc", "Read", "阅读")] },
     createGift: { title: T("Tạo Quà Tặng", "Create Gift", "创建礼物"), items: [A("template", "Chọn mẫu quà", "Gift Template", "礼物模板"), A("quantity", "Số lượng", "Quantity", "数量", false, "input"), A("rule", "Điều kiện nhận", "Claim Rule", "领取条件"), A("qr", "Tạo QR quà", "Create Gift QR", "创建礼物二维码", true), A("create", "Khởi tạo", "Create", "创建", true)] },
@@ -308,6 +310,7 @@ function comboEnd(section: string, child: string, action: string): EndBlock | nu
     "studio.broadcast:video-output:pxp": { title: T("PXP / Multi-view", "PXP / Multi-view", "多画面"), items: [A("2up", "2 ô", "2-up", "2画面"), A("4up", "4 ô", "4-up", "4画面", true), A("grid", "9 ô", "9-up", "9画面"), A("pip", "Picture in Picture", "Picture in Picture", "画中画"), A("apply", "Áp dụng", "Apply", "应用", true)] },
     "studio.broadcast:video-output:auto-fit": { title: T("AI Auto Fit", "AI Auto Fit", "AI自动适配"), items: [A("detect", "Nhận diện màn", "Detect Screen", "识别屏幕", true), A("crop", "Crop thông minh", "Smart Crop", "智能裁切"), A("safe", "Vùng an toàn", "Safe Area", "安全区"), A("apply", "Áp dụng", "Apply", "应用", true)] },
 
+    "studio.broadcast:flash-flow:source": { title: T("Flash Flow • Chọn nguồn", "Flash Flow • Choose Source", "Flash Flow • 选择来源"), items: [A("device-media", "Ảnh / video từ máy", "Image / Video from Device", "设备图片/视频", true), A("event-media", "Media sự kiện", "Event Media", "活动媒体"), A("camera", "Camera / Capture", "Camera / Capture", "相机/采集"), A("stream", "URL / Stream", "URL / Stream", "URL/流")] },
     "studio.broadcast:flash-flow:intro": { title: T("Flash Flow • Intro", "Flash Flow • Intro", "闪流引擎 • 片头"), items: [A("logo", "Logo intro", "Logo Intro", "Logo片头"), A("countdown", "Countdown", "Countdown", "倒计时", true), A("sound", "Nhạc intro", "Intro Music", "片头音乐"), A("play", "Phát intro", "Play Intro", "播放片头", true)] },
     "studio.broadcast:flash-flow:transition": { title: T("Flash Flow • Chuyển cảnh", "Flash Flow • Transition", "闪流引擎 • 转场"), items: [A("cut", "Cut", "Cut", "切换"), A("fade", "Fade", "Fade", "淡入淡出", true), A("wipe", "Wipe", "Wipe", "擦除"), A("save", "Lưu preset", "Save Preset", "保存预设", true)] },
     "studio.broadcast:flash-flow:idle": { title: T("Flash Flow • Idle Video", "Flash Flow • Idle Video", "闪流引擎 • 待机视频"), items: [A("banner", "Banner", "Banner", "横幅"), A("mascot", "Mascot", "Mascot", "吉祥物", true), A("clock", "Đồng hồ", "Clock", "时钟"), A("play", "Chạy idle", "Run Idle", "运行待机", true)] },
@@ -482,8 +485,8 @@ function fallbackEnd(section: string, child: NavChild, action?: Act | null): End
       items: [
         A("notice1", "Thông báo 1", "Notice 1", "通知1", true, "notice"),
         A("notice2", "Thông báo 2", "Notice 2", "通知2", false, "notice"),
-        A("watch", "Check / Watch / Read", "Check / Watch / Read", "检查/观看/阅读", true),
-        A("confirm", "Confirm / Read / Add", "Confirm / Read / Add", "确认/阅读/添加", true),
+        A("open", "Xem sự kiện", "View Event", "查看活动", true),
+        A("saved", "Sự kiện đã lưu", "Saved Event", "已保存活动"),
       ],
     };
   }
@@ -748,6 +751,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   const direct = !!active.directToEnd;
   const contentOpen = !!action || (direct && openedDirectId === active.id);
   const content = useMemo(() => getEndContent(section, active, action), [section, active, action]);
+  const access = useMemo(()=>resolveAccessContext({section,activeId:active.id,endType:active.endType,actionId:action?.id,selectedId:selected?.id}),[section,active.id,active.endType,action?.id,selected?.id]);
 
   function resetToB() {
     setAction(null); setSelected(null); setOpenedDirectId(null); setDraft(""); setDone(false);
@@ -811,13 +815,13 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
 
       {!selected ? <div className="contentGrid">
         {content.items.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
-          <b>{tx(x.label, lang)}</b>{x.kind === "input" && <small>Input → END</small>}{x.kind === "chat" && <small>Chat → END</small>}
+          <b>{tx(x.label, lang)}</b>{x.kind === "input" && <small>{lang === "en" ? "Enter details" : lang === "zh" ? "填写内容" : "Nhập nội dung"}</small>}{x.kind === "chat" && <small>{lang === "en" ? "Send message" : lang === "zh" ? "发送消息" : "Gửi tin nhắn"}</small>}
         </button>)}
       </div> : ((selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") && semanticIntent({section,activeId:active.id,activeLabel:label(active.label,lang),actionId:action?.id,actionLabel:action?tx(action.label,lang):undefined,selectedId:selected.id,selectedLabel:tx(selected.label,lang)}) === "generic") ? <div className="endWorkPanel">
-        <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Enter the required content, then commit END." : lang === "zh" ? "输入所需内容，然后提交 END。" : "Nhập nội dung cần thiết, sau đó xác nhận END."}</span></div>
+        <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Enter the required content, then complete this action." : lang === "zh" ? "输入所需内容，然后完成此操作。" : "Nhập nội dung cần thiết, sau đó hoàn tất thao tác."}</span></div>
         <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : selected.kind === "chat" ? (lang === "vi"?"Tin nhắn":"Message") : (lang === "vi"?"Nội dung":"Input")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>
         <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? "✓ END" : endLabel(section, active, selected, lang)}</button></div>
-      </div> : <SemanticSpecializedPanel lang={lang} section={section} activeId={active.id} activeLabel={label(active.label,lang)} actionId={action?.id} actionLabel={action?tx(action.label,lang):undefined} selectedId={selected.id} selectedLabel={tx(selected.label,lang)} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
+      </div> : <SemanticSpecializedPanel lang={lang} section={section} activeId={active.id} activeLabel={label(active.label,lang)} actionId={action?.id} actionLabel={action?tx(action.label,lang):undefined} selectedId={selected.id} selectedLabel={tx(selected.label,lang)} access={access} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
     </section>;
   }
 
