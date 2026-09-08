@@ -3,12 +3,19 @@ import { useEffect, useMemo, useState } from "react";
 import type { Lang, NavChild } from "@/lib/navigation";
 import { label } from "@/lib/navigation";
 import { useEventSpace } from "@/components/EventSpaceProvider";
-import {AppearanceCenter,SoundCenter,PrivacyCenter,SecurityCenter,StickerStore,PaymentCenter} from "@/components/ContentCompletePanels";
+import {AppearanceCenter,SoundCenter,PrivacyCenter,StickerStore,PaymentCenter} from "@/components/ContentCompletePanels";
 import MediaConnectionPanel from "@/components/MediaConnectionPanel";
 import RuntimeActionPanel from "@/components/RuntimeActionPanel";
 import TemplateVideoBuilder from "@/components/TemplateVideoBuilder";
 import ProductCreateForm from "@/components/ProductCreateForm";
 import SemanticSpecializedPanel, {semanticIntent} from "@/components/SemanticSpecializedPanel";
+import EventStructuredCreateForm from "@/components/EventStructuredCreateForm";
+import AuthLoginPanel from "@/components/AuthLoginPanel";
+import StoreCatalogPanel from "@/components/StoreCatalogPanel";
+import EventListPanel from "@/components/EventListPanel";
+import AIConfigPanel from "@/components/AIConfigPanel";
+import MixerConsolePanel from "@/components/MixerConsolePanel";
+import ChatRoomWorkspace from "@/components/ChatRoomWorkspace";
 import {resolveAccessContext} from "@/lib/role-aware-content";
 
 type Txt = { vi: string; en: string; zh: string };
@@ -408,7 +415,7 @@ function comboEnd(section: string, child: string, action: string): EndBlock | nu
     "me.profile:personal:security": { title: T("Thông tin cá nhân • Bảo mật", "Personal Info • Security", "个人信息 • 安全"), items: [A("faceid", "Face ID", "Face ID", "Face ID", true), A("social", "Đăng nhập nhanh", "Quick Login", "快速登录"), A("password", "Mật khẩu", "Password", "密码"), A("save", "Lưu", "Save", "保存", true)] },
     "me.profile:personal:sync": { title: T("Thông tin cá nhân • Đồng bộ", "Personal Info • Sync", "个人信息 • 同步"), items: [A("cloud", "Cloud", "Cloud", "云端", true), A("phone", "Điện thoại", "Phone", "手机"), A("laptop", "Laptop", "Laptop", "笔记本"), A("run", "Đồng bộ ngay", "Sync Now", "立即同步", true)] },
 
-    "me.profile:account:login": { title: T("Tài khoản • Đăng nhập", "Account • Login", "账户 • 登录"), items: [A("faceid", "Face ID", "Face ID", "Face ID", true), A("google", "Google", "Google", "Google"), A("apple", "Apple", "Apple", "Apple"), A("save", "Lưu", "Save", "保存", true)] },
+    "me.profile:account:login": { title: T("Tài khoản • Đăng nhập", "Account • Login", "账户 • 登录"), items: [A("google", "Google", "Google", "Google", true), A("facebook", "Facebook", "Facebook", "Facebook"), A("zalo", "Zalo", "Zalo", "Zalo"), A("apple", "Apple", "Apple", "Apple"), A("faceid", "Face ID / Passkey", "Face ID / Passkey", "Face ID / Passkey")] },
     "me.profile:account:email": { title: T("Tài khoản • Email", "Account • Email", "账户 • 邮箱"), items: [A("view", "Xem email", "View Email", "查看邮箱"), A("edit", "Đổi email", "Change Email", "更改邮箱"), A("save", "Lưu", "Save", "保存", true)] },
     "me.profile:account:phone": { title: T("Tài khoản • Số điện thoại", "Account • Phone", "账户 • 电话"), items: [A("view", "Xem số", "View Phone", "查看电话"), A("edit", "Đổi số", "Change Phone", "更改电话"), A("otp", "Xác minh OTP", "Verify OTP", "OTP验证", true), A("save", "Lưu", "Save", "保存", true)] },
     "me.profile:account:delete": { title: T("Tài khoản • Xóa", "Account • Delete", "账户 • 删除"), items: [A("archive", "Lưu dữ liệu", "Archive Data", "归档数据"), A("confirm", "Xác nhận xóa", "Confirm Delete", "确认删除", true, true)] },
@@ -713,7 +720,7 @@ function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => 
   return <section className="navWorkspace aiFlashWorkspace" data-runtime-area="home.myai.ai-flash">
     <div className="workspaceCrumbs">
       <button data-action-id="pro.components.nav3navigator.button.001" type="button" className="backKey" onClick={onBack}>← Back</button>
-      <button data-action-id="pro.components.nav3navigator.button.002" type="button" className="crumbKey selected">AI Flash</button>
+      <span className="crumbKey selected">AI Flash</span>
     </div>
     <div className="aiFlashBody">
       <div className="aiFlashHead"><b>AI Flash</b><span>{lang === "en" ? "Chat • tasks • reusable results" : lang === "zh" ? "聊天 • 任务 • 可复用结果" : "Chat • giao việc • kết quả tái sử dụng"}</span></div>
@@ -753,7 +760,8 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
 
   const childActs = useMemo(() => actions(section, active.id), [section, active.id]);
   const direct = !!active.directToEnd;
-  const contentOpen = !!action || (direct && openedDirectId === active.id);
+  const autoOpen=(section==="store.shopping"&&active.id==="all-products")||(section==="home.events"&&["gift","no-gift","ticket"].includes(active.id));
+  const contentOpen = !!action || (direct && openedDirectId === active.id) || autoOpen;
   const content = useMemo(() => getEndContent(section, active, action), [section, active, action]);
   const access = useMemo(()=>resolveAccessContext({section,activeId:active.id,endType:active.endType,actionId:action?.id,selectedId:selected?.id}),[section,active.id,active.endType,action?.id,selected?.id]);
 
@@ -792,7 +800,15 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
     resetToB();
   }
 
+  if(section==="studio.mixer")return <MixerConsolePanel lang={lang}/>;
+  if(section==="studio.chat")return <ChatRoomWorkspace lang={lang}/>;
+  if(contentOpen&&section==="home.events"&&(active.id==="gift"||active.id==="no-gift"||active.id==="ticket"))return <section className="navWorkspace contentSurface eventHub"><div className="eventFilterTabs">{items.map(item=><button data-action-id={`pro.events.filter.${item.id}`} type="button" key={item.id} className={item.id===active.id?"active":""} onClick={()=>choose3(item.id)}>{label(item.label,lang)}</button>)}</div><EventListPanel lang={lang} filter={active.id}/></section>;
+  if(contentOpen&&section==="store.shopping"&&active.id==="all-products")return <StoreCatalogPanel lang={lang} onBack={resetToB}/>;
+  if(contentOpen&&section==="home.myai"&&active.id!=="ai-flash")return <AIConfigPanel lang={lang} agentId={active.id} onBack={resetToB}/>;
+
   if (contentOpen && active.endType === "createVideo" && selected?.id === "template") return <TemplateVideoBuilder lang={lang} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
+  if (contentOpen && section === "home.quickcreate" && active.id === "event" && action?.id === "new") return <EventStructuredCreateForm lang={lang} onBack={resetToB}/>;
+  if (contentOpen && section === "me.profile" && active.id === "account" && action?.id === "login") return <AuthLoginPanel lang={lang} onBack={resetToB}/>;
   if (contentOpen && active.endType === "createProduct" && (selected?.id === "new" || selected?.id === "template")) return <ProductCreateForm lang={lang} mode={selected.id === "template" ? "template" : "new"} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
   if (contentOpen && active.endType === "aiFlashChat") {
     return <AIFlashWorkspace lang={lang} onBack={resetToB} record={record} />;
@@ -800,7 +816,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   if (contentOpen && active.endType === "appearanceCenter") return <AppearanceCenter lang={lang} onBack={resetToB}/>;
   if (contentOpen && active.endType === "soundCenter") return <SoundCenter lang={lang} onBack={resetToB}/>;
   if (contentOpen && active.endType === "privacyCenter") return <PrivacyCenter lang={lang} onBack={resetToB}/>;
-  if (contentOpen && active.endType === "securityCenter") return <SecurityCenter lang={lang} onBack={resetToB}/>;
+  if (contentOpen && active.endType === "securityCenter") return <AuthLoginPanel lang={lang} onBack={resetToB}/>;
   if (contentOpen && active.endType === "stickerStore") return <StickerStore lang={lang} onBack={resetToB} mode="store"/>;
   if (contentOpen && active.endType === "stickerWallet") return <StickerStore lang={lang} onBack={resetToB} mode="wallet"/>;
   if (contentOpen && active.id === "checkout") return <PaymentCenter lang={lang} onBack={resetToB}/>;
@@ -812,7 +828,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
         <button data-action-id="pro.components.nav3navigator.button.008" type="button" className="backKey" onClick={backOne}>← Back</button>
         <button data-action-id="pro.components.nav3navigator.button.009" type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{label(active.label, lang)}</button>
         {action && <button data-action-id="pro.components.nav3navigator.button.010" type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{tx(action.label, lang)}</button>}
-        {selected && <button data-action-id="pro.components.nav3navigator.button.011" type="button" className="crumbKey selected tree5Crumb">{tx(selected.label, lang)}</button>}
+        {selected && <span className="crumbKey selected tree5Crumb">{tx(selected.label, lang)}</span>}
       </div>
 
       {content.note && !selected && <p className="contentNote">{tx(content.note, lang)}</p>}

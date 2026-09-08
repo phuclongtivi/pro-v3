@@ -13,9 +13,20 @@ export async function GET(request:Request){
       `;
       return NextResponse.json({ok:true,products:rows});
     }
+    const q=String(url.searchParams.get("q")||"").trim().slice(0,120);
+    const category=String(url.searchParams.get("category")||"all").slice(0,40);
+    const sort=String(url.searchParams.get("sort")||"priority");
     const rows=await db`
       select p.*,i.sku,i.quantity,i.reserved from long_products p left join long_inventory i on i.product_id=p.id
-      where p.status='published' order by p.created_at desc limit 200
+      where p.status='published'
+        and (${category}='all' or p.category=${category})
+        and (${q}='' or p.title ilike ${`%${q}%`} or p.store_name ilike ${`%${q}%`} or i.sku ilike ${`%${q}%`})
+      order by
+        case when ${sort}='priority' then p.priority_score end desc,
+        case when ${sort}='priority' then p.featured::int end desc,
+        case when ${sort}='price-asc' then p.price end asc,
+        case when ${sort}='price-desc' then p.price end desc,
+        p.created_at desc limit 200
     `;
     return NextResponse.json({ok:true,products:rows});
   }catch(error){const e=jsonError(error);return NextResponse.json(e.body,{status:e.status})}

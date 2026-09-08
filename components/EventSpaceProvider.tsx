@@ -52,7 +52,7 @@ function RuntimeResultToast({result, onClose, onConfirm}: {result: RuntimeResult
     <small>EventSpace Runtime Lab · {result.resultCode}</small>
     <b>{result.message}</b>
     {plan && <span>{plan.target} · {plan.fps} FPS · {plan.codecProfile}{plan.enhancedLabel ? ` · ${plan.enhancedLabel}` : ""}</span>}
-    <span>6 lõi đã liên kết · {result.coreTrace.filter(step => step.mode === "active").length} lõi thực thi · {result.measurements.costClass}</span>
+    <span>Kế hoạch sáu lõi · {result.coreTrace.filter(step => step.mode === "active").length} lõi được chỉ định · chờ receipt executor</span>
     {result.status === "needs-confirmation" && onConfirm && <button data-action-id="pro.components.eventspaceprovider.button.002" type="button" className="runtimeToastConfirm" onClick={onConfirm} data-runtime-ignore="true">Xác nhận</button>}
   </aside>;
 }

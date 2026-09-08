@@ -10,7 +10,7 @@ const visible=uiFiles.filter(file=>/\.(tsx|ts)$/.test(file)).map(file=>fs.readFi
 const checks=[
   ["six technical cores",["long-scene","flash-flow","eventspace","media","long-ai","connection"].every(core=>runtime.includes(`\"${core}\"`))],
   ["pixel-domain governor",runtime.includes('domain: "pixel"')&&runtime.includes('transportUnit: "frame"')],
-  ["720p/1200p execution plan",runtime.includes('target: "720p" | "1200p"')],
+  ["720p/1080p execution plan",runtime.includes('target: "720p" | "1080p"')],
   ["device-aware local execution",runtime.includes("detectDeviceCapability")&&runtime.includes('execution: "local-gpu" | "local-cpu"')],
   ["global button dispatcher",provider.includes('document.addEventListener("click", click)')&&provider.includes('closest("button")')],
   ["event Flash artifact",runtime.includes('kind: "event-flash"')&&event.includes("openEventFlash")&&event.includes("eventFlashPreview")],

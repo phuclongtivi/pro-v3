@@ -36,6 +36,16 @@ for (const file of roots.flatMap(filesAt)) {
         const hasHandler = node.attributes.properties.some(item =>
           ts.isJsxAttribute(item) && ["onClick", "onSubmit"].includes(item.name.getText(source))
         );
+        const typeAttribute = node.attributes.properties.find(item =>
+          ts.isJsxAttribute(item) && item.name.getText(source) === "type"
+        );
+        const isSubmit = Boolean(
+          typeAttribute &&
+          ts.isJsxAttribute(typeAttribute) &&
+          typeAttribute.initializer &&
+          ts.isStringLiteral(typeAttribute.initializer) &&
+          typeAttribute.initializer.text === "submit"
+        );
         let parent = node.parent;
         let insideMap = false;
         while (parent) {
@@ -53,6 +63,7 @@ for (const file of roots.flatMap(filesAt)) {
           runtimeIgnore,
           label: label || null,
           hasHandler,
+          isSubmit,
           insideMap,
           literalActionId,
           status: actionAttribute ? "mapped" : "unmapped",
@@ -69,14 +80,16 @@ const literalCounts = new Map();
 for (const control of controls) if (control.literalActionId) literalCounts.set(control.literalActionId, (literalCounts.get(control.literalActionId) || 0) + 1);
 const duplicateLiteralIds = [...literalCounts].filter(([, count]) => count > 1).map(([actionId, count]) => ({actionId, count}));
 const staticIdsInsideMap = controls.filter(control => control.insideMap && control.literalActionId).map(control => ({file:control.file,line:control.line,actionId:control.literalActionId}));
+const deadButtons = controls.filter(control => !control.hasHandler && !control.isSubmit && !control.runtimeIgnore);
 const report = {
   generatedAt: new Date().toISOString(),
   surface,
   policy: "Every UI button requires an explicit data-action-id mapped to an ActionContract.",
-  totals: {controls: controls.length, mapped, unmapped: controls.length - mapped, duplicateLiteralIds: duplicateLiteralIds.length, staticIdsInsideMap: staticIdsInsideMap.length, coveragePercent: controls.length ? Number((mapped / controls.length * 100).toFixed(2)) : 100},
+  totals: {controls: controls.length, mapped, unmapped: controls.length - mapped, duplicateLiteralIds: duplicateLiteralIds.length, staticIdsInsideMap: staticIdsInsideMap.length, deadButtons: deadButtons.length, coveragePercent: controls.length ? Number((mapped / controls.length * 100).toFixed(2)) : 100},
   runtimeUniquenessPolicy: "List-rendered controls must derive data-action-id from the item identity; duplicate literal IDs are blocked.",
   duplicateLiteralIds,
   staticIdsInsideMap,
+  deadButtons,
   controls,
 };
 
@@ -85,7 +98,7 @@ fs.mkdirSync(outputDir, {recursive: true});
 fs.writeFileSync(path.join(outputDir, "action-coverage.json"), `${JSON.stringify(report, null, 2)}\n`);
 console.log(`ACTION CONTRACT COVERAGE ${mapped}/${controls.length} (${report.totals.coveragePercent}%)`);
 if (staticIdsInsideMap.length) console.warn(`RUNTIME NORMALIZATION REQUIRED: ${staticIdsInsideMap.length} list-rendered source controls use a base ID; browser audit must confirm their expanded IDs.`);
-if (report.totals.unmapped || duplicateLiteralIds.length) {
-  console.error(`BLOCKED: unmapped=${report.totals.unmapped}, duplicateLiteralIds=${duplicateLiteralIds.length}.`);
+if (report.totals.unmapped || duplicateLiteralIds.length || staticIdsInsideMap.length || deadButtons.length) {
+  console.error(`BLOCKED: unmapped=${report.totals.unmapped}, duplicateLiteralIds=${duplicateLiteralIds.length}, staticIdsInsideMap=${staticIdsInsideMap.length}, deadButtons=${deadButtons.length}.`);
   process.exitCode = 1;
 }

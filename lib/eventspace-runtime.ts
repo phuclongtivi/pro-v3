@@ -31,7 +31,7 @@ export type PixelExecutionPlan = {
   version: "FPG-1.0";
   domain: "pixel";
   transportUnit: "frame";
-  target: "720p" | "1200p";
+  target: "720p" | "1080p";
   width: number;
   height: number;
   pixelBudget: number;
@@ -123,8 +123,8 @@ export function detectDeviceCapability(): DeviceCapability {
 
 export function createPixelExecutionPlan(capability: DeviceCapability, requested?: string): PixelExecutionPlan {
   const constrained = capability.thermal === "hot" || capability.networkMbps < 5 || capability.deviceMemoryGb < 4 || capability.cpuCores < 4;
-  const target = constrained ? "720p" : "1200p";
-  const dimensions = target === "720p" ? {width: 1280, height: 720} : {width: 1920, height: 1200};
+  const target = constrained ? "720p" : "1080p";
+  const dimensions = target === "720p" ? {width: 1280, height: 720} : {width: 1920, height: 1080};
   const wants8K = /8k/i.test(requested || "");
   const wants4K = /4k/i.test(requested || "");
   const fps: 24 | 30 | 60 = constrained ? 24 : capability.networkMbps >= 25 && capability.cpuCores >= 8 ? 60 : 30;
@@ -232,8 +232,8 @@ export function executeEventSpaceCommand(command: EventSpaceCommand, capability 
       userActions: 1,
       automationRate: status === "ready" ? 1 : 0.75,
       latencyMs: elapsed,
-      qualityScore: plan?.target === "1200p" ? 92 : plan ? 84 : 100,
-      pixelEfficiency: plan ? (plan.target === "1200p" ? 0.91 : 0.96) : 1,
+      qualityScore: plan?.target === "1080p" ? 92 : plan ? 84 : 100,
+      pixelEfficiency: plan ? (plan.target === "1080p" ? 0.91 : 0.96) : 1,
       costClass: aiAction.test(signature) ? "cloud-low" : "local",
     },
   };
