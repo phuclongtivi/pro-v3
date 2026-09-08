@@ -1,0 +1,86 @@
+LONG R4B10 — BẢN SỬA ĐỂ KIỂM TRA, CHƯA NGHIỆM THU CHẠY THẬT
+Ngày: 2026-09-08
+Phạm vi: Pro và Mobi. TV không thay đổi trong lượt này.
+
+1. ĐĂNG KÝ / ĐĂNG NHẬP
+- Thêm /register, /login và nút Đăng ký mới trong mục Tài khoản.
+- Đăng ký qua tài khoản Google/Facebook/Zalo/Apple: lần đầu xác thực thành công sẽ tạo hồ sơ Long qua luồng OAuth hiện có.
+- Chưa thêm đăng ký riêng bằng mật khẩu, OTP email hoặc số điện thoại.
+- Chỉ bật nhà cung cấp khi có cấu hình và các bảng database cần thiết.
+- Sửa cookie callback Apple cho form_post và kiểm tra nonce/thuật toán ID token.
+- Không tự ghép hai tài khoản nhà cung cấp chỉ vì cùng email. Trường hợp này cần luồng liên kết tài khoản, chưa triển khai.
+- Bỏ tác vụ runtime chung gây chặn nút đăng xuất do bộ xử lý riêng đã quản lý thao tác.
+- Chưa kiểm thử đăng nhập thật với tài khoản nhà cung cấp.
+
+Biến bắt buộc:
+DATABASE_URL
+AUTH_SESSION_SECRET (chuỗi ngẫu nhiên tối thiểu 32 ký tự)
+Theo nhà cung cấp cần bật:
+GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
+FACEBOOK_CLIENT_ID / FACEBOOK_CLIENT_SECRET
+ZALO_APP_ID / ZALO_APP_SECRET
+APPLE_CLIENT_ID / APPLE_CLIENT_SECRET
+Không gửi secret qua ảnh chụp hoặc đưa lên GitHub.
+
+Database: triển khai các migration của bản đã dùng, đặc biệt db/007_user_oauth_accounts.sql.
+Callback phải đăng ký đúng từng origin triển khai:
+https://app.phuclong.live/api/auth/google/callback
+https://mobi.phuclong.live/api/auth/google/callback
+Thay google bằng facebook, zalo, apple tương ứng.
+Cấu hình Vercel đúng môi trường Preview/Production và triển khai lại.
+Đây là danh sách đầu vào, không phải xác nhận đã cấu hình các nhà cung cấp.
+
+2. GIAO DIỆN
+- Khôi phục danh mục Mix đầy đủ từ mã nguồn, Mic 1–8, chỉnh tràn ngang từ lượt R4B9.
+- Thanh phân cách tăng từ 2–5 px lên 10–15 px, có ánh sáng chạy nhẹ.
+- Tôn trọng prefers-reduced-motion.
+- Bỏ ghi chú kỹ thuật thừa và thông báo kế hoạch Runtime Lab thông thường.
+- Chưa kiểm chứng trực quan trên Safari iPhone, desktop và TV.
+- Việc khôi phục nút không xác nhận EQ/FX/AUX/ánh sáng đã điều khiển thiết bị thật.
+
+3. TEMPLATE / APP NGOÀI 0 ĐỒNG
+- Thêm ba mẫu thông báo nội bộ miễn phí: mời tham gia, nhắc lịch, thay đổi lịch.
+- Có chỉnh nội dung và sao chép. Chưa có gửi/đăng thông báo từ bảng mẫu này.
+- OBS Studio/VLC liên kết đến trang chính thức. Không đóng gói hoặc tự cài phần mềm ngoài.
+- Chọn OBS/VLC trong Nguồn vào → External apps mở bảng xem nguồn cửa sổ qua getDisplayMedia khi trình duyệt hỗ trợ.
+- Đây là xem nguồn; chưa có đường đưa nguồn này vào toàn bộ audio bus/luồng phát sóng.
+- Âm thanh cửa sổ phụ thuộc trình duyệt/hệ điều hành. iPhone có thể không hỗ trợ.
+
+Long Scene:
+- lib/scene-resource-policy.ts khai báo chính sách 0 đồng và hàm xét điều kiện.
+- Email chính: phuclongtivi1@gmail.com; dự phòng: phuclongtivi2@gmail.com.
+- Policy duyệt lại mỗi 3 tháng; không tự chấp nhận phí, thẻ thanh toán, dùng thử trả phí, tự gia hạn hoặc license chưa xác minh.
+- Đây mới là module chính sách; chưa nối worker mua/đăng ký, chưa có quyền hộp thư và chưa đăng ký dịch vụ nào.
+- OTP/CAPTCHA/xác minh hộp thư phải được thực hiện hợp lệ. Không giả tạo receipt đăng ký.
+
+4. FLASH FLOW TỪ TỆP TRÊN MÁY
+- Sửa đường Nguồn → Ảnh/video từ máy để vào trình dựng.
+- Mã cũ chỉ gửi tên tệp đến worker chưa hoạt động. Bản này thêm renderer cục bộ đọc byte thực tế qua Blob URL.
+- Dựng canvas 1280x720, 30 FPS; chọn định dạng MediaRecorder được trình duyệt hỗ trợ (MP4 hoặc WebM).
+- Có video preview và liên kết tải file Blob; không báo đã đưa lên phát sóng.
+- Ảnh: 3 giây mỗi ảnh. Video: mỗi tệp tối đa 30 giây. Tối đa 20 tệp và tổng 250 MB.
+- Giữ màn hình mở trong lúc dựng. Có hủy khi rời trình dựng và thu hồi tài nguyên.
+- Bằng chứng đầu ra cục bộ gồm dung lượng và SHA-256; KHÔNG phải receipt sáu engine trên server.
+- Xuất từ tài nguyên ngoài chưa hoạt động. Cần chọn tệp trên thiết bị.
+- Chưa kiểm tra thực tế hình/âm thanh của file xuất trên Safari/Chrome trong lượt này.
+
+5. KIỂM TRA TRƯỚC KHI MERGE
+- [ĐÃ] Pro/Mobi TypeScript và production build; xem kết quả bàn giao cuối.
+- [ĐÃ] Kiểm toán thuộc tính Action ID trong mã nguồn: 161/161 mỗi bản.
+- [CHƯA] Kiểm toán tất cả nút sau render; số trên không phải số nút runtime duy nhất.
+- [CHƯA] Xuất file với ảnh, video có âm thanh, hỗn hợp nhiều tệp; phát lại file tải xuống.
+- [CHƯA] Đăng ký mới, đăng nhập lại, logout và hết phiên trên từng nhà cung cấp.
+- [CHƯA] Kiểm tra các chức năng Mix chuyên sâu và nguồn thiết bị thật.
+- [CHƯA] Kiểm tra website sau khi người dùng triển khai phiên bản này.
+- Công cụ tải browser thất bại do lỗi chứng chỉ; không dùng kết quả build thay cho kiểm thử trình duyệt.
+
+6. PYTHON
+Có thể dùng Python cho backend/API, worker xử lý video và AI.
+Bản này không viết lại app bằng Python. Frontend trình duyệt vẫn cần HTML/CSS/JavaScript hoặc framework tạo ra chúng.
+Đề xuất: giữ frontend hiện tại, hoàn thiện API và worker Python theo từng luồng có đầu vào/đầu ra kiểm chứng trước khi cân nhắc viết lại toàn bộ.
+
+7. CẬP NHẬT GITHUB
+Dùng nhánh mới để review. Không merge snapshot với -s ours nếu chưa đối chiếu mọi thay đổi trên main.
+Cách bảo toàn lịch sử: clone repo main ra thư mục mới, tạo nhánh r4b10-review, chép mã từ ZIP vào đó (không chép .git, node_modules, .next, .env).
+Kiểm tra git diff và các file cần xóa theo nội dung bản cập nhật; không tự xóa file không rõ nguồn gốc.
+Commit, push nhánh mới và tạo PR. Build xanh chưa đồng nghĩa hoàn tất các kiểm thử còn thiếu ở trên.

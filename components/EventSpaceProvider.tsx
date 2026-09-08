@@ -49,10 +49,10 @@ function RuntimeResultToast({result, onClose, onConfirm}: {result: RuntimeResult
   const plan = result.pixelPlan;
   return <aside className={`runtimeResultToast state-${result.status}`} role="status" aria-live="polite">
     <button data-action-id="pro.components.eventspaceprovider.button.001" type="button" className="runtimeToastClose" onClick={onClose} aria-label="Đóng" data-runtime-ignore="true">×</button>
-    <small>EventSpace Runtime Lab · {result.resultCode}</small>
+
     <b>{result.message}</b>
     {plan && <span>{plan.target} · {plan.fps} FPS · {plan.codecProfile}{plan.enhancedLabel ? ` · ${plan.enhancedLabel}` : ""}</span>}
-    <span>Kế hoạch sáu lõi · {result.coreTrace.filter(step => step.mode === "active").length} lõi được chỉ định · chờ receipt executor</span>
+
     {result.status === "needs-confirmation" && onConfirm && <button data-action-id="pro.components.eventspaceprovider.button.002" type="button" className="runtimeToastConfirm" onClick={onConfirm} data-runtime-ignore="true">Xác nhận</button>}
   </aside>;
 }
@@ -161,7 +161,7 @@ export function EventSpaceProvider({children}: {children: React.ReactNode}) {
 
   return <Ctx.Provider value={value}>
     {children}
-    {lastResult && <RuntimeResultToast result={lastResult} onClose={() => {setLastResult(null); setPendingCommand(null);}} onConfirm={pendingCommand ? confirmPending : undefined} />}
+    {lastResult && lastResult.resultCode !== "PLANNED" && <RuntimeResultToast result={lastResult} onClose={() => {setLastResult(null); setPendingCommand(null);}} onConfirm={pendingCommand ? confirmPending : undefined} />}
   </Ctx.Provider>;
 }
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:55:29.005Z",
+  "generatedAt": "2026-09-08T21:56:19.857Z",
   "surface": "pro",
   "contractVersion": "long-action/v3",
   "contracts": [
@@ -1254,7 +1254,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 11,
+        "line": 13,
         "column": 129
       }
     },
@@ -1333,13 +1333,171 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 11,
-        "column": 489
+        "line": 13,
+        "column": 545
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.authloginpanel.tsx.11.840",
+      "actionId": "pro.auth.mode.login",
+      "actionIdPattern": null,
+      "name": "pro.auth.mode.login",
+      "intent": "Thực thi pro.auth.mode.login trong components/AuthLoginPanel",
+      "surface": "pro",
+      "screen": "components/AuthLoginPanel.tsx",
+      "ownerCore": "connection",
+      "status": "active",
+      "executorAvailability": "gated",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [
+        "authenticated-domain-api",
+        "signed-result-receipt"
+      ],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "domain-api",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "pass-through",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 13,
+        "column": 723
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "pro.auth.mode.register",
+      "actionIdPattern": null,
+      "name": "pro.auth.mode.register",
+      "intent": "Thực thi pro.auth.mode.register trong components/AuthLoginPanel",
+      "surface": "pro",
+      "screen": "components/AuthLoginPanel.tsx",
+      "ownerCore": "connection",
+      "status": "active",
+      "executorAvailability": "gated",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [
+        "authenticated-domain-api",
+        "signed-result-receipt"
+      ],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "domain-api",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "pass-through",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 13,
+        "column": 878
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "dynamic.pro.components.authloginpanel.tsx.13.1361",
       "actionIdPattern": "data-action-id={`pro.auth.provider.${provider.provider}`}",
       "name": "pro.auth.provider.provider.provider",
       "intent": "Thực thi pro.auth.provider.provider.provider trong components/AuthLoginPanel",
@@ -1412,8 +1570,8 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 11,
-        "column": 840
+        "line": 13,
+        "column": 1361
       }
     },
     {
@@ -1491,8 +1649,8 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 11,
-        "column": 1184
+        "line": 13,
+        "column": 1764
       }
     },
     {
@@ -3822,6 +3980,240 @@
     },
     {
       "contractVersion": "long-action/v3",
+      "actionId": "pro.mixer.apps.back",
+      "actionIdPattern": null,
+      "name": "←",
+      "intent": "Thực thi ← trong components/ExternalMixAppsPanel",
+      "surface": "pro",
+      "screen": "components/ExternalMixAppsPanel.tsx",
+      "ownerCore": "media",
+      "status": "active",
+      "executorAvailability": "ready",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "internal-ui",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "active",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 5,
+        "column": 1403
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "pro.mixer.apps.capture",
+      "actionIdPattern": null,
+      "name": "pro.mixer.apps.capture",
+      "intent": "Thực thi pro.mixer.apps.capture trong components/ExternalMixAppsPanel",
+      "surface": "pro",
+      "screen": "components/ExternalMixAppsPanel.tsx",
+      "ownerCore": "media",
+      "status": "active",
+      "executorAvailability": "gated",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [
+        "authenticated-domain-api",
+        "signed-result-receipt"
+      ],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "domain-api",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "active",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 5,
+        "column": 1726
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "pro.mixer.apps.stop",
+      "actionIdPattern": null,
+      "name": "pro.mixer.apps.stop",
+      "intent": "Thực thi pro.mixer.apps.stop trong components/ExternalMixAppsPanel",
+      "surface": "pro",
+      "screen": "components/ExternalMixAppsPanel.tsx",
+      "ownerCore": "media",
+      "status": "active",
+      "executorAvailability": "gated",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [
+        "authenticated-domain-api",
+        "signed-result-receipt"
+      ],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "domain-api",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "active",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 5,
+        "column": 1904
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
       "actionId": "pro.components.functionaltaskpanel.button.001",
       "actionIdPattern": null,
       "name": "pro.components.functionaltaskpanel.button.001",
@@ -5463,13 +5855,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 722,
+        "line": 725,
         "column": 7
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.nav3navigator.tsx.730.59",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.733.59",
       "actionIdPattern": "data-action-id={`pro.ai.quick.${index+1}`}",
       "name": "pro.ai.quick.index+1",
       "intent": "Thực thi pro.ai.quick.index+1 trong components/Nav3Navigator",
@@ -5542,7 +5934,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 730,
+        "line": 733,
         "column": 59
       }
     },
@@ -5621,7 +6013,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 733,
+        "line": 736,
         "column": 9
       }
     },
@@ -5700,7 +6092,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 736,
+        "line": 739,
         "column": 9
       }
     },
@@ -5779,7 +6171,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 737,
+        "line": 740,
         "column": 9
       }
     },
@@ -5858,13 +6250,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 738,
+        "line": 741,
         "column": 9
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.nav3navigator.tsx.805.225",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.808.225",
       "actionIdPattern": "data-action-id={`pro.events.filter.${item.id}`}",
       "name": "pro.events.filter.item.id",
       "intent": "Thực thi pro.events.filter.item.id trong components/Nav3Navigator",
@@ -5934,7 +6326,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 805,
+        "line": 808,
         "column": 225
       }
     },
@@ -6010,7 +6402,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 828,
+        "line": 835,
         "column": 9
       }
     },
@@ -6089,7 +6481,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 829,
+        "line": 836,
         "column": 9
       }
     },
@@ -6168,13 +6560,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 830,
+        "line": 837,
         "column": 20
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.nav3navigator.tsx.837.35",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.844.35",
       "actionIdPattern": "data-action-id={`pro.nav.${section}.${active.id}.${action?.id||\"direct\"}.${x.id}`}",
       "name": "pro.nav.section.active.id.action?.id||\"direct\".x.id",
       "intent": "Thực thi pro.nav.section.active.id.action?.id||\"direct\".x.id trong components/Nav3Navigator",
@@ -6247,7 +6639,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 837,
+        "line": 844,
         "column": 35
       }
     },
@@ -6326,7 +6718,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 843,
+        "line": 850,
         "column": 39
       }
     },
@@ -6405,13 +6797,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 843,
+        "line": 850,
         "column": 275
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.nav3navigator.tsx.849.80",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.856.80",
       "actionIdPattern": "data-action-id={`pro.nav.${section}.tree3.${x.id}`}",
       "name": "pro.nav.section.tree3.x.id",
       "intent": "Thực thi pro.nav.section.tree3.x.id trong components/Nav3Navigator",
@@ -6484,13 +6876,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 849,
+        "line": 856,
         "column": 80
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.nav3navigator.tsx.851.17",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.858.17",
       "actionIdPattern": "data-action-id={`pro.nav.${section}.tree4.${active.id}.open`}",
       "name": "pro.nav.section.tree4.active.id.open",
       "intent": "Thực thi pro.nav.section.tree4.active.id.open trong components/Nav3Navigator",
@@ -6560,13 +6952,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 851,
+        "line": 858,
         "column": 17
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.nav3navigator.tsx.851.348",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.858.348",
       "actionIdPattern": "data-action-id={`pro.nav.${section}.${active.id}.tree4.${x.id}`}",
       "name": "pro.nav.section.active.id.tree4.x.id",
       "intent": "Thực thi pro.nav.section.active.id.tree4.x.id trong components/Nav3Navigator",
@@ -6639,8 +7031,242 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 851,
+        "line": 858,
         "column": 348
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "pro.notice.back",
+      "actionIdPattern": null,
+      "name": "←",
+      "intent": "Thực thi ← trong components/NoticeTemplatePanel",
+      "surface": "pro",
+      "screen": "components/NoticeTemplatePanel.tsx",
+      "ownerCore": "long-scene",
+      "status": "active",
+      "executorAvailability": "ready",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "internal-ui",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "pass-through",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 5,
+        "column": 283
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "dynamic.pro.components.noticetemplatepanel.tsx.5.521",
+      "actionIdPattern": "data-action-id={`pro.notice.template.${t.id}`}",
+      "name": "pro.notice.template.t.id",
+      "intent": "Thực thi pro.notice.template.t.id trong components/NoticeTemplatePanel",
+      "surface": "pro",
+      "screen": "components/NoticeTemplatePanel.tsx",
+      "ownerCore": "long-scene",
+      "status": "active",
+      "executorAvailability": "gated",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [
+        "authenticated-domain-api",
+        "signed-result-receipt"
+      ],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "domain-api",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "pass-through",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 5,
+        "column": 521
+      }
+    },
+    {
+      "contractVersion": "long-action/v3",
+      "actionId": "pro.notice.copy",
+      "actionIdPattern": null,
+      "name": "pro.notice.copy",
+      "intent": "Thực thi pro.notice.copy trong components/NoticeTemplatePanel",
+      "surface": "pro",
+      "screen": "components/NoticeTemplatePanel.tsx",
+      "ownerCore": "long-scene",
+      "status": "active",
+      "executorAvailability": "gated",
+      "permissions": [
+        "current-user",
+        "screen-context"
+      ],
+      "preconditions": [
+        "authenticated-domain-api",
+        "signed-result-receipt"
+      ],
+      "inputSchema": "long-action-input/v1",
+      "outputSchema": "long-action-result/v1",
+      "executor": "api",
+      "adapter": "domain-api",
+      "receiptSchema": "long-six-core-envelope/v1",
+      "workflowLinks": {
+        "previous": "screen-context",
+        "next": "result-or-safe-gate"
+      },
+      "sixCorePlan": [
+        {
+          "sequence": 1,
+          "core": "eventspace",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 2,
+          "core": "connection",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 3,
+          "core": "long-ai",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 4,
+          "core": "long-scene",
+          "mode": "active",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 5,
+          "core": "flash-flow",
+          "mode": "pass-through",
+          "receiptRequired": true
+        },
+        {
+          "sequence": 6,
+          "core": "media",
+          "mode": "pass-through",
+          "receiptRequired": true
+        }
+      ],
+      "resultStates": [
+        "success",
+        "failed",
+        "pending",
+        "gated"
+      ],
+      "fallback": "show-gated",
+      "telemetry": "action-ledger/v3",
+      "source": {
+        "line": 5,
+        "column": 820
       }
     },
     {
@@ -11024,7 +11650,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 18,
+        "line": 31,
         "column": 36
       }
     },
@@ -11103,13 +11729,13 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 24,
+        "line": 37,
         "column": 204
       }
     },
     {
       "contractVersion": "long-action/v3",
-      "actionId": "dynamic.pro.components.templatevideobuilder.tsx.24.378",
+      "actionId": "dynamic.pro.components.templatevideobuilder.tsx.37.378",
       "actionIdPattern": "data-action-id={`pro.scene.assets.select.${asset.id}`}",
       "name": "pro.scene.assets.select.asset.id",
       "intent": "Thực thi pro.scene.assets.select.asset.id trong components/TemplateVideoBuilder",
@@ -11179,7 +11805,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 24,
+        "line": 37,
         "column": 378
       }
     },
@@ -11258,7 +11884,7 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 27,
+        "line": 41,
         "column": 33
       }
     },
@@ -11337,8 +11963,8 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 27,
-        "column": 200
+        "line": 41,
+        "column": 234
       }
     },
     {
@@ -11416,8 +12042,8 @@
       "fallback": "show-gated",
       "telemetry": "action-ledger/v3",
       "source": {
-        "line": 27,
-        "column": 505
+        "line": 41,
+        "column": 533
       }
     },
     {
