@@ -7,6 +7,7 @@ export type RuntimeCoreId =
   | "connection";
 
 export type RuntimeStatus =
+  | "planned"
   | "ready"
   | "needs-input"
   | "needs-confirmation"
@@ -54,6 +55,7 @@ export type EventSpaceCommand = {
   intent?: string;
   inputs?: Record<string, unknown>;
   confirmed?: boolean;
+  receiptVerified?: boolean;
   source?: "ui" | "event" | "ai" | "device";
 };
 
@@ -190,12 +192,14 @@ export function executeEventSpaceCommand(command: EventSpaceCommand, capability 
   const plan = visual ? createPixelExecutionPlan(capability, signature) : undefined;
   const needsInput = /(input|name|quantity|code|url|title|width|height)/i.test(command.intent || "") && !Object.keys(command.inputs || {}).length;
   const requiresConfirmation = riskyAction.test(signature) && !command.confirmed;
-  const status: RuntimeStatus = needsInput ? "needs-input" : requiresConfirmation ? "needs-confirmation" : "ready";
+  const status: RuntimeStatus = needsInput ? "needs-input" : requiresConfirmation ? "needs-confirmation" : command.receiptVerified ? "ready" : "planned";
   const isFlash = /(event.*flash|flash.*event|flash-idle|watch-flash|create-flash|flash-flow)/i.test(signature) || eventFlashAction.test(signature);
   const flashArtifact = isFlash && plan && status === "ready" ? createFlashArtifact(command, plan) : undefined;
   const outcome = String(command.inputs?.outcome || "");
   const elapsed = Math.max(1, Math.round((typeof performance !== "undefined" ? performance.now() : Date.now()) - started));
-  const message = status === "needs-input"
+  const message = status === "planned"
+    ? "Kế hoạch xử lý qua sáu lõi đã được tạo; đang chờ executor và receipt xác minh."
+    : status === "needs-input"
     ? "Cần bổ sung dữ liệu bắt buộc để tiếp tục."
     : status === "needs-confirmation"
       ? "Đã chuẩn bị kết quả. Cần xác nhận trước hành động quan trọng."

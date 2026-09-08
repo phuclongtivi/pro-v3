@@ -720,7 +720,7 @@ function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => 
       <div className="aiFlashLog" aria-live="polite">
         {thinking && <div className="aiThinking">AI Flash · {lang === "vi" ? "Đang suy nghĩ…" : lang === "zh" ? "正在思考…" : "Thinking…"}</div>}{aiError && <div className="aiError">{aiError}</div>}{messages.length === 0 ? <div className="aiEmpty">{lang === "en" ? "Start a conversation with AI Flash." : lang === "zh" ? "开始与 AI Flash 对话。" : "Bắt đầu trò chuyện với AI Flash."}</div> : messages.map((m, i) => <div key={i} className={`aiMsg ${m.role}`}><b>{m.role === "user" ? (lang === "vi" ? "Bạn" : lang === "zh" ? "你" : "You") : "AI Flash"}</b><span>{m.body}</span></div>)}
       </div>
-      <div className="aiQuickRow">{quick.map(q => <button data-action-id="pro.components.nav3navigator.button.003" type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
+      <div className="aiQuickRow">{quick.map((q,index) => <button data-action-id={`pro.ai.quick.${index+1}`} type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
       <div className="aiComposer">
         <textarea value={text} onChange={e => setText(e.target.value)} placeholder={lang === "en" ? "Message AI Flash…" : lang === "zh" ? "向 AI Flash 输入消息…" : "Nhập yêu cầu cho AI Flash…"} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} />
         <button data-action-id="pro.components.nav3navigator.button.004" type="button" className="endCommit" disabled={thinking} onClick={() => send()}>{lang === "en" ? "Send" : lang === "zh" ? "发送" : "Gửi"}</button>
@@ -782,9 +782,9 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   function finishEnd(a = selected, immediate = false) {
     if (!a && !selected) return;
     const target = a || selected!;
-    setDone(true);
-    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${target.id}`, result: "completed", costClass: target.id.includes("ai") ? "cloud-low" : "local", ok: true });
-    window.setTimeout(resetToB, immediate ? 700 : 900);
+    setDone(false);
+    record({ area: section, action: `${active.id}:${action?.id || "direct"}:${target.id}`, result: "awaiting-executor-receipt", costClass: target.id.includes("ai") ? "cloud-low" : "local", ok: false });
+    window.dispatchEvent(new CustomEvent("long:action-result",{detail:{state:"pending",resultCode:"VERIFIED_RECEIPT_REQUIRED",actionId:`${section}.${active.id}.${action?.id||"direct"}.${target.id}`,immediate}}));
   }
 
   function backOne() {
@@ -818,7 +818,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
       {content.note && !selected && <p className="contentNote">{tx(content.note, lang)}</p>}
 
       {!selected ? <div className="contentGrid">
-        {content.items.map((x) => <button data-action-id="pro.components.nav3navigator.button.012" type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
+        {content.items.map((x) => <button data-action-id={`pro.nav.${section}.${active.id}.${action?.id||"direct"}.${x.id}`} type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
           <b>{tx(x.label, lang)}</b>{x.kind === "input" && <small>{lang === "en" ? "Enter details" : lang === "zh" ? "填写内容" : "Nhập nội dung"}</small>}{x.kind === "chat" && <small>{lang === "en" ? "Send message" : lang === "zh" ? "发送消息" : "Gửi tin nhắn"}</small>}
         </button>)}
       </div> : ((selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") && semanticIntent({section,activeId:active.id,activeLabel:label(active.label,lang),actionId:action?.id,actionLabel:action?tx(action.label,lang):undefined,selectedId:selected.id,selectedLabel:tx(selected.label,lang)}) === "generic") ? <div className="endWorkPanel">
@@ -830,9 +830,9 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   }
 
   return <section className="navWorkspace navGroupB" data-runtime-area={section}>
-    <div className="navColumn"><div className="keyboardList">{items.map((x) => <button data-action-id="pro.components.nav3navigator.button.015" type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
+    <div className="navColumn"><div className="keyboardList">{items.map((x) => <button data-action-id={`pro.nav.${section}.tree3.${x.id}`} type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
     <div className="navColumn child"><div className="keyboardList">
-      {direct ? <button data-action-id="pro.components.nav3navigator.button.016" type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? `Open ${label(active.label, lang)}` : lang === "zh" ? `打开 ${label(active.label, lang)}` : `Mở ${label(active.label, lang)}`}</b></button> : childActs.map((x) => <button data-action-id="pro.components.nav3navigator.button.017" type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
+      {direct ? <button data-action-id={`pro.nav.${section}.tree4.${active.id}.open`} type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? `Open ${label(active.label, lang)}` : lang === "zh" ? `打开 ${label(active.label, lang)}` : `Mở ${label(active.label, lang)}`}</b></button> : childActs.map((x) => <button data-action-id={`pro.nav.${section}.${active.id}.tree4.${x.id}`} type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
     </div></div>
   </section>;
 }

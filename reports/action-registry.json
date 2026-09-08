@@ -1,5265 +1,2928 @@
 {
-  "generatedAt": "2026-09-08T07:10:57.202Z",
+  "generatedAt": "2026-09-08T08:48:29.436Z",
   "surface": "pro",
   "contracts": [
     {
       "actionId": "pro.app.ai.jobs.page.button.001",
+      "actionIdPattern": null,
       "name": "Tạo AI Job",
-      "function": "Tạo AI Job tại app/ai-jobs/page.tsx",
       "surface": "pro",
       "screen": "app/ai-jobs/page.tsx",
       "ownerCore": "ai",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 12,
-        "column": 345,
-        "hasHandler": true
+        "column": 345
       }
     },
     {
-      "actionId": "pro.app.ai.jobs.page.button.002",
+      "actionId": "dynamic.pro.app.ai.jobs.page.tsx.12.658",
+      "actionIdPattern": "data-action-id={`pro.ai.job.${j.id}.approve`}",
       "name": "Approve",
-      "function": "Approve tại app/ai-jobs/page.tsx",
       "surface": "pro",
       "screen": "app/ai-jobs/page.tsx",
       "ownerCore": "ai",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 12,
-        "column": 658,
-        "hasHandler": true
+        "column": 658
       }
     },
     {
-      "actionId": "pro.app.ai.jobs.page.button.003",
+      "actionId": "dynamic.pro.app.ai.jobs.page.tsx.12.785",
+      "actionIdPattern": "data-action-id={`pro.ai.job.${j.id}.execute`}",
       "name": "Execute",
-      "function": "Execute tại app/ai-jobs/page.tsx",
       "surface": "pro",
       "screen": "app/ai-jobs/page.tsx",
       "ownerCore": "ai",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 12,
-        "column": 788,
-        "hasHandler": true
+        "column": 785
       }
     },
     {
       "actionId": "pro.app.boss.login.page.button.001",
+      "actionIdPattern": null,
       "name": "page button 001",
-      "function": "page button 001 tại app/boss/login/page.tsx",
       "surface": "pro",
       "screen": "app/boss/login/page.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 4,
-        "column": 976,
-        "hasHandler": false
+        "column": 976
       }
     },
     {
       "actionId": "pro.app.event.token.page.button.001",
+      "actionIdPattern": null,
       "name": "Tiếp tục vào sự kiện",
-      "function": "Tiếp tục vào sự kiện tại app/event/[token]/page.tsx",
       "surface": "pro",
       "screen": "app/event/[token]/page.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 78,
-        "column": 285,
-        "hasHandler": true
+        "column": 285
       }
     },
     {
-      "actionId": "pro.app.event.token.page.button.002",
-      "name": "page button 002",
-      "function": "page button 002 tại app/event/[token]/page.tsx",
+      "actionId": "dynamic.pro.app.event.token.page.tsx.83.49",
+      "actionIdPattern": "data-action-id={`pro.event.service.${x.toLowerCase().replace(/[^a-z0-9]+/g,\"-\")}`}",
+      "name": "tsx 83 49",
       "surface": "pro",
       "screen": "app/event/[token]/page.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 83,
-        "column": 49,
-        "hasHandler": true
+        "column": 49
       }
     },
     {
       "actionId": "pro.app.event.token.page.button.003",
+      "actionIdPattern": null,
       "name": "Gửi",
-      "function": "Gửi tại app/event/[token]/page.tsx",
       "surface": "pro",
       "screen": "app/event/[token]/page.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 86,
-        "column": 171,
-        "hasHandler": true
+        "column": 171
       }
     },
     {
       "actionId": "pro.app.event.create.page.button.001",
+      "actionIdPattern": null,
       "name": "page button 001",
-      "function": "page button 001 tại app/event/create/page.tsx",
       "surface": "pro",
       "screen": "app/event/create/page.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 32,
-        "column": 3,
-        "hasHandler": true
+        "column": 3
       }
     },
     {
-      "actionId": "pro.app.me.page.button.001",
-      "name": "page button 001",
-      "function": "page button 001 tại app/me/page.tsx",
+      "actionId": "dynamic.pro.app.me.page.tsx.11.102",
+      "actionIdPattern": "data-action-id={`pro.me.group.${x.id}`}",
+      "name": "tsx 11 102",
       "surface": "pro",
       "screen": "app/me/page.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 10,
-        "column": 102,
-        "hasHandler": true
+        "line": 11,
+        "column": 102
       }
     },
     {
-      "actionId": "pro.app.page.button.001",
-      "name": "page button 001",
-      "function": "page button 001 tại app/page.tsx",
+      "actionId": "dynamic.pro.app.page.tsx.11.102",
+      "actionIdPattern": "data-action-id={`pro.home.group.${x.id}`}",
+      "name": "tsx 11 102",
       "surface": "pro",
       "screen": "app/page.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 10,
-        "column": 102,
-        "hasHandler": true
+        "line": 11,
+        "column": 102
       }
     },
     {
-      "actionId": "pro.app.store.page.button.001",
-      "name": "page button 001",
-      "function": "page button 001 tại app/store/page.tsx",
+      "actionId": "dynamic.pro.app.store.page.tsx.11.102",
+      "actionIdPattern": "data-action-id={`pro.store.group.${x.id}`}",
+      "name": "tsx 11 102",
       "surface": "pro",
       "screen": "app/store/page.tsx",
       "ownerCore": "scene",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 10,
-        "column": 102,
-        "hasHandler": true
+        "line": 11,
+        "column": 102
       }
     },
     {
-      "actionId": "pro.app.studio.page.button.001",
-      "name": "page button 001",
-      "function": "page button 001 tại app/studio/page.tsx",
+      "actionId": "dynamic.pro.app.studio.page.tsx.11.102",
+      "actionIdPattern": "data-action-id={`pro.studio.group.${x.id}`}",
+      "name": "tsx 11 102",
       "surface": "pro",
       "screen": "app/studio/page.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 10,
-        "column": 102,
-        "hasHandler": true
+        "line": 11,
+        "column": 102
       }
     },
     {
-      "actionId": "pro.components.broadcastcontrol.button.001",
-      "name": "broadcastcontrol button 001",
-      "function": "broadcastcontrol button 001 tại components/BroadcastControl.tsx",
+      "actionId": "dynamic.pro.components.broadcastcontrol.tsx.8.326",
+      "actionIdPattern": "data-action-id={`pro.broadcast.${itemId}.${value.toLowerCase().replace(/[^a-z0-9]+/g,\"-\")}`}",
+      "name": "tsx 8 326",
       "surface": "pro",
       "screen": "components/BroadcastControl.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 5,
-        "column": 1621,
-        "hasHandler": true
+        "line": 8,
+        "column": 326
       }
     },
     {
-      "actionId": "pro.components.broadcastcontrol.button.002",
+      "actionId": "dynamic.pro.components.broadcastcontrol.tsx.9.186",
+      "actionIdPattern": "data-action-id={`pro.broadcast.${itemId}.back`}",
       "name": "↩ Cây 4",
-      "function": "↩ Cây 4 tại components/BroadcastControl.tsx",
       "surface": "pro",
       "screen": "components/BroadcastControl.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 5,
-        "column": 1938,
-        "hasHandler": true
+        "line": 9,
+        "column": 186
       }
     },
     {
-      "actionId": "pro.components.broadcastcontrol.button.003",
-      "name": "broadcastcontrol button 003",
-      "function": "broadcastcontrol button 003 tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 5,
-        "column": 2205,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.004",
-      "name": "AUTO FIT",
-      "function": "AUTO FIT tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 5,
-        "column": 3889,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.005",
-      "name": "AI AUTO MAP",
-      "function": "AI AUTO MAP tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "ai",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 5,
-        "column": 4004,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.006",
-      "name": "TEST PATTERN",
-      "function": "TEST PATTERN tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 5,
-        "column": 4137,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.007",
+      "actionId": "dynamic.pro.components.broadcastcontrol.tsx.9.472",
+      "actionIdPattern": "data-action-id={`pro.broadcast.${itemId}.validate`}",
       "name": "VALIDATE",
-      "function": "VALIDATE tại components/BroadcastControl.tsx",
       "surface": "pro",
       "screen": "components/BroadcastControl.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 5,
-        "column": 4260,
-        "hasHandler": true
+        "line": 9,
+        "column": 472
       }
     },
     {
-      "actionId": "pro.components.broadcastcontrol.button.008",
+      "actionId": "dynamic.pro.components.broadcastcontrol.tsx.9.610",
+      "actionIdPattern": "data-action-id={`pro.broadcast.${itemId}.arm`}",
       "name": "ARM",
-      "function": "ARM tại components/BroadcastControl.tsx",
       "surface": "pro",
       "screen": "components/BroadcastControl.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 5,
-        "column": 4376,
-        "hasHandler": true
+        "line": 9,
+        "column": 610
       }
     },
     {
-      "actionId": "pro.components.broadcastcontrol.button.009",
+      "actionId": "dynamic.pro.components.broadcastcontrol.tsx.9.764",
+      "actionIdPattern": "data-action-id={`pro.broadcast.${itemId}.take-live`}",
       "name": "TAKE LIVE",
-      "function": "TAKE LIVE tại components/BroadcastControl.tsx",
       "surface": "pro",
       "screen": "components/BroadcastControl.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 5,
-        "column": 4499,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.010",
-      "name": "Áp dụng",
-      "function": "Áp dụng tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 5,
-        "column": 5162,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.011",
-      "name": "VOICE",
-      "function": "VOICE tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 10,
-        "column": 41,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.012",
-      "name": "MUSIC",
-      "function": "MUSIC tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 10,
-        "column": 173,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.013",
-      "name": "EVENT",
-      "function": "EVENT tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 10,
-        "column": 305,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.014",
-      "name": "SAFE",
-      "function": "SAFE tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 10,
-        "column": 437,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.015",
-      "name": "broadcastcontrol button 015",
-      "function": "broadcastcontrol button 015 tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 10,
-        "column": 918,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.016",
-      "name": "Áp dụng",
-      "function": "Áp dụng tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 10,
-        "column": 1117,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.broadcastcontrol.button.017",
-      "name": "broadcastcontrol button 017",
-      "function": "broadcastcontrol button 017 tại components/BroadcastControl.tsx",
-      "surface": "pro",
-      "screen": "components/BroadcastControl.tsx",
-      "ownerCore": "eventspace",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 12,
-        "column": 238,
-        "hasHandler": true
+        "line": 9,
+        "column": 764
       }
     },
     {
       "actionId": "pro.connect.control.refresh",
+      "actionIdPattern": null,
       "name": "Cập nhật runtime",
-      "function": "Cập nhật runtime tại components/ConnectActionControlPlane.tsx",
       "surface": "pro",
       "screen": "components/ConnectActionControlPlane.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 7,
-        "column": 2353,
-        "hasHandler": true
+        "column": 2353
       }
     },
     {
-      "actionId": "pro.components.connectiongateway.button.001",
-      "name": "3.",
-      "function": "3. tại components/ConnectionGateway.tsx",
+      "actionId": "dynamic.pro.components.connectiongateway.tsx.12.433",
+      "actionIdPattern": "data-action-id={`pro.connect.${kind}.discover`}",
+      "name": "tsx 12 433",
       "surface": "pro",
       "screen": "components/ConnectionGateway.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 9,
-        "column": 629,
-        "hasHandler": true
+        "line": 12,
+        "column": 433
       }
     },
     {
-      "actionId": "pro.components.connectiongateway.button.002",
-      "name": "connectiongateway button 002",
-      "function": "connectiongateway button 002 tại components/ConnectionGateway.tsx",
+      "actionId": "dynamic.pro.components.connectiongateway.tsx.12.651",
+      "actionIdPattern": "data-action-id={`pro.connect.${kind}.${item.id}`}",
+      "name": "tsx 12 651",
       "surface": "pro",
       "screen": "components/ConnectionGateway.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 9,
-        "column": 1059,
-        "hasHandler": true
+        "line": 12,
+        "column": 651
       }
     },
     {
-      "actionId": "pro.components.connectiongateway.button.003",
-      "name": "connectiongateway button 003",
-      "function": "connectiongateway button 003 tại components/ConnectionGateway.tsx",
+      "actionId": "dynamic.pro.components.connectiongateway.tsx.12.1290",
+      "actionIdPattern": "data-action-id={`pro.connect.${kind}.cancel`}",
+      "name": "tsx 12 1290",
       "surface": "pro",
       "screen": "components/ConnectionGateway.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 9,
-        "column": 1176,
-        "hasHandler": false
+        "line": 12,
+        "column": 1290
       }
     },
     {
-      "actionId": "pro.components.connectiongateway.button.004",
-      "name": "connectiongateway button 004",
-      "function": "connectiongateway button 004 tại components/ConnectionGateway.tsx",
+      "actionId": "dynamic.pro.components.connectiongateway.tsx.12.1412",
+      "actionIdPattern": "data-action-id={`pro.connect.${kind}.confirm`}",
+      "name": "tsx 12 1412",
       "surface": "pro",
       "screen": "components/ConnectionGateway.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 9,
-        "column": 1263,
-        "hasHandler": true
-      }
-    },
-    {
-      "actionId": "pro.components.connectiongateway.button.005",
-      "name": "connectiongateway button 005",
-      "function": "connectiongateway button 005 tại components/ConnectionGateway.tsx",
-      "surface": "pro",
-      "screen": "components/ConnectionGateway.tsx",
-      "ownerCore": "connect",
-      "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
-      "preconditions": [
-        "executor-and-receipt-mapping-required"
-      ],
-      "inputSchema": "none",
-      "executor": "adapter",
-      "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
-      "source": {
-        "line": 9,
-        "column": 1368,
-        "hasHandler": false
+        "line": 12,
+        "column": 1412
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.001",
+      "actionIdPattern": null,
       "name": "← Back",
-      "function": "← Back tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 9,
-        "column": 111,
-        "hasHandler": true
+        "column": 111
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.002",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 002",
-      "function": "contentcompletepanels button 002 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 9,
-        "column": 250,
-        "hasHandler": false
+        "column": 250
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.003",
+      "actionIdPattern": null,
       "name": "Mobile",
-      "function": "Mobile tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 11,
-        "column": 372,
-        "hasHandler": false
+        "column": 372
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.004",
+      "actionIdPattern": null,
       "name": "Web · Auto fit",
-      "function": "Web · Auto fit tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 11,
-        "column": 474,
-        "hasHandler": false
+        "column": 474
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.005",
+      "actionIdPattern": null,
       "name": "TV · Safe area",
-      "function": "TV · Safe area tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "connect",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 11,
-        "column": 584,
-        "hasHandler": false
+        "column": 584
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.006",
+      "actionIdPattern": null,
       "name": "1920×1080",
-      "function": "1920×1080 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 11,
-        "column": 694,
-        "hasHandler": false
+        "column": 694
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.007",
+      "actionIdPattern": null,
       "name": "720p / 1080p",
-      "function": "720p / 1080p tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 11,
-        "column": 799,
-        "hasHandler": false
+        "column": 799
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.008",
+      "actionIdPattern": null,
       "name": "Font / Density",
-      "function": "Font / Density tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 11,
-        "column": 907,
-        "hasHandler": false
+        "column": 907
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.009",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 009",
-      "function": "contentcompletepanels button 009 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 13,
-        "column": 724,
-        "hasHandler": false
+        "column": 724
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.010",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 010",
-      "function": "contentcompletepanels button 010 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 13,
-        "column": 876,
-        "hasHandler": false
+        "column": 876
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.011",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 011",
-      "function": "contentcompletepanels button 011 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 13,
-        "column": 1031,
-        "hasHandler": false
+        "column": 1031
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.012",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 012",
-      "function": "contentcompletepanels button 012 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 13,
-        "column": 1168,
-        "hasHandler": false
+        "column": 1168
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.013",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 013",
-      "function": "contentcompletepanels button 013 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 380,
-        "hasHandler": true
+        "column": 380
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.014",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 014",
-      "function": "contentcompletepanels button 014 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 597,
-        "hasHandler": false
+        "column": 597
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.015",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 015",
-      "function": "contentcompletepanels button 015 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 761,
-        "hasHandler": false
+        "column": 761
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.016",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 016",
-      "function": "contentcompletepanels button 016 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 920,
-        "hasHandler": false
+        "column": 920
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.017",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 017",
-      "function": "contentcompletepanels button 017 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 1062,
-        "hasHandler": false
+        "column": 1062
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.018",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 018",
-      "function": "contentcompletepanels button 018 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 1223,
-        "hasHandler": true
+        "column": 1223
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.019",
+      "actionIdPattern": null,
       "name": "1 · Face ID / Biometrics",
-      "function": "1 · Face ID / Biometrics tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 17,
-        "column": 373,
-        "hasHandler": false
+        "column": 373
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.020",
+      "actionIdPattern": null,
       "name": "2 · Google / Apple",
-      "function": "2 · Google / Apple tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 17,
-        "column": 514,
-        "hasHandler": false
+        "column": 514
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.021",
+      "actionIdPattern": null,
       "name": "3 · Email / Phone / OTP",
-      "function": "3 · Email / Phone / OTP tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 17,
-        "column": 628,
-        "hasHandler": false
+        "column": 628
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.022",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 022",
-      "function": "contentcompletepanels button 022 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 17,
-        "column": 747,
-        "hasHandler": false
+        "column": 747
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.023",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 023",
-      "function": "contentcompletepanels button 023 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 17,
-        "column": 905,
-        "hasHandler": false
+        "column": 905
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.024",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 024",
-      "function": "contentcompletepanels button 024 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 27,
-        "column": 591,
-        "hasHandler": true
+        "column": 591
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.025",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 025",
-      "function": "contentcompletepanels button 025 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 27,
-        "column": 1290,
-        "hasHandler": false
+        "column": 1290
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.026",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 026",
-      "function": "contentcompletepanels button 026 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 27,
-        "column": 1439,
-        "hasHandler": false
+        "column": 1439
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.027",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 027",
-      "function": "contentcompletepanels button 027 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 27,
-        "column": 1584,
-        "hasHandler": false
+        "column": 1584
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.028",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 028",
-      "function": "contentcompletepanels button 028 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 27,
-        "column": 1727,
-        "hasHandler": false
+        "column": 1727
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.029",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 029",
-      "function": "contentcompletepanels button 029 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 29,
-        "column": 581,
-        "hasHandler": true
+        "column": 581
       }
     },
     {
       "actionId": "pro.components.contentcompletepanels.button.030",
+      "actionIdPattern": null,
       "name": "contentcompletepanels button 030",
-      "function": "contentcompletepanels button 030 tại components/ContentCompletePanels.tsx",
       "surface": "pro",
       "screen": "components/ContentCompletePanels.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 29,
-        "column": 1066,
-        "hasHandler": true
+        "column": 1066
       }
     },
     {
       "actionId": "pro.components.eventspaceprovider.button.001",
+      "actionIdPattern": null,
       "name": "×",
-      "function": "× tại components/EventSpaceProvider.tsx",
       "surface": "pro",
       "screen": "components/EventSpaceProvider.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 51,
-        "column": 5,
-        "hasHandler": true
+        "column": 5
       }
     },
     {
       "actionId": "pro.components.eventspaceprovider.button.002",
+      "actionIdPattern": null,
       "name": "Xác nhận",
-      "function": "Xác nhận tại components/EventSpaceProvider.tsx",
       "surface": "pro",
       "screen": "components/EventSpaceProvider.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 56,
-        "column": 61,
-        "hasHandler": true
+        "column": 61
       }
     },
     {
       "actionId": "pro.components.functionaltaskpanel.button.001",
+      "actionIdPattern": null,
       "name": "functionaltaskpanel button 001",
-      "function": "functionaltaskpanel button 001 tại components/FunctionalTaskPanel.tsx",
       "surface": "pro",
       "screen": "components/FunctionalTaskPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 7,
-        "column": 641,
-        "hasHandler": true
+        "column": 641
       }
     },
     {
       "actionId": "pro.components.functionaltaskpanel.button.002",
+      "actionIdPattern": null,
       "name": "functionaltaskpanel button 002",
-      "function": "functionaltaskpanel button 002 tại components/FunctionalTaskPanel.tsx",
       "surface": "pro",
       "screen": "components/FunctionalTaskPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 9,
-        "column": 32,
-        "hasHandler": true
+        "column": 32
       }
     },
     {
       "actionId": "pro.components.functionaltaskpanel.button.003",
+      "actionIdPattern": null,
       "name": "functionaltaskpanel button 003",
-      "function": "functionaltaskpanel button 003 tại components/FunctionalTaskPanel.tsx",
       "surface": "pro",
       "screen": "components/FunctionalTaskPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 9,
-        "column": 210,
-        "hasHandler": true
+        "column": 210
       }
     },
     {
-      "actionId": "pro.components.languageprovider.button.001",
-      "name": "languageprovider button 001",
-      "function": "languageprovider button 001 tại components/LanguageProvider.tsx",
+      "actionId": "dynamic.pro.components.languageprovider.tsx.15.281",
+      "actionIdPattern": "data-action-id={`pro.language.${v}.select`}",
+      "name": "tsx 15 281",
       "surface": "pro",
       "screen": "components/LanguageProvider.tsx",
       "ownerCore": "eventspace",
-      "status": "active",
-      "permissions": [],
-      "preconditions": [],
-      "inputSchema": "none",
-      "executor": "navigation",
-      "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
+      "status": "gated",
+      "preconditions": [
+        "executor-and-receipt-mapping-required"
       ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "executor": "navigation",
+      "receiptSchema": "unconfigured",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 15,
-        "column": 281,
-        "hasHandler": true
+        "column": 281
       }
     },
     {
       "actionId": "pro.components.longfocusnavigator.button.001",
+      "actionIdPattern": null,
       "name": "longfocusnavigator button 001",
-      "function": "longfocusnavigator button 001 tại components/LongFocusNavigator.tsx",
       "surface": "pro",
       "screen": "components/LongFocusNavigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 18,
-        "column": 4,
-        "hasHandler": true
+        "column": 4
       }
     },
     {
-      "actionId": "pro.components.longfocusnavigator.button.002",
-      "name": "longfocusnavigator button 002",
-      "function": "longfocusnavigator button 002 tại components/LongFocusNavigator.tsx",
+      "actionId": "dynamic.pro.components.longfocusnavigator.tsx.21.147",
+      "actionIdPattern": "data-action-id={`pro.focus.${item.id}.select`}",
+      "name": "tsx 21 147",
       "surface": "pro",
       "screen": "components/LongFocusNavigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 21,
-        "column": 147,
-        "hasHandler": true
+        "column": 147
       }
     },
     {
       "actionId": "pro.components.longfocusnavigator.button.003",
+      "actionIdPattern": null,
       "name": "longfocusnavigator button 003",
-      "function": "longfocusnavigator button 003 tại components/LongFocusNavigator.tsx",
       "surface": "pro",
       "screen": "components/LongFocusNavigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 23,
-        "column": 4,
-        "hasHandler": true
+        "column": 4
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.001",
+      "actionIdPattern": null,
       "name": "← Back",
-      "function": "← Back tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 14,
-        "column": 94,
-        "hasHandler": true
+        "column": 94
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.002",
+      "actionIdPattern": null,
       "name": "mediaconnectionpanel button 002",
-      "function": "mediaconnectionpanel button 002 tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 14,
-        "column": 232,
-        "hasHandler": false
+        "column": 232
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.003",
+      "actionIdPattern": null,
       "name": "Laptop",
-      "function": "Laptop tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 14,
-        "column": 390,
-        "hasHandler": false
+        "column": 390
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.004",
+      "actionIdPattern": null,
       "name": "HDMI / Capture",
-      "function": "HDMI / Capture tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 14,
-        "column": 521,
-        "hasHandler": false
+        "column": 521
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.005",
+      "actionIdPattern": null,
       "name": "mediaconnectionpanel button 005",
-      "function": "mediaconnectionpanel button 005 tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 16,
-        "column": 34,
-        "hasHandler": true
+        "column": 34
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.006",
+      "actionIdPattern": null,
       "name": "mediaconnectionpanel button 006",
-      "function": "mediaconnectionpanel button 006 tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 16,
-        "column": 515,
-        "hasHandler": true
+        "column": 515
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.007",
+      "actionIdPattern": null,
       "name": "mediaconnectionpanel button 007",
-      "function": "mediaconnectionpanel button 007 tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 16,
-        "column": 725,
-        "hasHandler": true
+        "column": 725
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.008",
+      "actionIdPattern": null,
       "name": "mediaconnectionpanel button 008",
-      "function": "mediaconnectionpanel button 008 tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 18,
-        "column": 32,
-        "hasHandler": true
+        "column": 32
       }
     },
     {
       "actionId": "pro.components.mediaconnectionpanel.button.009",
+      "actionIdPattern": null,
       "name": "mediaconnectionpanel button 009",
-      "function": "mediaconnectionpanel button 009 tại components/MediaConnectionPanel.tsx",
       "surface": "pro",
       "screen": "components/MediaConnectionPanel.tsx",
       "ownerCore": "media",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "adapter",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 18,
-        "column": 209,
-        "hasHandler": true
+        "column": 209
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.001",
+      "actionIdPattern": null,
       "name": "← Back",
-      "function": "← Back tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 715,
-        "column": 7,
-        "hasHandler": true
+        "column": 7
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.002",
+      "actionIdPattern": null,
       "name": "AI Flash",
-      "function": "AI Flash tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 716,
-        "column": 7,
-        "hasHandler": false
+        "column": 7
       }
     },
     {
-      "actionId": "pro.components.nav3navigator.button.003",
-      "name": "nav3navigator button 003",
-      "function": "nav3navigator button 003 tại components/Nav3Navigator.tsx",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.723.59",
+      "actionIdPattern": "data-action-id={`pro.ai.quick.${index+1}`}",
+      "name": "tsx 723 59",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 723,
-        "column": 51,
-        "hasHandler": true
+        "column": 59
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.004",
+      "actionIdPattern": null,
       "name": "nav3navigator button 004",
-      "function": "nav3navigator button 004 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 726,
-        "column": 9,
-        "hasHandler": true
+        "column": 9
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.005",
+      "actionIdPattern": null,
       "name": "nav3navigator button 005",
-      "function": "nav3navigator button 005 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 729,
-        "column": 9,
-        "hasHandler": true
+        "column": 9
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.006",
+      "actionIdPattern": null,
       "name": "nav3navigator button 006",
-      "function": "nav3navigator button 006 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 730,
-        "column": 9,
-        "hasHandler": true
+        "column": 9
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.007",
+      "actionIdPattern": null,
       "name": "nav3navigator button 007",
-      "function": "nav3navigator button 007 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 731,
-        "column": 9,
-        "hasHandler": true
+        "column": 9
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.008",
+      "actionIdPattern": null,
       "name": "← Back",
-      "function": "← Back tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 812,
-        "column": 9,
-        "hasHandler": true
+        "column": 9
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.009",
+      "actionIdPattern": null,
       "name": "nav3navigator button 009",
-      "function": "nav3navigator button 009 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 813,
-        "column": 9,
-        "hasHandler": true
+        "column": 9
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.010",
+      "actionIdPattern": null,
       "name": "nav3navigator button 010",
-      "function": "nav3navigator button 010 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 814,
-        "column": 20,
-        "hasHandler": true
+        "column": 20
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.011",
+      "actionIdPattern": null,
       "name": "nav3navigator button 011",
-      "function": "nav3navigator button 011 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 815,
-        "column": 22,
-        "hasHandler": false
+        "column": 22
       }
     },
     {
-      "actionId": "pro.components.nav3navigator.button.012",
-      "name": "nav3navigator button 012",
-      "function": "nav3navigator button 012 tại components/Nav3Navigator.tsx",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.821.35",
+      "actionIdPattern": "data-action-id={`pro.nav.${section}.${active.id}.${action?.id||\"direct\"}.${x.id}`}",
+      "name": "tsx 821 35",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 821,
-        "column": 35,
-        "hasHandler": true
+        "column": 35
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.013",
+      "actionIdPattern": null,
       "name": "nav3navigator button 013",
-      "function": "nav3navigator button 013 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 827,
-        "column": 39,
-        "hasHandler": true
+        "column": 39
       }
     },
     {
       "actionId": "pro.components.nav3navigator.button.014",
+      "actionIdPattern": null,
       "name": "nav3navigator button 014",
-      "function": "nav3navigator button 014 tại components/Nav3Navigator.tsx",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 827,
-        "column": 275,
-        "hasHandler": true
+        "column": 275
       }
     },
     {
-      "actionId": "pro.components.nav3navigator.button.015",
-      "name": "nav3navigator button 015",
-      "function": "nav3navigator button 015 tại components/Nav3Navigator.tsx",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.833.80",
+      "actionIdPattern": "data-action-id={`pro.nav.${section}.tree3.${x.id}`}",
+      "name": "tsx 833 80",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 833,
-        "column": 80,
-        "hasHandler": true
+        "column": 80
       }
     },
     {
-      "actionId": "pro.components.nav3navigator.button.016",
-      "name": "nav3navigator button 016",
-      "function": "nav3navigator button 016 tại components/Nav3Navigator.tsx",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.835.17",
+      "actionIdPattern": "data-action-id={`pro.nav.${section}.tree4.${active.id}.open`}",
+      "name": "tsx 835 17",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 835,
-        "column": 17,
-        "hasHandler": true
+        "column": 17
       }
     },
     {
-      "actionId": "pro.components.nav3navigator.button.017",
-      "name": "nav3navigator button 017",
-      "function": "nav3navigator button 017 tại components/Nav3Navigator.tsx",
+      "actionId": "dynamic.pro.components.nav3navigator.tsx.835.348",
+      "actionIdPattern": "data-action-id={`pro.nav.${section}.${active.id}.tree4.${x.id}`}",
+      "name": "tsx 835 348",
       "surface": "pro",
       "screen": "components/Nav3Navigator.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 835,
-        "column": 343,
-        "hasHandler": true
+        "column": 348
       }
     },
     {
       "actionId": "pro.components.productcreateform.button.001",
+      "actionIdPattern": null,
       "name": "← Back",
-      "function": "← Back tại components/ProductCreateForm.tsx",
       "surface": "pro",
       "screen": "components/ProductCreateForm.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 10,
-        "column": 36,
-        "hasHandler": true
+        "column": 36
       }
     },
     {
       "actionId": "pro.components.productcreateform.button.002",
+      "actionIdPattern": null,
       "name": "productcreateform button 002",
-      "function": "productcreateform button 002 tại components/ProductCreateForm.tsx",
       "surface": "pro",
       "screen": "components/ProductCreateForm.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 10,
-        "column": 171,
-        "hasHandler": false
+        "column": 171
       }
     },
     {
       "actionId": "pro.components.productcreateform.button.003",
+      "actionIdPattern": null,
       "name": "productcreateform button 003",
-      "function": "productcreateform button 003 tại components/ProductCreateForm.tsx",
       "surface": "pro",
       "screen": "components/ProductCreateForm.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 10,
-        "column": 329,
-        "hasHandler": false
+        "column": 329
       }
     },
     {
       "actionId": "pro.components.productcreateform.button.004",
+      "actionIdPattern": null,
       "name": "productcreateform button 004",
-      "function": "productcreateform button 004 tại components/ProductCreateForm.tsx",
       "surface": "pro",
       "screen": "components/ProductCreateForm.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 22,
-        "column": 33,
-        "hasHandler": true
+        "column": 33
       }
     },
     {
       "actionId": "pro.components.productcreateform.button.005",
+      "actionIdPattern": null,
       "name": "productcreateform button 005",
-      "function": "productcreateform button 005 tại components/ProductCreateForm.tsx",
       "surface": "pro",
       "screen": "components/ProductCreateForm.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 22,
-        "column": 222,
-        "hasHandler": true
+        "column": 222
       }
     },
     {
       "actionId": "pro.components.runtimeactionpanel.button.001",
+      "actionIdPattern": null,
       "name": "runtimeactionpanel button 001",
-      "function": "runtimeactionpanel button 001 tại components/RuntimeActionPanel.tsx",
       "surface": "pro",
       "screen": "components/RuntimeActionPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 9,
-        "column": 34,
-        "hasHandler": true
+        "column": 34
       }
     },
     {
       "actionId": "pro.components.runtimeactionpanel.button.002",
+      "actionIdPattern": null,
       "name": "runtimeactionpanel button 002",
-      "function": "runtimeactionpanel button 002 tại components/RuntimeActionPanel.tsx",
       "surface": "pro",
       "screen": "components/RuntimeActionPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 10,
-        "column": 33,
-        "hasHandler": true
+        "column": 33
       }
     },
     {
       "actionId": "pro.components.runtimeactionpanel.button.003",
+      "actionIdPattern": null,
       "name": "runtimeactionpanel button 003",
-      "function": "runtimeactionpanel button 003 tại components/RuntimeActionPanel.tsx",
       "surface": "pro",
       "screen": "components/RuntimeActionPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 10,
-        "column": 200,
-        "hasHandler": true
+        "column": 200
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.001",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 001",
-      "function": "semanticspecializedpanel button 001 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 71,
-        "column": 296,
-        "hasHandler": true
+        "column": 296
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.002",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 002",
-      "function": "semanticspecializedpanel button 002 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 72,
-        "column": 586,
-        "hasHandler": true
+        "column": 586
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.003",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 003",
-      "function": "semanticspecializedpanel button 003 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 73,
-        "column": 403,
-        "hasHandler": true
+        "column": 403
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.004",
+      "actionIdPattern": null,
       "name": "Test Pattern",
-      "function": "Test Pattern tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 74,
-        "column": 657,
-        "hasHandler": true
+        "column": 657
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.005",
+      "actionIdPattern": null,
       "name": "Validate",
-      "function": "Validate tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 74,
-        "column": 810,
-        "hasHandler": true
+        "column": 810
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.006",
+      "actionIdPattern": null,
       "name": "ARM",
-      "function": "ARM tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 74,
-        "column": 955,
-        "hasHandler": true
+        "column": 955
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.007",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 007",
-      "function": "semanticspecializedpanel button 007 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 75,
-        "column": 362,
-        "hasHandler": true
+        "column": 362
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.008",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 008",
-      "function": "semanticspecializedpanel button 008 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 76,
-        "column": 363,
-        "hasHandler": true
+        "column": 363
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.009",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 009",
-      "function": "semanticspecializedpanel button 009 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 77,
-        "column": 297,
-        "hasHandler": true
+        "column": 297
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.010",
+      "actionIdPattern": null,
       "name": "Open",
-      "function": "Open tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 78,
-        "column": 87,
-        "hasHandler": true
+        "column": 87
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.011",
+      "actionIdPattern": null,
       "name": "Open",
-      "function": "Open tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 78,
-        "column": 313,
-        "hasHandler": true
+        "column": 313
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.012",
+      "actionIdPattern": null,
       "name": "Open",
-      "function": "Open tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 78,
-        "column": 545,
-        "hasHandler": true
+        "column": 545
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.013",
+      "actionIdPattern": null,
       "name": "RUN",
-      "function": "RUN tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 78,
-        "column": 814,
-        "hasHandler": true
+        "column": 814
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.014",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 014",
-      "function": "semanticspecializedpanel button 014 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 79,
-        "column": 104,
-        "hasHandler": true
+        "column": 104
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.015",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 015",
-      "function": "semanticspecializedpanel button 015 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 79,
-        "column": 291,
-        "hasHandler": true
+        "column": 291
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.016",
+      "actionIdPattern": null,
       "name": "SAFE",
-      "function": "SAFE tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 80,
-        "column": 309,
-        "hasHandler": true
+        "column": 309
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.017",
+      "actionIdPattern": null,
       "name": "DEFAULT",
-      "function": "DEFAULT tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 80,
-        "column": 439,
-        "hasHandler": true
+        "column": 439
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.018",
+      "actionIdPattern": null,
       "name": "EVENT",
-      "function": "EVENT tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 80,
-        "column": 572,
-        "hasHandler": true
+        "column": 572
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.019",
+      "actionIdPattern": null,
       "name": "Test / Preview",
-      "function": "Test / Preview tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 80,
-        "column": 779,
-        "hasHandler": true
+        "column": 779
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.020",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 020",
-      "function": "semanticspecializedpanel button 020 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 81,
-        "column": 549,
-        "hasHandler": true
+        "column": 549
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.021",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 021",
-      "function": "semanticspecializedpanel button 021 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 84,
-        "column": 906,
-        "hasHandler": true
+        "column": 906
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.022",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 022",
-      "function": "semanticspecializedpanel button 022 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 84,
-        "column": 1112,
-        "hasHandler": true
+        "column": 1112
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.023",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 023",
-      "function": "semanticspecializedpanel button 023 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 84,
-        "column": 2029,
-        "hasHandler": true
+        "column": 2029
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.024",
+      "actionIdPattern": null,
       "name": "Preview",
-      "function": "Preview tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 86,
-        "column": 68,
-        "hasHandler": true
+        "column": 68
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.025",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 025",
-      "function": "semanticspecializedpanel button 025 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 87,
-        "column": 287,
-        "hasHandler": true
+        "column": 287
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.026",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 026",
-      "function": "semanticspecializedpanel button 026 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 88,
-        "column": 1160,
-        "hasHandler": true
+        "column": 1160
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.027",
+      "actionIdPattern": null,
       "name": "Test",
-      "function": "Test tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 89,
-        "column": 786,
-        "hasHandler": true
+        "column": 786
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.028",
+      "actionIdPattern": null,
       "name": "Preview",
-      "function": "Preview tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 91,
-        "column": 859,
-        "hasHandler": true
+        "column": 859
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.029",
+      "actionIdPattern": null,
       "name": "Validate",
-      "function": "Validate tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 92,
-        "column": 788,
-        "hasHandler": true
+        "column": 788
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.030",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 030",
-      "function": "semanticspecializedpanel button 030 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 93,
-        "column": 290,
-        "hasHandler": true
+        "column": 290
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.031",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 031",
-      "function": "semanticspecializedpanel button 031 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 95,
-        "column": 385,
-        "hasHandler": true
+        "column": 385
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.032",
+      "actionIdPattern": null,
       "name": "Test / Preview",
-      "function": "Test / Preview tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 97,
-        "column": 339,
-        "hasHandler": true
+        "column": 339
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.033",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 033",
-      "function": "semanticspecializedpanel button 033 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 99,
-        "column": 35,
-        "hasHandler": true
+        "column": 35
       }
     },
     {
       "actionId": "pro.components.semanticspecializedpanel.button.034",
+      "actionIdPattern": null,
       "name": "semanticspecializedpanel button 034",
-      "function": "semanticspecializedpanel button 034 tại components/SemanticSpecializedPanel.tsx",
       "surface": "pro",
       "screen": "components/SemanticSpecializedPanel.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 99,
-        "column": 258,
-        "hasHandler": true
+        "column": 258
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.001",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 001",
-      "function": "studioworkflowpanel button 001 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 47,
-        "column": 35,
-        "hasHandler": true
+        "column": 35
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.002",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 002",
-      "function": "studioworkflowpanel button 002 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 47,
-        "column": 206,
-        "hasHandler": true
+        "column": 206
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.003",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 003",
-      "function": "studioworkflowpanel button 003 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 51,
-        "column": 2033,
-        "hasHandler": true
+        "column": 2033
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.004",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 004",
-      "function": "studioworkflowpanel button 004 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 53,
-        "column": 35,
-        "hasHandler": true
+        "column": 35
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.005",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 005",
-      "function": "studioworkflowpanel button 005 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 53,
-        "column": 242,
-        "hasHandler": true
+        "column": 242
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.006",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 006",
-      "function": "studioworkflowpanel button 006 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 53,
-        "column": 444,
-        "hasHandler": true
+        "column": 444
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.007",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 007",
-      "function": "studioworkflowpanel button 007 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 58,
-        "column": 35,
-        "hasHandler": true
+        "column": 35
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.008",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 008",
-      "function": "studioworkflowpanel button 008 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 58,
-        "column": 206,
-        "hasHandler": true
+        "column": 206
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.009",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 009",
-      "function": "studioworkflowpanel button 009 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 62,
-        "column": 253,
-        "hasHandler": true
+        "column": 253
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.010",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 010",
-      "function": "studioworkflowpanel button 010 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 63,
-        "column": 91,
-        "hasHandler": true
+        "column": 91
       }
     },
     {
       "actionId": "pro.components.studioworkflowpanel.button.011",
+      "actionIdPattern": null,
       "name": "studioworkflowpanel button 011",
-      "function": "studioworkflowpanel button 011 tại components/StudioWorkflowPanel.tsx",
       "surface": "pro",
       "screen": "components/StudioWorkflowPanel.tsx",
       "ownerCore": "flash-pixel",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 63,
-        "column": 262,
-        "hasHandler": true
+        "column": 262
       }
     },
     {
       "actionId": "pro.components.templatevideobuilder.button.001",
+      "actionIdPattern": null,
       "name": "← Back",
-      "function": "← Back tại components/TemplateVideoBuilder.tsx",
       "surface": "pro",
       "screen": "components/TemplateVideoBuilder.tsx",
       "ownerCore": "scene",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 16,
-        "column": 36,
-        "hasHandler": true
+        "line": 18,
+        "column": 36
       }
     },
     {
       "actionId": "pro.components.templatevideobuilder.button.002",
+      "actionIdPattern": null,
       "name": "templatevideobuilder button 002",
-      "function": "templatevideobuilder button 002 tại components/TemplateVideoBuilder.tsx",
       "surface": "pro",
       "screen": "components/TemplateVideoBuilder.tsx",
       "ownerCore": "scene",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 16,
-        "column": 174,
-        "hasHandler": false
+        "line": 18,
+        "column": 174
       }
     },
     {
       "actionId": "pro.components.templatevideobuilder.button.003",
+      "actionIdPattern": null,
       "name": "templatevideobuilder button 003",
-      "function": "templatevideobuilder button 003 tại components/TemplateVideoBuilder.tsx",
       "surface": "pro",
       "screen": "components/TemplateVideoBuilder.tsx",
       "ownerCore": "scene",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 16,
-        "column": 330,
-        "hasHandler": false
+        "line": 18,
+        "column": 330
+      }
+    },
+    {
+      "actionId": "pro.scene.assets.search",
+      "actionIdPattern": null,
+      "name": "scene assets search",
+      "surface": "pro",
+      "screen": "components/TemplateVideoBuilder.tsx",
+      "ownerCore": "scene",
+      "status": "gated",
+      "preconditions": [
+        "executor-and-receipt-mapping-required"
+      ],
+      "executor": "job",
+      "receiptSchema": "unconfigured",
+      "telemetry": "action-ledger/v2",
+      "source": {
+        "line": 24,
+        "column": 204
+      }
+    },
+    {
+      "actionId": "dynamic.pro.components.templatevideobuilder.tsx.24.378",
+      "actionIdPattern": "data-action-id={`pro.scene.assets.select.${asset.id}`}",
+      "name": "tsx 24 378",
+      "surface": "pro",
+      "screen": "components/TemplateVideoBuilder.tsx",
+      "ownerCore": "scene",
+      "status": "gated",
+      "preconditions": [
+        "executor-and-receipt-mapping-required"
+      ],
+      "executor": "job",
+      "receiptSchema": "unconfigured",
+      "telemetry": "action-ledger/v2",
+      "source": {
+        "line": 24,
+        "column": 378
       }
     },
     {
       "actionId": "pro.components.templatevideobuilder.button.004",
+      "actionIdPattern": null,
       "name": "templatevideobuilder button 004",
-      "function": "templatevideobuilder button 004 tại components/TemplateVideoBuilder.tsx",
       "surface": "pro",
       "screen": "components/TemplateVideoBuilder.tsx",
       "ownerCore": "scene",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 24,
-        "column": 33,
-        "hasHandler": true
+        "line": 27,
+        "column": 33
       }
     },
     {
       "actionId": "pro.components.templatevideobuilder.button.005",
+      "actionIdPattern": null,
       "name": "templatevideobuilder button 005",
-      "function": "templatevideobuilder button 005 tại components/TemplateVideoBuilder.tsx",
       "surface": "pro",
       "screen": "components/TemplateVideoBuilder.tsx",
       "ownerCore": "scene",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 24,
-        "column": 200,
-        "hasHandler": true
+        "line": 27,
+        "column": 200
       }
     },
     {
       "actionId": "pro.components.templatevideobuilder.button.006",
+      "actionIdPattern": null,
       "name": "templatevideobuilder button 006",
-      "function": "templatevideobuilder button 006 tại components/TemplateVideoBuilder.tsx",
       "surface": "pro",
       "screen": "components/TemplateVideoBuilder.tsx",
       "ownerCore": "scene",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "job",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
-        "line": 24,
-        "column": 467,
-        "hasHandler": true
+        "line": 27,
+        "column": 505
       }
     },
     {
       "actionId": "pro.components.themepicker.button.001",
+      "actionIdPattern": null,
       "name": "·",
-      "function": "· tại components/ThemePicker.tsx",
       "surface": "pro",
       "screen": "components/ThemePicker.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 4,
-        "column": 516,
-        "hasHandler": true
+        "column": 516
       }
     },
     {
-      "actionId": "pro.components.themepicker.button.002",
-      "name": "themepicker button 002",
-      "function": "themepicker button 002 tại components/ThemePicker.tsx",
+      "actionId": "dynamic.pro.components.themepicker.tsx.4.744",
+      "actionIdPattern": "data-action-id={`pro.theme.${v}.select`}",
+      "name": "tsx 4 744",
       "surface": "pro",
       "screen": "components/ThemePicker.tsx",
       "ownerCore": "eventspace",
-      "status": "active",
-      "permissions": [],
-      "preconditions": [],
-      "inputSchema": "none",
-      "executor": "navigation",
-      "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
+      "status": "gated",
+      "preconditions": [
+        "executor-and-receipt-mapping-required"
       ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "executor": "navigation",
+      "receiptSchema": "unconfigured",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 4,
-        "column": 744,
-        "hasHandler": true
+        "column": 744
       }
     },
     {
       "actionId": "pro.components.treecontent.button.001",
+      "actionIdPattern": null,
       "name": "treecontent button 001",
-      "function": "treecontent button 001 tại components/TreeContent.tsx",
       "surface": "pro",
       "screen": "components/TreeContent.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 8,
-        "column": 1072,
-        "hasHandler": true
+        "column": 1072
       }
     },
     {
       "actionId": "pro.components.treecontent.button.002",
+      "actionIdPattern": null,
       "name": "↩ Cây 4",
-      "function": "↩ Cây 4 tại components/TreeContent.tsx",
       "surface": "pro",
       "screen": "components/TreeContent.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 8,
-        "column": 1439,
-        "hasHandler": true
+        "column": 1439
       }
     },
     {
       "actionId": "pro.components.treecontent.button.003",
+      "actionIdPattern": null,
       "name": "Chọn lại",
-      "function": "Chọn lại tại components/TreeContent.tsx",
       "surface": "pro",
       "screen": "components/TreeContent.tsx",
       "ownerCore": "eventspace",
       "status": "active",
-      "permissions": [],
       "preconditions": [],
-      "inputSchema": "none",
       "executor": "navigation",
       "receiptSchema": "navigation-receipt/v1",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "manual-safe-step",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 8,
-        "column": 1713,
-        "hasHandler": true
+        "column": 1713
       }
     },
     {
       "actionId": "pro.components.treecontent.button.004",
+      "actionIdPattern": null,
       "name": "treecontent button 004",
-      "function": "treecontent button 004 tại components/TreeContent.tsx",
       "surface": "pro",
       "screen": "components/TreeContent.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 8,
-        "column": 1848,
-        "hasHandler": true
+        "column": 1848
       }
     },
     {
       "actionId": "pro.components.welcomeexperience.button.001",
+      "actionIdPattern": null,
       "name": "welcomeexperience button 001",
-      "function": "welcomeexperience button 001 tại components/WelcomeExperience.tsx",
       "surface": "pro",
       "screen": "components/WelcomeExperience.tsx",
       "ownerCore": "eventspace",
       "status": "gated",
-      "permissions": [
-        "owner-policy-review"
-      ],
       "preconditions": [
         "executor-and-receipt-mapping-required"
       ],
-      "inputSchema": "none",
       "executor": "api",
       "receiptSchema": "unconfigured",
-      "resultStates": [
-        "success",
-        "failed",
-        "pending",
-        "gated"
-      ],
-      "fallback": "show-gated",
-      "telemetry": "action-ledger/v1",
-      "lastReviewedAt": "2026-09-08",
+      "telemetry": "action-ledger/v2",
       "source": {
         "line": 20,
-        "column": 4,
-        "hasHandler": true
+        "column": 4
       }
     }
   ]

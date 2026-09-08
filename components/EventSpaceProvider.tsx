@@ -58,10 +58,17 @@ function RuntimeResultToast({result, onClose, onConfirm}: {result: RuntimeResult
 }
 
 export function EventSpaceProvider({children}: {children: React.ReactNode}) {
-  const [metrics, setMetrics] = useState<EvolutionMetric[]>(() => loadList(METRIC_KEY, 240));
-  const [results, setResults] = useState<RuntimeResult[]>(() => loadList(RESULT_KEY, 80));
+  // Keep the server render and the first browser render identical. Persistent
+  // telemetry is hydrated only after mount to avoid React hydration mismatch.
+  const [metrics, setMetrics] = useState<EvolutionMetric[]>([]);
+  const [results, setResults] = useState<RuntimeResult[]>([]);
   const [lastResult, setLastResult] = useState<RuntimeResult | null>(null);
   const [pendingCommand, setPendingCommand] = useState<EventSpaceCommand | null>(null);
+
+  useEffect(() => {
+    setMetrics(loadList(METRIC_KEY, 240));
+    setResults(loadList(RESULT_KEY, 80));
+  }, []);
 
   const record = useCallback((metric: Omit<EvolutionMetric, "ts">) => {
     setMetrics(previous => {

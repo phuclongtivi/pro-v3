@@ -1,0 +1,3 @@
+import {NextResponse} from "next/server";
+export const dynamic="force-dynamic";
+export async function GET(request:Request){const kind=new URL(request.url).searchParams.get("kind")||"custom";const configured=[{id:"openai",name:"OpenAI",kind:"provider",adapter:"openai",available:!!process.env.OPENAI_API_KEY,reason:"OPENAI_API_KEY_REQUIRED"},{id:"gemini",name:"Gemini",kind:"provider",adapter:"gemini",available:!!process.env.GEMINI_API_KEY,reason:"GEMINI_API_KEY_REQUIRED"}].filter(()=>kind==="ai"||kind==="custom");return NextResponse.json({ok:true,kind,candidates:configured,discovery:{wifi:"requires-native-or-lan-agent",bluetooth:"requires-user-gesture",qrFallback:true}})}

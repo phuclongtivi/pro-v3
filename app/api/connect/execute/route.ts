@@ -1,0 +1,3 @@
+import {NextResponse} from "next/server";
+import {executeProduction} from "@/lib/production-executor";
+export async function POST(request:Request){const body=await request.json().catch(()=>null);if(!body?.consent)return NextResponse.json({ok:false,code:"USER_CONSENT_REQUIRED",message:"Cần user đồng ý trước khi kết nối."},{status:409});if(!body?.target?.adapter||!body?.actionId||!body?.invocationId)return NextResponse.json({ok:false,code:"INVALID_CONNECT_COMMAND"},{status:400});const result=await executeProduction({invocationId:body.invocationId,actionId:body.actionId,executor:body.target.kind==="device"?"device":"provider",adapter:body.target.adapter,input:{targetId:body.target.id}});return NextResponse.json(result,{status:result.ok?200:409})}
