@@ -14,6 +14,8 @@ import AuthLoginPanel from "@/components/AuthLoginPanel";
 import StoreCatalogPanel from "@/components/StoreCatalogPanel";
 import EventListPanel from "@/components/EventListPanel";
 import AIConfigPanel from "@/components/AIConfigPanel";
+import ExternalMixAppsPanel from "@/components/ExternalMixAppsPanel";
+import NoticeTemplatePanel from "@/components/NoticeTemplatePanel";
 import MixerConsolePanel from "@/components/MixerConsolePanel";
 import ChatRoomWorkspace from "@/components/ChatRoomWorkspace";
 import {resolveAccessContext} from "@/lib/role-aware-content";
@@ -197,6 +199,7 @@ function actions(section: string, child: string): Act[] {
       A("sync", "Đồng bộ", "Sync", "同步"),
     ],
     "me.profile:account": [
+      A("register", "Đăng ký mới", "Create account", "注册", true),
       A("login", "Đăng nhập", "Login", "登录"),
       A("email", "Email", "Email", "邮箱"),
       A("phone", "Số điện thoại", "Phone", "电话"),
@@ -333,7 +336,7 @@ function comboEnd(section: string, child: string, action: string): EndBlock | nu
     "studio.broadcast:export-video:short": { title: T("Xuất clip ngắn", "Export Short Clip", "导出短片"), items: [A("9x16", "9:16", "9:16", "9:16", true), A("1x1", "1:1", "1:1", "1:1"), A("16x9", "16:9", "16:9", "16:9"), A("export", "Xuất clip", "Export Clip", "导出短片", true)] },
     "studio.broadcast:export-video:replay": { title: T("Xuất replay", "Export Replay", "导出回放"), items: [A("full", "Toàn bộ replay", "Full Replay", "完整回放", true), A("segment", "Đoạn đã chọn", "Selected Segment", "已选片段"), A("annotate", "Gắn chú thích", "Add Note", "添加说明"), A("export", "Xuất replay", "Export Replay", "导出回放", true)] },
 
-    "studio.mixer:inputs:mic": { title: T("Nguồn vào • Mic 1–8", "Inputs • Mic 1–8", "输入 • 麦克风1-8"), items: [A("mic1", "Mic 1", "Mic 1", "麦克风1", true), A("mic2", "Mic 2", "Mic 2", "麦克风2"), A("mic3", "Mic 3", "Mic 3", "麦克风3"), A("mic4", "Mic 4", "Mic 4", "麦克风4"), A("gain", "Gain nhanh", "Quick Gain", "快速增益"), A("monitor", "Monitor", "Monitor", "监听"), A("mute", "Mute", "Mute", "静音"), A("save", "Lưu cấu hình", "Save Preset", "保存预设", true)] },
+    "studio.mixer:inputs:mic": { title: T("Nguồn vào • Mic 1–8", "Inputs • Mic 1–8", "输入 • 麦克风1-8"), items: [A("mic1", "Mic 1", "Mic 1", "麦克风1", true), A("mic2", "Mic 2", "Mic 2", "麦克风2"), A("mic3", "Mic 3", "Mic 3", "麦克风3"), A("mic4", "Mic 4", "Mic 4", "麦克风4"), A("mic5", "Mic 5", "Mic 5", "麦克风5"), A("mic6", "Mic 6", "Mic 6", "麦克风6"), A("mic7", "Mic 7", "Mic 7", "麦克风7"), A("mic8", "Mic 8", "Mic 8", "麦克风8"), A("gain", "Gain nhanh", "Quick Gain", "快速增益"), A("monitor", "Monitor", "Monitor", "监听"), A("mute", "Mute", "Mute", "静音"), A("save", "Lưu cấu hình", "Save Preset", "保存预设", true)] },
     "studio.mixer:inputs:music": { title: T("Nguồn vào • Nhạc nền", "Inputs • Background Music", "输入 • 背景音乐"), items: [A("playlist", "Playlist", "Playlist", "播放列表", true), A("music1", "Track 1", "Track 1", "曲目1"), A("music2", "Track 2", "Track 2", "曲目2"), A("duck", "Auto ducking", "Auto Ducking", "自动压低"), A("app", "App ngoài", "External App", "外部应用"), A("save", "Lưu", "Save", "保存", true)] },
     "studio.mixer:inputs:usb": { title: T("Nguồn vào • Audio USB", "Inputs • USB Audio", "输入 • USB音频"), items: [A("usb1", "USB 1", "USB 1", "USB 1", true), A("usb2", "USB 2", "USB 2", "USB 2"), A("source", "Chọn nguồn", "Select Source", "选择来源"), A("latency", "Độ trễ", "Latency", "延迟"), A("monitor", "Monitor", "Monitor", "监听"), A("save", "Lưu", "Save", "保存", true)] },
     "studio.mixer:inputs:bluetooth": { title: T("Nguồn vào • Bluetooth", "Inputs • Bluetooth", "输入 • 蓝牙"), items: [A("pair", "Ghép thiết bị", "Pair Device", "配对设备", true), A("saved", "Thiết bị đã lưu", "Saved Devices", "已保存设备"), A("level", "Âm lượng", "Level", "音量"), A("latency", "Độ trễ", "Latency", "延迟"), A("save", "Lưu", "Save", "保存", true)] },
@@ -800,15 +803,19 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
     resetToB();
   }
 
-  if(section==="studio.mixer")return <MixerConsolePanel lang={lang}/>;
+
   if(section==="studio.chat")return <ChatRoomWorkspace lang={lang}/>;
   if(contentOpen&&section==="home.events"&&(active.id==="gift"||active.id==="no-gift"||active.id==="ticket"))return <section className="navWorkspace contentSurface eventHub"><div className="eventFilterTabs">{items.map(item=><button data-action-id={`pro.events.filter.${item.id}`} type="button" key={item.id} className={item.id===active.id?"active":""} onClick={()=>choose3(item.id)}>{label(item.label,lang)}</button>)}</div><EventListPanel lang={lang} filter={active.id}/></section>;
   if(contentOpen&&section==="store.shopping"&&active.id==="all-products")return <StoreCatalogPanel lang={lang} onBack={resetToB}/>;
   if(contentOpen&&section==="home.myai"&&active.id!=="ai-flash")return <AIConfigPanel lang={lang} agentId={active.id} onBack={resetToB}/>;
 
+  if (contentOpen && section.startsWith("me.") && selected?.id === "faceid") return <AuthLoginPanel lang={lang} onBack={backOne}/>;
+  if(contentOpen && section === "studio.mixer" && active.id === "inputs" && action?.id === "external" && (selected?.id === "obs" || selected?.id === "vlc")) return <ExternalMixAppsPanel lang={lang} onBack={backOne}/>;
+  if(contentOpen && (active.endType === "createNotice" || (active.endType === "chatNotice" && selected?.id === "template"))) return <NoticeTemplatePanel lang={lang} onBack={backOne}/>;
+  if(contentOpen && section === "studio.broadcast" && active.id === "flash-flow" && action?.id === "source" && selected?.id === "device-media") return <TemplateVideoBuilder lang={lang} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
   if (contentOpen && active.endType === "createVideo" && selected?.id === "template") return <TemplateVideoBuilder lang={lang} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
   if (contentOpen && section === "home.quickcreate" && active.id === "event" && action?.id === "new") return <EventStructuredCreateForm lang={lang} onBack={resetToB}/>;
-  if (contentOpen && section === "me.profile" && active.id === "account" && action?.id === "login") return <AuthLoginPanel lang={lang} onBack={resetToB}/>;
+  if (contentOpen && section === "me.profile" && active.id === "account" && (action?.id === "login" || action?.id === "register")) return <AuthLoginPanel lang={lang} onBack={resetToB}/>;
   if (contentOpen && active.endType === "createProduct" && (selected?.id === "new" || selected?.id === "template")) return <ProductCreateForm lang={lang} mode={selected.id === "template" ? "template" : "new"} onBack={backOne} onDone={()=>finishEnd(selected,false)}/>;
   if (contentOpen && active.endType === "aiFlashChat") {
     return <AIFlashWorkspace lang={lang} onBack={resetToB} record={record} />;
@@ -831,7 +838,7 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
         {selected && <span className="crumbKey selected tree5Crumb">{tx(selected.label, lang)}</span>}
       </div>
 
-      {content.note && !selected && <p className="contentNote">{tx(content.note, lang)}</p>}
+      {section === "studio.mixer" && (active.id === "audio" || (active.id === "inputs" && action?.id === "mic")) && <MixerConsolePanel lang={lang}/>}
 
       {!selected ? <div className="contentGrid">
         {content.items.map((x) => <button data-action-id={`pro.nav.${section}.${active.id}.${action?.id||"direct"}.${x.id}`} type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
