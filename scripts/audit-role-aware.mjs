@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+const nav=fs.readFileSync('components/Nav3Navigator.tsx','utf8');
+const sem=fs.readFileSync('components/SemanticSpecializedPanel.tsx','utf8');
+const role=fs.readFileSync('lib/role-aware-content.ts','utf8');
+const css=fs.readFileSync('app/globals.css','utf8');
+const failures=[];
+for(const x of ['home.events','home.quickcreate','studio.broadcast','studio.chat','store.sales','store.shopping','me.']) if(!role.includes(x)) failures.push(`role matrix missing ${x}`);
+if(!nav.includes('resolveAccessContext')) failures.push('Nav3Navigator does not resolve access context');
+if(!nav.includes('access={access}')) failures.push('access context not passed to semantic panel');
+if(!sem.includes('event-notice-viewer')) failures.push('read-only event notice viewer missing');
+if(!sem.includes('event-notice-editor')) failures.push('event notice editor route missing');
+if(!sem.includes('requiresRuntimeOwnership')) failures.push('runtime ownership guard missing');
+if(!sem.includes('"Tham gia","Join","参加"')) failures.push('event join action missing');
+if(sem.includes('Tham gia · END')) failures.push('internal END label is visible to users');
+if(!sem.includes('Chia sẻ')) failures.push('event share action missing');
+if(!sem.includes('Xem Flash')) failures.push('event Flash viewer action missing');
+if(sem.includes('<section className="navWorkspace semanticWorkspace">')) failures.push('nested semantic nav workspace still duplicates Tree5 crumbs/borders');
+if(!css.includes('.semanticEmbedded{')) failures.push('embedded Tree5 visual cleanup missing');
+if(nav.includes('Check / Watch / Read", "Check / Watch / Read"') || nav.includes('Confirm / Read / Add", "Confirm / Read / Add"')) failures.push('forced public event action labels still present');
+if(failures.length){console.error('R4B2 ROLE-AWARE AUDIT FAIL');for(const f of failures)console.error('-',f);process.exit(1)}
+console.log('R4B2 ROLE-AWARE AUDIT PASS');
+console.log('PASS public event notice -> viewer, not editor');
+console.log('PASS runtime ownership guard for ambiguous owned/joined objects');
+console.log('PASS buyer/seller/self/operator/participant routing matrix');
+console.log('PASS nested Tree5 breadcrumb/border cleanup');

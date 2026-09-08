@@ -1,0 +1,1 @@
+export default function BrandZoneDivider(){return <div className="brandZoneDivider" role="separator" aria-label="Phân cách Nhóm A và vùng tác vụ B C"><span>PHUC LONG CENTER · EVENT SPACE@ · AI FLASH FLOW™</span></div>}
