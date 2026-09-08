@@ -15,11 +15,11 @@ export default function LongFocusNavigator({items,activeId,onSelect,lang}:{items
  function stop(){if(timer.current){clearInterval(timer.current);timer.current=null}}
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.key==="ArrowLeft"){e.preventDefault();move(-1)}if(e.key==="ArrowRight"){e.preventDefault();move(1)}};window.addEventListener("keydown",key);return()=>window.removeEventListener("keydown",key)},[index,items]);
  return <div className="longFocusNav" aria-label="Long Focus Navigator">
-   <button className="quickKey left" onClick={()=>precision(-1)} onPointerDown={()=>hold(-1)} onPointerUp={stop} onPointerLeave={stop}><b>◀</b><span>QUICK</span><small>tap • double • hold</small></button>
+   <button data-action-id="pro.components.longfocusnavigator.button.001" className="quickKey left" onClick={()=>precision(-1)} onPointerDown={()=>hold(-1)} onPointerUp={stop} onPointerLeave={stop}><b>◀</b><span>QUICK</span><small>tap • double • hold</small></button>
    <div className="focusStage" style={{transform:`translateX(${fineOffset}px)`}}>
     <div className="focusTarget" aria-hidden="true"><i/><i/><i/><i/><span>＋</span></div>
-    {visible.map(({item,d})=>{const a=d===0,x=d*132,abs=Math.abs(d),scale=a?1:Math.max(.60,1-abs*.12),rot=d===0?0:(d<0?16+abs*6:-16-abs*6);return <button key={item.id} className={`focusItem ${a?"active":""}`} onClick={()=>onSelect(item.id)} style={{transform:`translate3d(${x}px,0,${-abs*58}px) rotateY(${rot}deg) scale(${scale})`,opacity:a?1:Math.max(.28,1-abs*.19),zIndex:30-abs}}><span>{label(item.label,lang)}</span>{a&&<em>FOCUS</em>}</button>})}
+    {visible.map(({item,d})=>{const a=d===0,x=d*132,abs=Math.abs(d),scale=a?1:Math.max(.60,1-abs*.12),rot=d===0?0:(d<0?16+abs*6:-16-abs*6);return <button data-action-id="pro.components.longfocusnavigator.button.002" key={item.id} className={`focusItem ${a?"active":""}`} onClick={()=>onSelect(item.id)} style={{transform:`translate3d(${x}px,0,${-abs*58}px) rotateY(${rot}deg) scale(${scale})`,opacity:a?1:Math.max(.28,1-abs*.19),zIndex:30-abs}}><span>{label(item.label,lang)}</span>{a&&<em>FOCUS</em>}</button>})}
    </div>
-   <button className="quickKey right" onClick={()=>precision(1)} onPointerDown={()=>hold(1)} onPointerUp={stop} onPointerLeave={stop}><b>▶</b><span>QUICK</span><small>tap • double • hold</small></button>
+   <button data-action-id="pro.components.longfocusnavigator.button.003" className="quickKey right" onClick={()=>precision(1)} onPointerDown={()=>hold(1)} onPointerUp={stop} onPointerLeave={stop}><b>▶</b><span>QUICK</span><small>tap • double • hold</small></button>
  </div>
 }

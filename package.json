@@ -10,6 +10,7 @@
     "audit:final-polish": "node scripts/audit-final-polish.mjs",
     "audit:studio-logic": "node scripts/audit-studio-logic.mjs",
     "audit:eventspace-pixel": "node scripts/audit-eventspace-pixel-runtime.mjs"
+    ,"audit:actions": "node scripts/audit-action-contracts.mjs && node scripts/build-action-registry.mjs"
   },
   "dependencies": {
     "next": "^15.2.4",

@@ -29,6 +29,6 @@ export default function CreateEvent(){
   <div className="field"><label>Kết thúc</label><input type="datetime-local" value={end} onChange={e=>setEnd(e.target.value)}/></div>
   <label><input type="checkbox" checked={preChat} onChange={e=>setPreChat(e.target.checked)}/> Mở chat trước sự kiện</label>
   {error&&<div className="notice">{error}</div>}
-  <button className="action" onClick={create} disabled={busy}>{busy?"Đang tạo…":"Tạo Event Space"}</button>
+  <button data-action-id="pro.app.event.create.page.button.001" className="action" onClick={create} disabled={busy}>{busy?"Đang tạo…":"Tạo Event Space"}</button>
  </section><BrandFooter/></main>
 }
