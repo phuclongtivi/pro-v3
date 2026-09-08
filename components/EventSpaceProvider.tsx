@@ -48,12 +48,12 @@ function loadList<T>(key: string, max: number): T[] {
 function RuntimeResultToast({result, onClose, onConfirm}: {result: RuntimeResult; onClose: () => void; onConfirm?: () => void}) {
   const plan = result.pixelPlan;
   return <aside className={`runtimeResultToast state-${result.status}`} role="status" aria-live="polite">
-    <button type="button" className="runtimeToastClose" onClick={onClose} aria-label="Đóng" data-runtime-ignore="true">×</button>
+    <button data-action-id="pro.components.eventspaceprovider.button.001" type="button" className="runtimeToastClose" onClick={onClose} aria-label="Đóng" data-runtime-ignore="true">×</button>
     <small>EventSpace Runtime Lab · {result.resultCode}</small>
     <b>{result.message}</b>
     {plan && <span>{plan.target} · {plan.fps} FPS · {plan.codecProfile}{plan.enhancedLabel ? ` · ${plan.enhancedLabel}` : ""}</span>}
     <span>6 lõi đã liên kết · {result.coreTrace.filter(step => step.mode === "active").length} lõi thực thi · {result.measurements.costClass}</span>
-    {result.status === "needs-confirmation" && onConfirm && <button type="button" className="runtimeToastConfirm" onClick={onConfirm} data-runtime-ignore="true">Xác nhận</button>}
+    {result.status === "needs-confirmation" && onConfirm && <button data-action-id="pro.components.eventspaceprovider.button.002" type="button" className="runtimeToastConfirm" onClick={onConfirm} data-runtime-ignore="true">Xác nhận</button>}
   </aside>;
 }
 
@@ -101,7 +101,7 @@ export function EventSpaceProvider({children}: {children: React.ReactNode}) {
   useEffect(() => {
     const click = (event: MouseEvent) => {
       const button = (event.target as HTMLElement | null)?.closest("button");
-      if (!button || button.disabled || button.dataset.runtimeIgnore === "true") return;
+      if (!button || button.disabled || button.dataset.runtimeIgnore === "true" || button.dataset.actionId) return;
       const areaNode = button.closest<HTMLElement>("[data-runtime-area]");
       const area = button.dataset.runtimeArea || areaNode?.dataset.runtimeArea || "app";
       const action = button.dataset.runtimeAction || button.getAttribute("name") || button.id || button.textContent?.trim() || "button";

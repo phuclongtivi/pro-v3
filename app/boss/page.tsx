@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 const blocks=[
+ ["CONNECT ENGINE","Action Registry • Daily Health • Boss Proposals","/boss/actions"],
  ["EVENT LIVE","Video Preview • Event Space • Timeline","/event/demo-live"],
  ["AI / APPROVAL","Jobs • Requests • Human AI roadmap","/ai-jobs"],
  ["STUDIO","Camera • Audio • Flash Flow • Output","/studio"],

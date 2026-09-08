@@ -17,6 +17,6 @@ export default function WelcomeExperience({lang,onDone}:{lang:Lang;onDone:()=>vo
      onEnded={close} onLoadedData={()=>videoRef.current?.play().catch(()=>{})} onCanPlay={()=>videoRef.current?.play().catch(()=>{})}/>
    <div className="welcomeGlass"/>
    <div className="welcomeIdentity compact"><h1>{copy[lang].title}</h1><p>{copy[lang].line}</p></div>
-   <button className="welcomeSkip" onClick={close}>{copy[lang].skip}</button>
+   <button data-action-id="pro.components.welcomeexperience.button.001" className="welcomeSkip" onClick={close}>{copy[lang].skip}</button>
  </div>
 }

@@ -712,23 +712,23 @@ function AIFlashWorkspace({ lang, onBack, record }: { lang: Lang; onBack: () => 
 
   return <section className="navWorkspace aiFlashWorkspace" data-runtime-area="home.myai.ai-flash">
     <div className="workspaceCrumbs">
-      <button type="button" className="backKey" onClick={onBack}>← Back</button>
-      <button type="button" className="crumbKey selected">AI Flash</button>
+      <button data-action-id="pro.components.nav3navigator.button.001" type="button" className="backKey" onClick={onBack}>← Back</button>
+      <button data-action-id="pro.components.nav3navigator.button.002" type="button" className="crumbKey selected">AI Flash</button>
     </div>
     <div className="aiFlashBody">
       <div className="aiFlashHead"><b>AI Flash</b><span>{lang === "en" ? "Chat • tasks • reusable results" : lang === "zh" ? "聊天 • 任务 • 可复用结果" : "Chat • giao việc • kết quả tái sử dụng"}</span></div>
       <div className="aiFlashLog" aria-live="polite">
         {thinking && <div className="aiThinking">AI Flash · {lang === "vi" ? "Đang suy nghĩ…" : lang === "zh" ? "正在思考…" : "Thinking…"}</div>}{aiError && <div className="aiError">{aiError}</div>}{messages.length === 0 ? <div className="aiEmpty">{lang === "en" ? "Start a conversation with AI Flash." : lang === "zh" ? "开始与 AI Flash 对话。" : "Bắt đầu trò chuyện với AI Flash."}</div> : messages.map((m, i) => <div key={i} className={`aiMsg ${m.role}`}><b>{m.role === "user" ? (lang === "vi" ? "Bạn" : lang === "zh" ? "你" : "You") : "AI Flash"}</b><span>{m.body}</span></div>)}
       </div>
-      <div className="aiQuickRow">{quick.map(q => <button type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
+      <div className="aiQuickRow">{quick.map(q => <button data-action-id="pro.components.nav3navigator.button.003" type="button" key={q} onClick={() => send(q)}>{q}</button>)}</div>
       <div className="aiComposer">
         <textarea value={text} onChange={e => setText(e.target.value)} placeholder={lang === "en" ? "Message AI Flash…" : lang === "zh" ? "向 AI Flash 输入消息…" : "Nhập yêu cầu cho AI Flash…"} onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }} />
-        <button type="button" className="endCommit" disabled={thinking} onClick={() => send()}>{lang === "en" ? "Send" : lang === "zh" ? "发送" : "Gửi"}</button>
+        <button data-action-id="pro.components.nav3navigator.button.004" type="button" className="endCommit" disabled={thinking} onClick={() => send()}>{lang === "en" ? "Send" : lang === "zh" ? "发送" : "Gửi"}</button>
       </div>
       <div className="aiToolRow">
-        <button type="button" onClick={() => setText(quick[0])}>{lang === "vi" ? "Giao việc nhanh" : lang === "zh" ? "快速任务" : "Quick Task"}</button>
-        <button type="button" onClick={() => setText(quick[2])}>{lang === "vi" ? "Mẫu tác vụ" : lang === "zh" ? "任务模板" : "Task Template"}</button>
-        <button type="button" onClick={save}>{saved ? "✓ " : ""}{lang === "vi" ? "Lưu kết quả" : lang === "zh" ? "保存结果" : "Save Result"}</button>
+        <button data-action-id="pro.components.nav3navigator.button.005" type="button" onClick={() => setText(quick[0])}>{lang === "vi" ? "Giao việc nhanh" : lang === "zh" ? "快速任务" : "Quick Task"}</button>
+        <button data-action-id="pro.components.nav3navigator.button.006" type="button" onClick={() => setText(quick[2])}>{lang === "vi" ? "Mẫu tác vụ" : lang === "zh" ? "任务模板" : "Task Template"}</button>
+        <button data-action-id="pro.components.nav3navigator.button.007" type="button" onClick={save}>{saved ? "✓ " : ""}{lang === "vi" ? "Lưu kết quả" : lang === "zh" ? "保存结果" : "Save Result"}</button>
       </div>
     </div>
   </section>;
@@ -809,30 +809,30 @@ export default function Nav3Navigator({ section, items, activeId, onSelect, lang
   if (contentOpen) {
     return <section className={`navWorkspace contentSurface mode-${content.mode || "grid"}`} data-runtime-area={section}>
       <div className="workspaceCrumbs">
-        <button type="button" className="backKey" onClick={backOne}>← Back</button>
-        <button type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{label(active.label, lang)}</button>
-        {action && <button type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{tx(action.label, lang)}</button>}
-        {selected && <button type="button" className="crumbKey selected tree5Crumb">{tx(selected.label, lang)}</button>}
+        <button data-action-id="pro.components.nav3navigator.button.008" type="button" className="backKey" onClick={backOne}>← Back</button>
+        <button data-action-id="pro.components.nav3navigator.button.009" type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{label(active.label, lang)}</button>
+        {action && <button data-action-id="pro.components.nav3navigator.button.010" type="button" className="crumbKey selected" onClick={() => { setSelected(null); setDone(false); }}>{tx(action.label, lang)}</button>}
+        {selected && <button data-action-id="pro.components.nav3navigator.button.011" type="button" className="crumbKey selected tree5Crumb">{tx(selected.label, lang)}</button>}
       </div>
 
       {content.note && !selected && <p className="contentNote">{tx(content.note, lang)}</p>}
 
       {!selected ? <div className="contentGrid">
-        {content.items.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
+        {content.items.map((x) => <button data-action-id="pro.components.nav3navigator.button.012" type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger " : "") + `kind-${x.kind || "action"}`} onClick={() => choose5(x)}>
           <b>{tx(x.label, lang)}</b>{x.kind === "input" && <small>{lang === "en" ? "Enter details" : lang === "zh" ? "填写内容" : "Nhập nội dung"}</small>}{x.kind === "chat" && <small>{lang === "en" ? "Send message" : lang === "zh" ? "发送消息" : "Gửi tin nhắn"}</small>}
         </button>)}
       </div> : ((selected.kind === "input" || selected.kind === "chat" || active.endType === "createNotice") && semanticIntent({section,activeId:active.id,activeLabel:label(active.label,lang),actionId:action?.id,actionLabel:action?tx(action.label,lang):undefined,selectedId:selected.id,selectedLabel:tx(selected.label,lang)}) === "generic") ? <div className="endWorkPanel">
         <div className="endWorkCopy"><b>{tx(selected.label, lang)}</b><span>{lang === "en" ? "Enter the required content, then complete this action." : lang === "zh" ? "输入所需内容，然后完成此操作。" : "Nhập nội dung cần thiết, sau đó hoàn tất thao tác."}</span></div>
         <label className="endInput"><span>{active.endType === "createNotice" ? (lang === "en" ? "Notice title / content" : lang === "zh" ? "通知标题 / 内容" : "Tiêu đề / nội dung thông báo") : selected.kind === "chat" ? (lang === "vi"?"Tin nhắn":"Message") : (lang === "vi"?"Nội dung":"Input")}</span><textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>
-        <div className="endCommitRow"><button type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? (lang === "en" ? "✓ Completed" : lang === "zh" ? "✓ 已完成" : "✓ Đã hoàn tất") : endLabel(section, active, selected, lang)}</button></div>
+        <div className="endCommitRow"><button data-action-id="pro.components.nav3navigator.button.013" type="button" className="secondaryEnd" onClick={() => { setSelected(null); setDraft(""); }}>{lang === "en" ? "Choose again" : lang === "zh" ? "重新选择" : "Chọn lại"}</button><button data-action-id="pro.components.nav3navigator.button.014" type="button" className="endCommit" disabled={!draft.trim()} onClick={() => finishEnd()}>{done ? (lang === "en" ? "✓ Completed" : lang === "zh" ? "✓ 已完成" : "✓ Đã hoàn tất") : endLabel(section, active, selected, lang)}</button></div>
       </div> : <SemanticSpecializedPanel lang={lang} section={section} activeId={active.id} activeLabel={label(active.label,lang)} actionId={action?.id} actionLabel={action?tx(action.label,lang):undefined} selectedId={selected.id} selectedLabel={tx(selected.label,lang)} access={access} onCancel={()=>{setSelected(null);setDraft("");}} onComplete={()=>finishEnd(selected,false)}/>}
     </section>;
   }
 
   return <section className="navWorkspace navGroupB" data-runtime-area={section}>
-    <div className="navColumn"><div className="keyboardList">{items.map((x) => <button type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
+    <div className="navColumn"><div className="keyboardList">{items.map((x) => <button data-action-id="pro.components.nav3navigator.button.015" type="button" key={x.id} className={(x.id === active.id ? "selected " : "") + (x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose3(x.id)}><b>{label(x.label, lang)}</b></button>)}</div></div>
     <div className="navColumn child"><div className="keyboardList">
-      {direct ? <button type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? `Open ${label(active.label, lang)}` : lang === "zh" ? `打开 ${label(active.label, lang)}` : `Mở ${label(active.label, lang)}`}</b></button> : childActs.map((x) => <button type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
+      {direct ? <button data-action-id="pro.components.nav3navigator.button.016" type="button" className="priority" onClick={() => setOpenedDirectId(active.id)}><b>{lang === "en" ? `Open ${label(active.label, lang)}` : lang === "zh" ? `打开 ${label(active.label, lang)}` : `Mở ${label(active.label, lang)}`}</b></button> : childActs.map((x) => <button data-action-id="pro.components.nav3navigator.button.017" type="button" key={x.id} className={(x.priority ? "priority " : "") + (x.danger ? "danger" : "")} onClick={() => choose4(x)}><b>{tx(x.label, lang)}</b></button>)}
     </div></div>
   </section>;
 }
