@@ -1,0 +1,217 @@
+name: LONG NEW BUILD PRO R2 CI
+
+on:
+  push:
+    branches:
+      - long-new-build-pro-r2-ci
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  canonical-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout isolated CI branch
+        uses: actions/checkout@v4
+
+      - name: Reconstruct NEW BUILD source snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/long-pro-r2
+          mkdir -p /tmp/long-pro-r2
+          cat new-build-ci/source/chunk_*.b64 | base64 -d > /tmp/long-pro-r2.tgz
+          tar -xzf /tmp/long-pro-r2.tgz -C /tmp/long-pro-r2
+          test -f /tmp/long-pro-r2/package.json
+          test -f /tmp/long-pro-r2/native/media-rust/Cargo.toml
+
+      - name: Apply audited S7 Rust raw-string correction
+        working-directory: /tmp/long-pro-r2/native/media-rust
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("src/main.rs")
+          s = p.read_text()
+          old_start = 'format!(r#"<svg'
+          old_end = '</svg>"#,esc(&title))'
+          if old_start not in s or old_end not in s:
+              raise SystemExit("Expected R2 Rust literal not found; refusing non-deterministic patch")
+          s = s.replace(old_start, 'format!(r##"<svg', 1)
+          s = s.replace(old_end, '</svg>"##,esc(&title))', 1)
+          p.write_text(s)
+          print(p.read_text())
+          PY
+
+      - name: Apply audited TypeScript CI compatibility correction
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("tests/full-innovation-implementation.test.ts")
+          s = p.read_text()
+          decl = "declare const require:any;\n"
+          if not s.startswith(decl):
+              raise SystemExit("Expected R2 test require shim not found; refusing non-deterministic patch")
+          p.write_text(s[len(decl):])
+          print("Removed obsolete require shim now that @types/node is installed")
+          PY
+
+      - name: Apply audited Next.js TypeScript module-resolution correction
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          roots=[Path("lib"),Path("packages"),Path("eventspace"),Path("app"),Path("components")]
+          changed=[]
+          for root in roots:
+              if not root.exists(): continue
+              for p in list(root.rglob("*.ts"))+list(root.rglob("*.tsx")):
+                  s=p.read_text()
+                  n=s.replace('.js";','";').replace(".js';","';")
+                  if n!=s:
+                      p.write_text(n)
+                      changed.append(str(p))
+          if not changed:
+              raise SystemExit("Expected explicit .js TypeScript imports not found; refusing no-op patch")
+          print("Corrected explicit .js imports for Next bundler:")
+          print("\n".join(changed))
+          PY
+
+      - name: Apply audited PRO AI gateway correction
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("app/api/actions/studio/prepare-preview/route.ts")
+          s=p.read_text()
+          old='import {AiRouter,GeminiProvider,DeepSeekProvider} from "../../../../../lib/ai/router";'
+          new='import {AiRouter,LongAiServiceProvider} from "../../../../../lib/ai/router";'
+          old_ctor='new AiRouter([new GeminiProvider(),new DeepSeekProvider()])'
+          new_ctor='new AiRouter([new LongAiServiceProvider()])'
+          if old not in s or old_ctor not in s:
+              raise SystemExit("Expected stale direct-provider route wiring not found")
+          s=s.replace(old,new,1).replace(old_ctor,new_ctor,1)
+          p.write_text(s)
+          print("PRO route now uses Python LONG AI service gateway only")
+          PY
+
+      - name: Install stable Rust toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Build canonical S7 Rust executor
+        working-directory: /tmp/long-pro-r2/native/media-rust
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo build --release
+
+      - name: Execute canonical S7 Rust executor
+        working-directory: /tmp/long-pro-r2/native/media-rust
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./target/release/long-media-preview /tmp/long-pro-r2/s7-rust-preview.svg "Long S7 Canonical Preview" | tee /tmp/s7-rust-output.json
+          test -s /tmp/long-pro-r2/s7-rust-preview.svg
+          test -s /tmp/s7-rust-output.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          evidence=json.loads(Path('/tmp/s7-rust-output.json').read_text())
+          assert evidence.get('nativeMedia') is True, evidence
+          assert evidence.get('sha256'), evidence
+          print(json.dumps(evidence, indent=2))
+          PY
+
+      - name: Reconcile S7 local canonical Rust execution evidence
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs quality/receipts evidence/s7
+          cp "$GITHUB_WORKSPACE/new-build-ci/support/FULL-INNOVATION-IMPLEMENTATION-PLAN.md" docs/FULL-INNOVATION-IMPLEMENTATION-PLAN.md
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          rust=json.loads(Path('/tmp/s7-rust-output.json').read_text())
+          receipt={
+            "layerId":"S7",
+            "receiptId":"g5.s7.media.receipt:ci-rust-r2",
+            "reconciliationState":"RECONCILED_LOCAL",
+            "evidenceLevel":"E2_CANONICAL_RUST_EXECUTOR_LOCAL",
+            "executionRefs":["/tmp/s7-rust-output.json"],
+            "artifactRef":rust["artifact"],
+            "artifactSha256":rust["sha256"],
+            "canonicalRustExecution":True,
+            "blockers":["FULL_MEDIA_HOT_PATH_VIDEO_AUDIO_QOE_NOT_PROVEN_BY_SVG_EXECUTOR"]
+          }
+          Path("quality/receipts/s7-layer-receipt.json").write_text(json.dumps(receipt,indent=2))
+          Path("evidence/s7/s7-rust-ci-evidence.json").write_text(json.dumps(rust,indent=2))
+          print(json.dumps(receipt,indent=2))
+          PY
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install PRO dependencies
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-audit --no-fund
+
+      - name: Unified prebuild validator
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run prebuild
+
+      - name: Full Next.js production build
+        working-directory: /tmp/long-pro-r2
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+
+      - name: S10 release-control reconciliation
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run execute:s10
+          if [ -f evidence/s10/s10-release-execution.json ]; then
+            cat evidence/s10/s10-release-execution.json
+          fi
+
+      - name: Upload CI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: long-pro-r2-ci-evidence
+          path: |
+            /tmp/s7-rust-output.json
+            /tmp/long-pro-r2/s7-rust-preview.svg
+            /tmp/long-pro-r2/.next
+            /tmp/long-pro-r2/evidence
+          if-no-files-found: warn
