@@ -63,6 +63,29 @@ jobs:
           print("Removed obsolete require shim now that @types/node is installed")
           PY
 
+      - name: Apply audited Next.js TypeScript module-resolution correction
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          roots=[Path("lib"),Path("packages"),Path("eventspace"),Path("app"),Path("components")]
+          changed=[]
+          for root in roots:
+              if not root.exists(): continue
+              for p in list(root.rglob("*.ts"))+list(root.rglob("*.tsx")):
+                  s=p.read_text()
+                  n=s.replace('.js";','";').replace(".js';","';")
+                  if n!=s:
+                      p.write_text(n)
+                      changed.append(str(p))
+          if not changed:
+              raise SystemExit("Expected explicit .js TypeScript imports not found; refusing no-op patch")
+          print("Corrected explicit .js imports for Next bundler:")
+          print("\n".join(changed))
+          PY
+
       - name: Install stable Rust toolchain
         shell: bash
         run: |
