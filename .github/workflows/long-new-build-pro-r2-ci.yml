@@ -21,11 +21,31 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf /tmp/long-pro-r2
           mkdir -p /tmp/long-pro-r2
           cat new-build-ci/source/chunk_*.b64 | base64 -d > /tmp/long-pro-r2.tgz
           tar -xzf /tmp/long-pro-r2.tgz -C /tmp/long-pro-r2
           test -f /tmp/long-pro-r2/package.json
           test -f /tmp/long-pro-r2/native/media-rust/Cargo.toml
+
+      - name: Apply audited S7 Rust raw-string correction
+        working-directory: /tmp/long-pro-r2/native/media-rust
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("src/main.rs")
+          s = p.read_text()
+          old_start = 'format!(r#"<svg'
+          old_end = '</svg>"#,esc(&title))'
+          if old_start not in s or old_end not in s:
+              raise SystemExit("Expected R2 Rust literal not found; refusing non-deterministic patch")
+          s = s.replace(old_start, 'format!(r##"<svg', 1)
+          s = s.replace(old_end, '</svg>"##,esc(&title))', 1)
+          p.write_text(s)
+          print(p.read_text())
+          PY
 
       - name: Install stable Rust toolchain
         shell: bash
@@ -51,6 +71,14 @@ jobs:
           ./target/release/long-media-preview /tmp/long-pro-r2/s7-rust-preview.svg "Long S7 Canonical Preview" | tee /tmp/s7-rust-output.json
           test -s /tmp/long-pro-r2/s7-rust-preview.svg
           test -s /tmp/s7-rust-output.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          evidence=json.loads(Path('/tmp/s7-rust-output.json').read_text())
+          assert evidence.get('nativeMedia') is True, evidence
+          assert evidence.get('sha256'), evidence
+          print(json.dumps(evidence, indent=2))
+          PY
 
       - name: Setup Node 22
         uses: actions/setup-node@v4
