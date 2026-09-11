@@ -1,0 +1,103 @@
+name: LONG NEW BUILD PRO R2 CI
+
+on:
+  push:
+    branches:
+      - long-new-build-pro-r2-ci
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  canonical-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout isolated CI branch
+        uses: actions/checkout@v4
+
+      - name: Reconstruct NEW BUILD source snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/long-pro-r2
+          cat new-build-ci/source/chunk_*.b64 | base64 -d > /tmp/long-pro-r2.tgz
+          tar -xzf /tmp/long-pro-r2.tgz -C /tmp/long-pro-r2
+          test -f /tmp/long-pro-r2/package.json
+          test -f /tmp/long-pro-r2/native/media-rust/Cargo.toml
+
+      - name: Install stable Rust toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Build canonical S7 Rust executor
+        working-directory: /tmp/long-pro-r2/native/media-rust
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo build --release
+
+      - name: Execute canonical S7 Rust executor
+        working-directory: /tmp/long-pro-r2/native/media-rust
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./target/release/long-media-preview /tmp/long-pro-r2/s7-rust-preview.svg "Long S7 Canonical Preview" | tee /tmp/s7-rust-output.json
+          test -s /tmp/long-pro-r2/s7-rust-preview.svg
+          test -s /tmp/s7-rust-output.json
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install PRO dependencies
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-audit --no-fund
+
+      - name: Unified prebuild validator
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run prebuild
+
+      - name: Full Next.js production build
+        working-directory: /tmp/long-pro-r2
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+
+      - name: S10 release-control reconciliation
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run execute:s10 || true
+          if [ -f evidence/s10/s10-release-execution.json ]; then
+            cat evidence/s10/s10-release-execution.json
+          fi
+
+      - name: Upload CI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: long-pro-r2-ci-evidence
+          path: |
+            /tmp/s7-rust-output.json
+            /tmp/long-pro-r2/s7-rust-preview.svg
+            /tmp/long-pro-r2/.next
+            /tmp/long-pro-r2/evidence
+          if-no-files-found: warn
