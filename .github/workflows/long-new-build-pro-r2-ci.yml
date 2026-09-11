@@ -47,6 +47,22 @@ jobs:
           print(p.read_text())
           PY
 
+      - name: Apply audited TypeScript CI compatibility correction
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("tests/full-innovation-implementation.test.ts")
+          s = p.read_text()
+          decl = "declare const require:any;\n"
+          if not s.startswith(decl):
+              raise SystemExit("Expected R2 test require shim not found; refusing non-deterministic patch")
+          p.write_text(s[len(decl):])
+          print("Removed obsolete require shim now that @types/node is installed")
+          PY
+
       - name: Install stable Rust toolchain
         shell: bash
         run: |
