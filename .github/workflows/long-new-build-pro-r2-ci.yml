@@ -86,6 +86,26 @@ jobs:
           print("\n".join(changed))
           PY
 
+      - name: Apply audited PRO AI gateway correction
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("app/api/actions/studio/prepare-preview/route.ts")
+          s=p.read_text()
+          old='import {AiRouter,GeminiProvider,DeepSeekProvider} from "../../../../../lib/ai/router";'
+          new='import {AiRouter,LongAiServiceProvider} from "../../../../../lib/ai/router";'
+          old_ctor='new AiRouter([new GeminiProvider(),new DeepSeekProvider()])'
+          new_ctor='new AiRouter([new LongAiServiceProvider()])'
+          if old not in s or old_ctor not in s:
+              raise SystemExit("Expected stale direct-provider route wiring not found")
+          s=s.replace(old,new,1).replace(old_ctor,new_ctor,1)
+          p.write_text(s)
+          print("PRO route now uses Python LONG AI service gateway only")
+          PY
+
       - name: Install stable Rust toolchain
         shell: bash
         run: |
