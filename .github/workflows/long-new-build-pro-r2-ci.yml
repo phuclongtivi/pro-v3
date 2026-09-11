@@ -139,6 +139,33 @@ jobs:
           print(json.dumps(evidence, indent=2))
           PY
 
+      - name: Reconcile S7 local canonical Rust execution evidence
+        working-directory: /tmp/long-pro-r2
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs quality/receipts evidence/s7
+          cp "$GITHUB_WORKSPACE/new-build-ci/support/FULL-INNOVATION-IMPLEMENTATION-PLAN.md" docs/FULL-INNOVATION-IMPLEMENTATION-PLAN.md
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          rust=json.loads(Path('/tmp/s7-rust-output.json').read_text())
+          receipt={
+            "layerId":"S7",
+            "receiptId":"g5.s7.media.receipt:ci-rust-r2",
+            "reconciliationState":"RECONCILED_LOCAL",
+            "evidenceLevel":"E2_CANONICAL_RUST_EXECUTOR_LOCAL",
+            "executionRefs":["/tmp/s7-rust-output.json"],
+            "artifactRef":rust["artifact"],
+            "artifactSha256":rust["sha256"],
+            "canonicalRustExecution":True,
+            "blockers":["FULL_MEDIA_HOT_PATH_VIDEO_AUDIO_QOE_NOT_PROVEN_BY_SVG_EXECUTOR"]
+          }
+          Path("quality/receipts/s7-layer-receipt.json").write_text(json.dumps(receipt,indent=2))
+          Path("evidence/s7/s7-rust-ci-evidence.json").write_text(json.dumps(rust,indent=2))
+          print(json.dumps(receipt,indent=2))
+          PY
+
       - name: Setup Node 22
         uses: actions/setup-node@v4
         with:
@@ -172,7 +199,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          npm run execute:s10 || true
+          npm run execute:s10
           if [ -f evidence/s10/s10-release-execution.json ]; then
             cat evidence/s10/s10-release-execution.json
           fi
